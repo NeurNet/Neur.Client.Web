@@ -1,6 +1,6 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-export function login(username: string, password: string): Promise<Response> {
+export function authenticate(username: string, password: string): Promise<Response> {
   return fetch(BACKEND_URL + '/auth/login', {
     method: 'POST',
     credentials: 'same-origin',

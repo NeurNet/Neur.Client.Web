@@ -11,8 +11,13 @@ function Chat() {
   return (
     <div>
       <form onSubmit={onSubmit} className={classes.form}>
-        <input type="text" placeholder="Prompt" onChange={(e) => setPrompt(e.target.value)} />
-        <input type="submit" value="Generate" />
+        <input
+          type="text"
+          placeholder="Опишите то, что вы бы хотели увидеть от нейросети"
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+        />
+        <input type="submit" value="Сгенерировать" />
       </form>
     </div>
   );
