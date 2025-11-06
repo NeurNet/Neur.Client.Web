@@ -1,31 +1,53 @@
+* {
+  font-family: 'Comfortaa', sans-serif;
+}
+
 body {
-  font-family: monospace;
   margin: 0;
-  background-color: #101010;
-  color: #eaeaea;
-}
-
-input {
-  font-family: monospace;
-  font-size: 16px;
-  color: #eaeaea;
-  background-color: #2c2c2c;
-  border: none;
-  padding: 16px;
-
-  &:focus {
-    outline: 4px solid #761fac;
-  }
-}
-
-input[type='submit'] {
-  cursor: pointer;
-
-  &:hover {
-    background-color: #761fac;
-  }
+  background-color: #eaeaea;
+  color: #101010;
 }
 
 a {
+  color: #101010;
+}
+
+h1 {
+  font-weight: 300;
+  font-size: 24px;
+}
+
+input {
+  font-size: 16px;
+  padding: 16px;
+  border: 1px solid #a7a7a7;
+  background-color: #eaeaea;
+  transition: outline 0.1s linear;
+
+  &:focus {
+    outline: 3px solid #9605ca;
+  }
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 16px;
+  padding: 16px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  background-color: #9605ca;
   color: #eaeaea;
+  transition: background-color 0.2s;
+
+  &:hover, &:focus {
+    background-color: #573d60;
+  }
+
+  &:disabled {
+    background-color: #36253b;
+  }
 }

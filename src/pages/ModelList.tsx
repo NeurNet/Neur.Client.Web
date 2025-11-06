@@ -1,23 +1,22 @@
-import classes from './ModelList.module.scss';
+import { Link } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
 
 function ModelList() {
+  const { auth, isLoading } = useAuth();
+
+  if (isLoading) {
+    return <p>Загрузка...</p>;
+  }
+
   return (
-    <div className={classes.wrapper}>
-      <h1>Выберите модель:</h1>
-      <div className={classes.models}>
-        <div className={classes.model}>
-          <h2>LLaMa 8B</h2>
-          <p>Text model v1.2</p>
-        </div>
-        <div className={classes.model}>
-          <h2>Midjourney XL</h2>
-          <p>Image model v1.5</p>
-        </div>
-        <div className={classes.model}>
-          <h2>Codex</h2>
-          <p>Code model v1</p>
-        </div>
-      </div>
+    <div>
+      {auth ? (
+        <p>Привет, {auth.id}!</p>
+      ) : (
+        <p>
+          Вы не вошли в аккаунт! <Link to="/login">Войти</Link>
+        </p>
+      )}
     </div>
   );
 }

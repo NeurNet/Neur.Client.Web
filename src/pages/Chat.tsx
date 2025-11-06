@@ -17,7 +17,7 @@ function Chat() {
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
         />
-        <input type="submit" value="Сгенерировать" />
+        <button type="submit">Сгенерировать</button>
       </form>
     </div>
   );
