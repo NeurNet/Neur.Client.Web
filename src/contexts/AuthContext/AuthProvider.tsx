@@ -10,7 +10,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setIsLoading(true);
     getAuthenticatedUser()
       .then((auth) => setAuth(auth))
-      .catch(console.error)
+      .catch((err) => {
+        console.error(err);
+        setAuth(null);
+      })
       .finally(() => setIsLoading(false));
   }, []);
 
@@ -18,9 +21,5 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     refreshAuth();
   }, [refreshAuth]);
 
-  return (
-    <AuthContext value={{ auth, isLoading, refreshAuth }}>
-      {children}
-    </AuthContext>
-  );
+  return <AuthContext value={{ auth, isLoading, refreshAuth }}>{children}</AuthContext>;
 }

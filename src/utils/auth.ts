@@ -4,7 +4,7 @@ export interface Auth {
 }
 
 export async function authenticate(username: string, password: string) {
-  const res = await fetch(import.meta.env.VITE_BACKEND_URL + '/users/auth', {
+  const res = await fetch(import.meta.env.VITE_BACKEND_URL + '/users/auth/login', {
     method: 'POST',
     credentials: 'include',
     headers: {
@@ -16,8 +16,17 @@ export async function authenticate(username: string, password: string) {
   if (!res.ok) {
     throw new Error('Неверный логин или пароль!');
   }
+}
 
-  return (await res.json()) as Auth;
+export async function logout() {
+  const res = await fetch(import.meta.env.VITE_BACKEND_URL + '/users/auth/logout', {
+    method: 'POST',
+    credentials: 'include',
+  });
+
+  if (!res.ok) {
+    throw new Error('Не удалось выйти из аккаунта!');
+  }
 }
 
 export async function getAuthenticatedUser(): Promise<Auth> {
