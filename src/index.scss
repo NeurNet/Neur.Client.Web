@@ -1,15 +1,21 @@
+:root {
+  --background: #eaeaea;
+  --foreground: #101010;
+  --input-outline: #a7a7a7;
+  --brand: #9605ca;
+
+  --button-focus: #573d60;
+  --button-disabled: #36253b;
+}
+
 * {
   font-family: 'Comfortaa', sans-serif;
 }
 
 body {
   margin: 0;
-  background-color: #eaeaea;
-  color: #101010;
-}
-
-a {
-  color: #101010;
+  background-color: var(--background);
+  color: var(--foreground);
 }
 
 h1 {
@@ -17,19 +23,29 @@ h1 {
   font-size: 24px;
 }
 
-input {
-  font-size: 16px;
-  padding: 16px;
-  border: 1px solid #a7a7a7;
-  background-color: #eaeaea;
-  transition: outline 0.1s linear;
+.link {
+  text-decoration: none;
+  color: var(--foreground);
 
-  &:focus {
-    outline: 3px solid #9605ca;
+  &:hover {
+    text-decoration: underline;
   }
 }
 
-button {
+.input {
+  font-size: 16px;
+  padding: 16px;
+  border: 1px solid var(--input-outline);
+  background-color: var(--foreground);
+  transition: outline 0.1s linear;
+  border-radius: 4px;
+
+  &:focus {
+    outline: 3px solid var(--brand);
+  }
+}
+
+.button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,15 +55,16 @@ button {
   border-radius: 4px;
   border: none;
   cursor: pointer;
-  background-color: #9605ca;
-  color: #eaeaea;
-  transition: background-color 0.2s;
+  background-color: var(--brand);
+  color: var(--background);
+  transition: background-color 0.2s linear;
 
-  &:hover, &:focus {
-    background-color: #573d60;
+  &:hover,
+  &:focus {
+    background-color: var(--button-focus);
   }
 
   &:disabled {
-    background-color: #36253b;
+    background-color: var(--button-disabled);
   }
 }
