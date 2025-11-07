@@ -25,23 +25,25 @@ function Login() {
 
   return (
     <div className={classes.wrapper}>
-      <p>Нейросети колледжа</p>
+      <p>{import.meta.env.VITE_NAME}</p>
       <h1>Вход в аккаунт</h1>
       <form onSubmit={onSubmit} className={classes.form}>
         <input
           type="text"
           placeholder="Логин"
+          className="input"
           onChange={(e) => setUsername(e.target.value)}
           required
         />
         <input
           type="password"
           placeholder="Пароль"
+          className="input"
           onChange={(e) => setPassword(e.target.value)}
           required
         />
         {error && <p>Неверный логин или пароль!</p>}
-        <button type="submit" disabled={isLoading}>
+        <button type="submit" className="button" disabled={isLoading}>
           Вход
         </button>
       </form>

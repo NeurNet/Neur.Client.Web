@@ -1,4 +1,5 @@
 interface ImportMetaEnv {
+  readonly VITE_NAME: string;
   readonly VITE_BACKEND_URL: string;
 }
 
