@@ -1,8 +1,8 @@
 import { createContext, use } from 'react';
-import type { Auth } from '@/utils/auth';
+import type { User } from '@/utils/auth';
 
 export interface AuthContextData {
-  auth: Auth | null;
+  user: User | null;
   isLoading: boolean;
   refreshAuth: () => Promise<void>;
   login: (username: string, password: string) => Promise<void>;

@@ -4,8 +4,8 @@ import { useAuth } from '@/contexts/AuthContext';
 import classes from './Login.module.scss';
 
 function Login() {
-  const navigate = useNavigate();
   const { login } = useAuth();
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');

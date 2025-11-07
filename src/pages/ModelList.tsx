@@ -3,7 +3,7 @@ import { useAuth } from '@/contexts/AuthContext';
 
 function ModelList() {
   const navigate = useNavigate();
-  const { auth, isLoading, logout } = useAuth();
+  const { user, isLoading, logout } = useAuth();
 
   const logoutHandler = () => {
     logout()
@@ -17,9 +17,9 @@ function ModelList() {
 
   return (
     <div>
-      {auth ? (
+      {user ? (
         <p>
-          Привет, {auth.id}! <button onClick={logoutHandler}>Выйти</button>
+          Привет, {user.id}! <button onClick={logoutHandler}>Выйти</button>
         </p>
       ) : (
         <p>
