@@ -1,31 +1,32 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '@/contexts/AuthContext';
+import { useEffect, useState } from 'react';
+import { fetchModels, type Model } from '@/utils/models';
+import Header from '@/components/Header';
+import ModelCard from '@/components/ModelCard';
+import classes from './ModelList.module.scss';
 
 function ModelList() {
-  const navigate = useNavigate();
-  const { user, isLoading, logout } = useAuth();
+  const [models, setModels] = useState<Model[]>([]);
+  const [modelsLoading, setModelsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const logoutHandler = () => {
-    logout()
-      .then(() => navigate('/login'))
-      .catch(console.error);
-  };
-
-  if (isLoading) {
-    return <p>Загрузка...</p>;
-  }
+  useEffect(() => {
+    setModelsLoading(true);
+    fetchModels()
+      .then((models) => setModels(models))
+      .catch((err: Error) => setError(err.message))
+      .finally(() => setModelsLoading(false));
+  }, []);
 
   return (
     <div>
-      {user ? (
-        <p>
-          Привет, {user.id}! <button onClick={logoutHandler}>Выйти</button>
-        </p>
-      ) : (
-        <p>
-          Вы не вошли в аккаунт! <Link to="/login">Войти</Link>
-        </p>
-      )}
+      <Header />
+      <div className={classes.models}>
+        {modelsLoading ? (
+          <span>Загрузка...</span>
+        ) : (
+          error ?? models.map((model) => <ModelCard model={model} key={model.id} />)
+        )}
+      </div>
     </div>
   );
 }

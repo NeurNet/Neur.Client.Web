@@ -1,0 +1,21 @@
+.modelCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background-color: var(--background);
+  border: 1px solid var(--input-outline);
+  border-radius: 8px;
+  min-width: 360px;
+  transition: background-color 0.2s;
+  cursor: pointer;
+
+  h1 {
+    font-weight: bold;
+  }
+
+  &:hover {
+    background-color: var(--input-outline);
+  }
+}
