@@ -4,7 +4,9 @@ import type { Auth } from '@/utils/auth';
 export interface AuthContextData {
   auth: Auth | null;
   isLoading: boolean;
-  refreshAuth: () => void;
+  refreshAuth: () => Promise<void>;
+  login: (username: string, password: string) => Promise<void>;
+  logout: () => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextData | null>(null);

@@ -3,7 +3,7 @@ export interface Auth {
   tokens: number;
 }
 
-export async function authenticate(username: string, password: string) {
+export async function requestLogin(username: string, password: string): Promise<void> {
   const res = await fetch(import.meta.env.VITE_BACKEND_URL + '/users/auth/login', {
     method: 'POST',
     credentials: 'include',
@@ -18,7 +18,7 @@ export async function authenticate(username: string, password: string) {
   }
 }
 
-export async function logout() {
+export async function requestLogout(): Promise<void> {
   const res = await fetch(import.meta.env.VITE_BACKEND_URL + '/users/auth/logout', {
     method: 'POST',
     credentials: 'include',
@@ -29,7 +29,7 @@ export async function logout() {
   }
 }
 
-export async function getAuthenticatedUser(): Promise<Auth> {
+export async function fetchAuthenticatedUser(): Promise<Auth> {
   const res = await fetch(import.meta.env.VITE_BACKEND_URL + '/users/auth', {
     credentials: 'include',
   });

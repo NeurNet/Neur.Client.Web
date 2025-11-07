@@ -1,14 +1,13 @@
 import { useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
-import { authenticate } from '@/utils/auth';
 import classes from './Login.module.scss';
 
 function Login() {
   const navigate = useNavigate();
-  const { refreshAuth } = useAuth();
+  const { login } = useAuth();
 
-  const [login, setLogin] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -18,8 +17,7 @@ function Login() {
     setIsLoading(true);
     setError(null);
 
-    authenticate(login, password)
-      .then(() => refreshAuth())
+    login(username, password)
       .then(() => navigate('/'))
       .catch((err: Error) => setError(err.message))
       .finally(() => setIsLoading(false));
@@ -33,7 +31,7 @@ function Login() {
         <input
           type="text"
           placeholder="Логин"
-          onChange={(e) => setLogin(e.target.value)}
+          onChange={(e) => setUsername(e.target.value)}
           required
         />
         <input
