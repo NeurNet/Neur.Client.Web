@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
+import HeaderLayout from './components/HeaderLayout';
 import ModelList from './pages/ModelList';
 import Chat from './pages/Chat';
 import Login from './pages/Login';
@@ -10,10 +11,13 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<ModelList />} />
+          <Route element={<HeaderLayout />}>
+            <Route index element={<ModelList />} />
+            <Route path="/chat/:chatId" element={<Chat />} />
+            <Route path="/settings" element={<Settings />} />
+          </Route>
+
           <Route path="/login" element={<Login />} />
-          <Route path="/chat/:chatId" element={<Chat />} />
-          <Route path="/settings" element={<Settings />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

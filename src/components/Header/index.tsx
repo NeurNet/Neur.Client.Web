@@ -7,7 +7,10 @@ function Header() {
 
   return (
     <header className={classes.header}>
-      <h1>{import.meta.env.VITE_NAME}</h1>
+      <Link to="/" className="link">
+        <h1>{import.meta.env.VITE_NAME}</h1>
+      </Link>
+
       {isLoading ? (
         <span>Загрузка...</span>
       ) : user ? (
