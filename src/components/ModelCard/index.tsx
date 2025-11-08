@@ -17,6 +17,7 @@ function ModelCard({ model }: { model: Model }) {
       </span>
 
       <h1>{model.name}</h1>
+      <span>Версия: {model.version}</span>
     </button>
   );
 }
