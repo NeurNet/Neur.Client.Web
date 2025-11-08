@@ -13,8 +13,12 @@ export async function requestLogin(username: string, password: string): Promise<
     body: JSON.stringify({ username, password }),
   });
 
-  if (!res.ok) {
+  if (res.status === 401) {
     throw new Error('Неверный логин или пароль!');
+  }
+
+  if (!res.ok) {
+    throw new Error('Не удалось выполнить вход!');
   }
 }
 
