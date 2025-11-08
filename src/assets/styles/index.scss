@@ -1,12 +1,4 @@
-:root {
-  --background: #eaeaea;
-  --foreground: #101010;
-  --input-outline: #a7a7a7;
-  --brand: #9605ca;
-
-  --button-focus: #573d60;
-  --button-disabled: #36253b;
-}
+@use 'vars';
 
 @font-face {
   font-family: 'Comfortaa';
@@ -19,8 +11,12 @@
 
 body {
   margin: 0;
-  background-color: var(--background);
-  color: var(--foreground);
+  background-color: vars.$background;
+  color: vars.$foreground;
+}
+
+a {
+  text-decoration: none;
 }
 
 h1 {
@@ -30,7 +26,7 @@ h1 {
 
 .link {
   text-decoration: none;
-  color: var(--foreground);
+  color: vars.$foreground;
 
   &:hover {
     text-decoration: underline;
@@ -40,13 +36,13 @@ h1 {
 .input {
   font-size: 16px;
   padding: 16px;
-  border: 1px solid var(--input-outline);
-  background-color: var(--background);
+  border: 1px solid vars.$input-outline;
+  background-color: vars.$background;
   transition: outline 0.1s linear;
   border-radius: 4px;
 
   &:focus {
-    outline: 3px solid var(--brand);
+    outline: 3px solid vars.$brand;
   }
 }
 
@@ -60,16 +56,17 @@ h1 {
   border-radius: 4px;
   border: none;
   cursor: pointer;
-  background-color: var(--brand);
-  color: var(--background);
+  background-color: vars.$brand;
+  color: vars.$background;
   transition: background-color 0.2s linear;
 
   &:hover,
   &:focus {
-    background-color: var(--button-focus);
+    background-color: vars.$button-focus;
   }
 
   &:disabled {
-    background-color: var(--button-disabled);
+    background-color: vars.$button-disabled;
+    cursor: not-allowed;
   }
 }
