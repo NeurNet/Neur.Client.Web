@@ -47,7 +47,9 @@ function Login() {
           Вход
         </button>
       </form>
-      <Link to="/">Вернуться назад</Link>
+      <Link to="/" className="link">
+        Вернуться назад
+      </Link>
     </div>
   );
 }

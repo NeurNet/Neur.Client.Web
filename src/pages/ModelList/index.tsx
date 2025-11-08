@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { fetchModels, type Model } from '@/utils/models';
-import Header from '@/components/Header';
 import ModelCard from '@/components/ModelCard';
 import classes from './ModelList.module.scss';
 
@@ -17,15 +16,16 @@ function ModelList() {
       .finally(() => setModelsLoading(false));
   }, []);
 
+  if (modelsLoading) {
+    return <span>Загрузка...</span>;
+  }
+
   return (
     <div>
-      <Header />
+      <h2>Список моделей:</h2>
+
       <div className={classes.models}>
-        {modelsLoading ? (
-          <span>Загрузка...</span>
-        ) : (
-          error ?? models.map((model) => <ModelCard model={model} key={model.id} />)
-        )}
+        {error ?? models.map((model) => <ModelCard model={model} key={model.id} />)}
       </div>
     </div>
   );
