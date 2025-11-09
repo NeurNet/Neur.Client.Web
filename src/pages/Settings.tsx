@@ -17,7 +17,7 @@ function Settings() {
 
   return (
     <div>
-      <p>Выполнен вход как {user.id}</p>
+      <p>Выполнен вход как {user.username}</p>
       <button className="button" onClick={logoutHandler}>
         Выйти
       </button>

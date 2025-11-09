@@ -17,7 +17,7 @@ function Header() {
         <div className={classes.userInfo}>
           <b>{user.tokens} токенов</b>
           <Link to="/settings" className="link">
-            {user.id}
+            {user.username}
           </Link>
         </div>
       ) : (
