@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 import { AuthContext } from './AuthContext';
-import { fetchAuthenticatedUser, requestLogin, requestLogout, type User } from '@/utils/auth';
+import { fetchAuthenticatedUser, requestLogin, requestLogout, type AuthUser } from '@/utils/auth';
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [authUser, setAuthUser] = useState<AuthUser | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const login = async (username: string, password: string) => {
@@ -19,10 +19,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const refreshAuth = useCallback(async () => {
     setIsLoading(true);
     try {
-      const user = await fetchAuthenticatedUser();
-      setUser(user);
+      setAuthUser(await fetchAuthenticatedUser());
     } catch {
-      setUser(null);
+      setAuthUser(null);
     } finally {
       setIsLoading(false);
     }
@@ -33,6 +32,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [refreshAuth]);
 
   return (
-    <AuthContext value={{ user, isLoading, refreshAuth, login, logout }}>{children}</AuthContext>
+    <AuthContext value={{ authUser, isLoading, refreshAuth, login, logout }}>
+      {children}
+    </AuthContext>
   );
 }

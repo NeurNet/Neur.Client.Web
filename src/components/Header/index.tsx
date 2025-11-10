@@ -3,7 +3,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import classes from './Header.module.scss';
 
 function Header() {
-  const { user, isLoading } = useAuth();
+  const { authUser, isLoading } = useAuth();
 
   return (
     <header className={classes.header}>
@@ -13,11 +13,11 @@ function Header() {
 
       {isLoading ? (
         <span>Загрузка...</span>
-      ) : user ? (
+      ) : authUser ? (
         <div className={classes.userInfo}>
-          <b>{user.tokens} токенов</b>
+          <b>{authUser.tokens} токенов</b>
           <Link to="/settings" className="link">
-            {user.username}
+            {authUser.username}
           </Link>
         </div>
       ) : (

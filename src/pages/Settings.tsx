@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 
 function Settings() {
-  const { user, logout } = useAuth();
+  const { authUser, logout } = useAuth();
   const navigate = useNavigate();
 
   const logoutHandler = () => {
@@ -11,13 +11,13 @@ function Settings() {
       .catch(console.error);
   };
 
-  if (!user) {
+  if (!authUser) {
     return null;
   }
 
   return (
     <div>
-      <p>Выполнен вход как {user.username}</p>
+      <p>Выполнен вход как {authUser.username}</p>
       <button className="button" onClick={logoutHandler}>
         Выйти
       </button>
