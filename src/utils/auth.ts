@@ -19,7 +19,7 @@ export async function requestLogin(username: string, password: string): Promise<
   }
 
   if (!res.ok) {
-    throw new Error('Не удалось выполнить вход!');
+    throw new Error('Произошла ошибка!');
   }
 }
 
@@ -40,7 +40,7 @@ export async function fetchAuthenticatedUser(): Promise<AuthUser> {
   });
 
   if (!res.ok) {
-    throw new Error('Не удалось получить пользователя!');
+    throw new Error('Произошла ошибка!');
   }
 
   return (await res.json()) as AuthUser;
