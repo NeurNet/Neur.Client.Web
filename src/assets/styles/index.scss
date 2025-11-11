@@ -46,7 +46,6 @@ h2 {
   background-color: vars.$background;
   transition: outline 0.1s linear;
   border-radius: 4px;
-  width: 100%;
 
   &:focus {
     outline: 3px solid vars.$brand;
@@ -66,6 +65,7 @@ h2 {
   background-color: vars.$brand;
   color: vars.$background;
   transition: background-color 0.2s linear;
+  width: 100%;
 
   &:hover,
   &:focus {
