@@ -15,10 +15,7 @@ function Chat() {
   const messagesRef = useRef<HTMLDivElement | null>(null);
 
   const appendUserMessage = (text: string) => {
-    setChatMessages((prev) => [
-      ...prev,
-      { author: 'user', body: text, thinkingText: '' },
-    ]);
+    setChatMessages((prev) => [...prev, { author: 'user', body: text, thinkingText: '' }]);
   };
 
   const appendBotChunk = (chunk: string, isThinking: boolean) => {
@@ -29,7 +26,9 @@ function Chat() {
           ? { ...last }
           : ({ author: 'bot', body: '', thinkingText: '' } satisfies IChatMessage);
 
-      const filteredChunk = chunk.replace('event', '');
+      let filteredChunk = chunk.replace('event', '');
+      filteredChunk = filteredChunk.trimEnd();
+      console.log(JSON.stringify(filteredChunk));
 
       if (isThinking) {
         botMsg.thinkingText += filteredChunk;

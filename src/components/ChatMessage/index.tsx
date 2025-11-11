@@ -23,7 +23,7 @@ function ChatMessage({ chatMessage }: { chatMessage: IChatMessage }) {
       {chatMessage.thinkingText && (
         <div className={classes.thinking} ref={thinkingRef}>Думает: {chatMessage.thinkingText}</div>
       )}
-      <span>{chatMessage.body}</span>
+      <pre className={classes.messageBody}>{chatMessage.body}</pre>
     </div>
   );
 }

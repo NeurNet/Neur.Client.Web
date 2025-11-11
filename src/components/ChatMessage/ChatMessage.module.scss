@@ -11,3 +11,8 @@
   overflow-x: scroll;
   white-space: nowrap;
 }
+
+.messageBody {
+  margin: 0;
+  white-space: pre-wrap;
+}
