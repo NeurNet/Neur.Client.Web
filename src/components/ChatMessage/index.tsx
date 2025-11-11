@@ -1,7 +1,16 @@
+import { useEffect, useRef } from 'react';
 import type { IChatMessage } from '@/utils/messages';
 import classes from './ChatMessage.module.scss';
 
 function ChatMessage({ chatMessage }: { chatMessage: IChatMessage }) {
+  const thinkingRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (thinkingRef.current) {
+      thinkingRef.current.scrollTo(thinkingRef.current.scrollWidth, 0);
+    }
+  }, [chatMessage.thinkingText]);
+
   return (
     <div
       className={classes.message}
@@ -11,7 +20,10 @@ function ChatMessage({ chatMessage }: { chatMessage: IChatMessage }) {
           : { borderBottomLeftRadius: 0 }
       }
     >
-      {chatMessage.body}
+      {chatMessage.thinkingText && (
+        <div className={classes.thinking} ref={thinkingRef}>Думает: {chatMessage.thinkingText}</div>
+      )}
+      <span>{chatMessage.body}</span>
     </div>
   );
 }

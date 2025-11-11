@@ -5,3 +5,9 @@
   background-color: vars.$model-card-hover;
   border-radius: 12px;
 }
+
+.thinking {
+  opacity: 0.4;
+  overflow-x: scroll;
+  white-space: nowrap;
+}

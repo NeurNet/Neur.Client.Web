@@ -1,69 +1,93 @@
-import { useState, type FormEvent } from 'react';
+import { useRef, useState, type FormEvent } from 'react';
 import { useParams } from 'react-router-dom';
 import { generateResponse } from '@/utils/chats';
 import type { IChatMessage } from '@/utils/messages';
-import classes from './Chat.module.scss';
 import ChatMessage from '@/components/ChatMessage';
+import classes from './Chat.module.scss';
 
 function Chat() {
   const { chatId } = useParams();
+
   const [prompt, setPrompt] = useState('');
+  const [isGenerating, setIsGenerating] = useState(false);
   const [chatMessages, setChatMessages] = useState<IChatMessage[]>([]);
 
-  const generateHandler = (e: FormEvent) => {
-    e.preventDefault();
+  const messagesRef = useRef<HTMLDivElement | null>(null);
 
-    if (!chatId) {
-      return;
+  const appendUserMessage = (text: string) => {
+    setChatMessages((prev) => [
+      ...prev,
+      { author: 'user', body: text, thinkingText: '' },
+    ]);
+  };
+
+  const appendBotChunk = (chunk: string, isThinking: boolean) => {
+    setChatMessages((prev) => {
+      const last = prev.at(-1);
+      const botMsg =
+        last?.author === 'bot'
+          ? { ...last }
+          : ({ author: 'bot', body: '', thinkingText: '' } satisfies IChatMessage);
+
+      const filteredChunk = chunk.replace('event', '');
+
+      if (isThinking) {
+        botMsg.thinkingText += filteredChunk;
+      } else {
+        botMsg.body += filteredChunk;
+      }
+
+      const updated = last?.author === 'bot' ? prev.slice(0, -1) : prev;
+      return [...updated, botMsg];
+    });
+
+    if (messagesRef.current) {
+      messagesRef.current.scrollTo(0, messagesRef.current.scrollHeight);
     }
+  };
 
-    setChatMessages([...chatMessages, { author: 'user', body: prompt }]);
+  const generateHandler = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!chatId || !prompt.trim()) return;
+
+    appendUserMessage(prompt);
+    setIsGenerating(true);
     setPrompt('');
 
-    generateResponse(chatId, prompt)
-      .then(async (reader) => {
-        const decoder = new TextDecoder();
+    try {
+      const reader = await generateResponse(chatId, prompt);
+      const decoder = new TextDecoder();
 
-        while (true) {
-          const { value, done } = await reader.read();
-          if (done) {
-            break;
-          }
+      let isThinking = false;
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
 
-          const eventResponse = decoder.decode(value);
-          const [type, data] = eventResponse.split(': ');
+        const text = decoder.decode(value);
+        const [type, data] = text.split(': ');
 
-          switch (type) {
-            case 'data':
-              setChatMessages((chatMessages) => [
-                ...(chatMessages[chatMessages.length - 1].author === 'bot'
-                  ? chatMessages.slice(0, -1)
-                  : chatMessages),
-                {
-                  author: 'bot',
-                  body: chatMessages[chatMessages.length - 1].body + data,
-                },
-              ]);
-
-              break;
-            case 'event':
-              console.log(`event: '${data}'`);
-              break;
-          }
+        if (type === 'data') {
+          if (data.includes('<think>')) isThinking = true;
+          else if (data.includes('</think>')) isThinking = false;
+          else appendBotChunk(data, isThinking);
         }
-      })
-      .catch(console.error);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+
+    setIsGenerating(false);
   };
 
   return (
     <div className={classes.wrapper}>
-      <div className={classes.messages}>
+      <div className={classes.messages} ref={messagesRef}>
         {chatMessages.map((message, i) => (
           <ChatMessage chatMessage={message} key={i} />
         ))}
       </div>
 
-      <form onSubmit={generateHandler} className={classes.form}>
+      <form onSubmit={(e) => void generateHandler(e)} className={classes.form}>
         <input
           type="text"
           placeholder="Напишите сообщение"
@@ -72,7 +96,7 @@ function Chat() {
           onChange={(e) => setPrompt(e.target.value)}
           required
         />
-        <button type="submit" className="button">
+        <button type="submit" disabled={isGenerating} className="button">
           Сгенерировать
         </button>
       </form>
