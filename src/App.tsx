@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Chat from './pages/Chat';
 import Login from './pages/Login';
 import Settings from './pages/Settings';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           </Route>
 
           <Route path="/login" element={<Login />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
