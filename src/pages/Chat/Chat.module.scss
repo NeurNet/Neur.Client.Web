@@ -1,12 +1,19 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: calc(100vh - 120px);
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+}
+
 .form {
-  position: fixed;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
   gap: 8px;
-
-  & input:first-child {
-    width: 640px;
-  }
+  margin-top: auto;
 }

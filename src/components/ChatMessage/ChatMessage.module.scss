@@ -1,0 +1,7 @@
+@use '@/assets/styles/vars';
+
+.message {
+  padding: 16px;
+  background-color: vars.$model-card-hover;
+  border-radius: 12px;
+}

@@ -1,13 +1,18 @@
+import { useNavigate } from 'react-router-dom';
 import type { Model } from '@/utils/models';
-import classes from './ModelCard.module.scss';
+import { createChat } from '@/utils/chats';
 
 function ModelCard({ model }: { model: Model }) {
+  const navigate = useNavigate();
+
   const createChatHandler = () => {
-    // TODO
+    createChat(model.id)
+      .then((res) => navigate(`/chat/${res.chatId}`))
+      .catch(console.error);
   };
 
   return (
-    <button className={classes.modelCard} onClick={createChatHandler}>
+    <button className="card" onClick={createChatHandler}>
       <span>
         {model.type === 'text'
           ? 'Генерация текста'

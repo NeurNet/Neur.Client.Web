@@ -11,7 +11,7 @@ export interface Model {
   updatedAt: string | null;
 }
 
-export async function fetchModels(): Promise<Model[]> {
+export async function getModels(): Promise<Model[]> {
   const res = await fetchBackend('/api/models');
 
   if (res.status === 401) {

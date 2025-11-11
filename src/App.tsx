@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import HeaderLayout from './components/HeaderLayout';
-import ModelList from './pages/ModelList';
+import Home from './pages/Home';
 import Chat from './pages/Chat';
 import Login from './pages/Login';
 import Settings from './pages/Settings';
@@ -12,7 +12,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<HeaderLayout />}>
-            <Route index element={<ModelList />} />
+            <Route index element={<Home />} />
             <Route path="/chat/:chatId" element={<Chat />} />
             <Route path="/settings" element={<Settings />} />
           </Route>
