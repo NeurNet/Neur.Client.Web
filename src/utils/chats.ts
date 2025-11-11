@@ -1,5 +1,6 @@
 import type { User } from './users';
 import type { Model } from './models';
+import { fetchBackend } from './fetch';
 
 export interface CreateChatResponse {
   chatId: string;
@@ -17,9 +18,8 @@ export interface Chat {
 }
 
 export async function createChat(modelId: string): Promise<CreateChatResponse> {
-  const res = await fetch(import.meta.env.VITE_BACKEND_URL + '/api/chats', {
+  const res = await fetchBackend('/api/chats', {
     method: 'POST',
-    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -38,9 +38,7 @@ export async function createChat(modelId: string): Promise<CreateChatResponse> {
 }
 
 export async function getChats(): Promise<Chat[]> {
-  const res = await fetch(import.meta.env.VITE_BACKEND_URL + '/api/chats', {
-    credentials: 'include',
-  });
+  const res = await fetchBackend('/api/chats');
 
   if (res.status === 401) {
     throw new Error('Недостатончо прав!');
@@ -54,9 +52,7 @@ export async function getChats(): Promise<Chat[]> {
 }
 
 export async function getChat(chatId: string): Promise<Chat> {
-  const res = await fetch(import.meta.env.VITE_BACKEND_URL + '/api/chats' + chatId, {
-    credentials: 'include',
-  });
+  const res = await fetchBackend(`/api/chats/${chatId}`);
 
   if (res.status === 401) {
     throw new Error('Недостатончо прав!');
@@ -72,9 +68,8 @@ export async function getChat(chatId: string): Promise<Chat> {
 }
 
 export async function deleteChat(chatId: string) {
-  const res = await fetch(import.meta.env.VITE_BACKEND_URL + '/api/chats/' + chatId, {
+  const res = await fetchBackend(`/api/chats/${chatId}`, {
     method: 'DELETE',
-    credentials: 'include',
   });
 
   if (res.status === 401) {
@@ -89,9 +84,8 @@ export async function deleteChat(chatId: string) {
 }
 
 export async function generateResponse(chatId: string, prompt: string) {
-  const res = await fetch(import.meta.env.VITE_BACKEND_URL + '/api/chats/' + chatId + '/generate', {
+  const res = await fetchBackend(`/api/chats/${chatId}/generate`, {
     method: 'POST',
-    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
     },

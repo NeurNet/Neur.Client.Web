@@ -1,3 +1,5 @@
+import { fetchBackend } from './fetch';
+
 export interface AuthUser {
   id: string;
   username: string;
@@ -5,9 +7,8 @@ export interface AuthUser {
 }
 
 export async function requestLogin(username: string, password: string): Promise<void> {
-  const res = await fetch(import.meta.env.VITE_BACKEND_URL + '/api/users/auth/login', {
+  const res = await fetchBackend('/api/users/auth/login', {
     method: 'POST',
-    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -24,9 +25,8 @@ export async function requestLogin(username: string, password: string): Promise<
 }
 
 export async function requestLogout(): Promise<void> {
-  const res = await fetch(import.meta.env.VITE_BACKEND_URL + '/api/users/auth/logout', {
+  const res = await fetchBackend('/api/users/auth/logout', {
     method: 'POST',
-    credentials: 'include',
   });
 
   if (!res.ok) {
@@ -35,9 +35,7 @@ export async function requestLogout(): Promise<void> {
 }
 
 export async function fetchAuthenticatedUser(): Promise<AuthUser> {
-  const res = await fetch(import.meta.env.VITE_BACKEND_URL + '/api/users/auth', {
-    credentials: 'include',
-  });
+  const res = await fetchBackend('/api/users/auth');
 
   if (!res.ok) {
     throw new Error('Произошла ошибка!');

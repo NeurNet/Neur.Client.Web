@@ -1,3 +1,5 @@
+import { fetchBackend } from './fetch';
+
 export interface Model {
   id: string;
   name: string | null;
@@ -10,9 +12,7 @@ export interface Model {
 }
 
 export async function fetchModels(): Promise<Model[]> {
-  const res = await fetch(import.meta.env.VITE_BACKEND_URL + '/api/models', {
-    credentials: 'include',
-  });
+  const res = await fetchBackend('/api/models');
 
   if (res.status === 401) {
     throw new Error('Недостаточно прав!');
