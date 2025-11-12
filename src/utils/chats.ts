@@ -24,7 +24,7 @@ export async function createChat(modelId: string): Promise<CreateChatResponse> {
   });
 
   if (res.status === 401) {
-    throw new Error('Недостатончо прав!');
+    throw new Error('Недостаточно прав!');
   }
 
   if (!res.ok) {
@@ -38,7 +38,7 @@ export async function getChats(): Promise<Chat[]> {
   const res = await fetchBackend('/chats');
 
   if (res.status === 401) {
-    throw new Error('Недостатончо прав!');
+    throw new Error('Недостаточно прав!');
   }
 
   if (!res.ok) {
@@ -52,7 +52,7 @@ export async function getChat(chatId: string): Promise<Chat> {
   const res = await fetchBackend(`/chats/${chatId}`);
 
   if (res.status === 401) {
-    throw new Error('Недостатончо прав!');
+    throw new Error('Недостаточно прав!');
   } else if (res.status === 404) {
     throw new Error('Не найдено!');
   }
@@ -70,7 +70,7 @@ export async function deleteChat(chatId: string) {
   });
 
   if (res.status === 401) {
-    throw new Error('Недостатончо прав!');
+    throw new Error('Недостаточно прав!');
   } else if (res.status === 404) {
     throw new Error('Не найдено!');
   }
@@ -90,7 +90,7 @@ export async function generateResponse(chatId: string, prompt: string) {
   });
 
   if (res.status === 401) {
-    throw new Error('Недостатончо прав!');
+    throw new Error('Недостаточно прав!');
   } else if (res.status === 404) {
     throw new Error('Не найдено!');
   }
