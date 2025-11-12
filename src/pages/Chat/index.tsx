@@ -26,14 +26,10 @@ function Chat() {
           ? { ...last }
           : ({ author: 'bot', body: '', thinkingText: '' } satisfies IChatMessage);
 
-      let filteredChunk = chunk.replace('event', '');
-      filteredChunk = filteredChunk.trimEnd();
-      console.log(JSON.stringify(filteredChunk));
-
       if (isThinking) {
-        botMsg.thinkingText += filteredChunk;
+        botMsg.thinkingText += chunk;
       } else {
-        botMsg.body += filteredChunk;
+        botMsg.body += chunk;
       }
 
       const updated = last?.author === 'bot' ? prev.slice(0, -1) : prev;
@@ -58,17 +54,24 @@ function Chat() {
       const decoder = new TextDecoder();
 
       let isThinking = false;
+
       while (true) {
         const { value, done } = await reader.read();
-        if (done) break;
+        if (done) {
+          break;
+        }
 
-        const text = decoder.decode(value);
+        const text = decoder.decode(value).slice(0, -2);
         const [type, data] = text.split(': ');
 
         if (type === 'data') {
-          if (data.includes('<think>')) isThinking = true;
-          else if (data.includes('</think>')) isThinking = false;
-          else appendBotChunk(data, isThinking);
+          if (data.includes('<think>')) {
+            isThinking = true;
+          } else if (data.includes('</think>')) {
+            isThinking = false;
+          } else {
+            appendBotChunk(data, isThinking);
+          }
         }
       }
     } catch (err) {
