@@ -1,4 +1,5 @@
 import { fetchBackend } from './fetch';
+import type { Model } from './models';
 
 export interface CreateChatResponse {
   chatId: string;
@@ -10,10 +11,11 @@ export interface Chat {
   modelId: string;
   createdAt: string;
   updatedAt: string | null;
+  model: Model;
 }
 
 export async function createChat(modelId: string): Promise<CreateChatResponse> {
-  const res = await fetchBackend('/api/chats', {
+  const res = await fetchBackend('/chats', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -33,7 +35,7 @@ export async function createChat(modelId: string): Promise<CreateChatResponse> {
 }
 
 export async function getChats(): Promise<Chat[]> {
-  const res = await fetchBackend('/api/chats');
+  const res = await fetchBackend('/chats');
 
   if (res.status === 401) {
     throw new Error('Недостатончо прав!');
@@ -47,7 +49,7 @@ export async function getChats(): Promise<Chat[]> {
 }
 
 export async function getChat(chatId: string): Promise<Chat> {
-  const res = await fetchBackend(`/api/chats/${chatId}`);
+  const res = await fetchBackend(`/chats/${chatId}`);
 
   if (res.status === 401) {
     throw new Error('Недостатончо прав!');
@@ -63,7 +65,7 @@ export async function getChat(chatId: string): Promise<Chat> {
 }
 
 export async function deleteChat(chatId: string) {
-  const res = await fetchBackend(`/api/chats/${chatId}`, {
+  const res = await fetchBackend(`/chats/${chatId}`, {
     method: 'DELETE',
   });
 
@@ -79,7 +81,7 @@ export async function deleteChat(chatId: string) {
 }
 
 export async function generateResponse(chatId: string, prompt: string) {
-  const res = await fetchBackend(`/api/chats/${chatId}/generate`, {
+  const res = await fetchBackend(`/chats/${chatId}/generate`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

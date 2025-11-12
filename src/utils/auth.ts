@@ -7,7 +7,7 @@ export interface AuthUser {
 }
 
 export async function requestLogin(username: string, password: string): Promise<void> {
-  const res = await fetchBackend('/api/users/auth/login', {
+  const res = await fetchBackend('/users/auth/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -25,7 +25,7 @@ export async function requestLogin(username: string, password: string): Promise<
 }
 
 export async function requestLogout(): Promise<void> {
-  const res = await fetchBackend('/api/users/auth/logout', {
+  const res = await fetchBackend('/users/auth/logout', {
     method: 'POST',
   });
 
@@ -35,7 +35,7 @@ export async function requestLogout(): Promise<void> {
 }
 
 export async function fetchAuthenticatedUser(): Promise<AuthUser> {
-  const res = await fetchBackend('/api/users/auth');
+  const res = await fetchBackend('/users/auth');
 
   if (!res.ok) {
     throw new Error('Произошла ошибка!');

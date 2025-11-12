@@ -11,7 +11,7 @@ export interface Model {
 }
 
 export async function getModels(): Promise<Model[]> {
-  const res = await fetchBackend('/api/models');
+  const res = await fetchBackend('/models');
 
   if (res.status === 401) {
     throw new Error('Недостаточно прав!');
