@@ -13,15 +13,8 @@ function ModelCard({ model }: { model: Model }) {
 
   return (
     <button className="card" onClick={createChatHandler}>
-      <span>
-        {model.type === 'text'
-          ? 'Генерация текста'
-          : model.type === 'code'
-          ? 'Генерация кода'
-          : 'Генерация изображений'}
-      </span>
-
       <h1>{model.name}</h1>
+      <span>Имя: {model.model}</span>
       <span>Версия: {model.version}</span>
     </button>
   );

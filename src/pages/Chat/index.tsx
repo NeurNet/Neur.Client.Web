@@ -61,21 +61,15 @@ function Chat() {
           break;
         }
 
-        const text = decoder.decode(value).slice(0, -2);
-        console.log(JSON.stringify(text));
-        const [type, data] = text.split(': ');
+        const chunk = decoder.decode(value);
+        console.log(JSON.stringify(chunk));
 
-        if (type === 'data') {
-          const chunks = data.split('\n\ndata: ');
-          for (const chunk of chunks) {
-            if (chunk.includes('<think>')) {
-              isThinking = true;
-            } else if (data.includes('</think>')) {
-              isThinking = false;
-            } else {
-              appendBotChunk(data, isThinking);
-            }
-          }
+        if (chunk.includes('<think>')) {
+          isThinking = true;
+        } else if (chunk.includes('</think>')) {
+          isThinking = false;
+        } else {
+          appendBotChunk(chunk, isThinking);
         }
       }
     } catch (err) {
