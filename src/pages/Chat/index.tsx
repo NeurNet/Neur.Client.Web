@@ -62,15 +62,19 @@ function Chat() {
         }
 
         const text = decoder.decode(value).slice(0, -2);
+        console.log(JSON.stringify(text));
         const [type, data] = text.split(': ');
 
         if (type === 'data') {
-          if (data.includes('<think>')) {
-            isThinking = true;
-          } else if (data.includes('</think>')) {
-            isThinking = false;
-          } else {
-            appendBotChunk(data, isThinking);
+          const chunks = data.split('\n\ndata: ');
+          for (const chunk of chunks) {
+            if (chunk.includes('<think>')) {
+              isThinking = true;
+            } else if (data.includes('</think>')) {
+              isThinking = false;
+            } else {
+              appendBotChunk(data, isThinking);
+            }
           }
         }
       }
