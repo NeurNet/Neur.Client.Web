@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import type { Model } from '@/utils/models';
 import { createChat } from '@/utils/chats';
+import classes from './ModelCard.module.scss';
 
 function ModelCard({ model }: { model: Model }) {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ function ModelCard({ model }: { model: Model }) {
   };
 
   return (
-    <button className="card" onClick={createChatHandler}>
+    <button className={classes.card} onClick={createChatHandler}>
       <h1>{model.name}</h1>
       <span>Имя: {model.model}</span>
       <span>Версия: {model.version}</span>
