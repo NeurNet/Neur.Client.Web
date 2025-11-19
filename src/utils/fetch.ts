@@ -1,11 +1,15 @@
 import { TimeoutError } from '@/errors/TimeoutError';
 
-export async function fetchBackend(path: string, init?: RequestInit): Promise<Response> {
+export async function fetchBackend(
+  path: string,
+  init?: RequestInit,
+  enableTimeout = true
+): Promise<Response> {
   try {
     return await fetch(import.meta.env.VITE_BACKEND_URL + path, {
       ...init,
       credentials: 'include',
-      signal: AbortSignal.timeout(5000),
+      signal: enableTimeout ? AbortSignal.timeout(5000) : undefined,
     });
   } catch (err) {
     if (err instanceof Error && err.name === 'TimeoutError') {

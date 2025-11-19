@@ -2,11 +2,14 @@ import { useRef, useState, type FormEvent } from 'react';
 import { useParams } from 'react-router-dom';
 import { generateResponse } from '@/utils/chats';
 import type { IChatMessage } from '@/utils/messages';
+import { useAuth } from '@/contexts/AuthContext';
 import ChatMessage from '@/components/ChatMessage';
 import classes from './Chat.module.scss';
+import toast from 'react-hot-toast';
 
 function Chat() {
   const { chatId } = useParams();
+  const { refreshAuth } = useAuth();
 
   const [prompt, setPrompt] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
@@ -51,8 +54,9 @@ function Chat() {
 
     try {
       const reader = await generateResponse(chatId, prompt);
-      const decoder = new TextDecoder();
+      await refreshAuth();
 
+      const decoder = new TextDecoder();
       let isThinking = false;
 
       while (true) {
@@ -73,7 +77,11 @@ function Chat() {
         }
       }
     } catch (err) {
-      console.error(err);
+      if (err instanceof Error) {
+        toast.error(err.message);
+      } else {
+        toast.error('Что-то пошло не так!');
+      }
     }
 
     setIsGenerating(false);

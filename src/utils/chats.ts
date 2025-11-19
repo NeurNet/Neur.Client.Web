@@ -85,12 +85,15 @@ export async function generateResponse(chatId: string, prompt: string) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ prompt }),
-  });
+  }, false);
 
-  if (res.status === 401) {
-    throw new Error('Недостаточно прав!');
-  } else if (res.status === 404) {
-    throw new Error('Не найдено!');
+  switch (res.status) {
+    case 401:
+      throw new Error('Недостаточно прав!');
+    case 404:
+      throw new Error('Не найдено!');
+    case 402:
+      throw new Error('Недостаточно токенов!');
   }
 
   if (!res.ok || !res.body) {
