@@ -33,10 +33,12 @@ function ModelList() {
       <div className={classes.models}>
         {chatsLoading ? (
           <span>Загрузка...</span>
+        ) : chatsError ? (
+          <span>{chatsError}</span>
         ) : chats.length === 0 ? (
           <span>Создайте первый чат, выбрав нужную модель ниже.</span>
         ) : (
-          chatsError ?? chats.map((chat) => <ChatCard chat={chat} key={chat.id} />)
+          chats.map((chat) => <ChatCard chat={chat} key={chat.id} />)
         )}
       </div>
 
@@ -45,10 +47,12 @@ function ModelList() {
       <div className={classes.models}>
         {modelsLoading ? (
           <span>Загрузка...</span>
+        ) : modelsError ? (
+          <span>{modelsError}</span>
         ) : models.length === 0 ? (
           <span>Модели отсутствуют.</span>
         ) : (
-          modelsError ?? models.map((model) => <ModelCard model={model} key={model.id} />)
+          models.map((model) => <ModelCard model={model} key={model.id} />)
         )}
       </div>
     </div>

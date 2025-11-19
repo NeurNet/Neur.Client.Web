@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './contexts/AuthContext';
 import HeaderLayout from './components/HeaderLayout';
 import Home from './pages/Home';
@@ -21,6 +22,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+
+        <Toaster />
       </BrowserRouter>
     </AuthProvider>
   );

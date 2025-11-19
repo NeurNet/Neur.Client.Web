@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import classes from './Login.module.scss';
+import toast from 'react-hot-toast';
 
 function Login() {
   const { login } = useAuth();
@@ -10,16 +11,14 @@ function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setError(null);
 
     login(username, password)
       .then(() => navigate('/'))
-      .catch((err: Error) => setError(err.message))
+      .catch((err: Error) => toast.error(err.message))
       .finally(() => setIsLoading(false));
   };
 
@@ -42,7 +41,6 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        {error && <p>Неверный логин или пароль!</p>}
         <button type="submit" className="button" disabled={isLoading}>
           Вход
         </button>
