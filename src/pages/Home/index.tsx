@@ -33,6 +33,8 @@ function ModelList() {
       <div className={classes.models}>
         {chatsLoading ? (
           <span>Загрузка...</span>
+        ) : chats.length === 0 ? (
+          <span>Создайте первый чат, выбрав нужную модель ниже.</span>
         ) : (
           chatsError ?? chats.map((chat) => <ChatCard chat={chat} key={chat.id} />)
         )}
@@ -43,6 +45,8 @@ function ModelList() {
       <div className={classes.models}>
         {modelsLoading ? (
           <span>Загрузка...</span>
+        ) : models.length === 0 ? (
+          <span>Модели отсутствуют.</span>
         ) : (
           modelsError ?? models.map((model) => <ModelCard model={model} key={model.id} />)
         )}
