@@ -1,6 +1,17 @@
-export function fetchBackend(path: string, init?: RequestInit): Promise<Response> {
-  return fetch(import.meta.env.VITE_BACKEND_URL + path, {
-    ...init,
-    credentials: 'include',
-  });
+import { TimeoutError } from '@/errors/TimeoutError';
+
+export async function fetchBackend(path: string, init?: RequestInit): Promise<Response> {
+  try {
+    return await fetch(import.meta.env.VITE_BACKEND_URL + path, {
+      ...init,
+      credentials: 'include',
+      signal: AbortSignal.timeout(5000),
+    });
+  } catch (err) {
+    if (err instanceof Error && err.name === 'TimeoutError') {
+      throw new TimeoutError();
+    }
+
+    throw err;
+  }
 }
