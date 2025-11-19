@@ -21,7 +21,9 @@ function ChatMessage({ chatMessage }: { chatMessage: IChatMessage }) {
       }
     >
       {chatMessage.thinkingText && (
-        <div className={classes.thinking} ref={thinkingRef}>Думает: {chatMessage.thinkingText}</div>
+        <div className={classes.thinking} ref={thinkingRef}>
+          Думает: {chatMessage.thinkingText}
+        </div>
       )}
       <pre className={classes.messageBody}>{chatMessage.body}</pre>
     </div>
