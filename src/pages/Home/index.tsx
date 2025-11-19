@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { getModels, type Model } from '@/utils/models';
-import { getChats, type Chat } from '@/utils/chats';
+import { deleteChat, getChats, type Chat } from '@/utils/chats';
 import ModelCard from '@/components/ModelCard';
 import ChatCard from '@/components/ChatCard';
 import classes from './Home.module.scss';
+import toast from 'react-hot-toast';
 
 function ModelList() {
   const [models, setModels] = useState<Model[]>([]);
@@ -26,6 +27,12 @@ function ModelList() {
       .finally(() => setChatsLoading(false));
   }, []);
 
+  const onChatDelete = (chatId: string) => {
+    deleteChat(chatId)
+      .then(() => setChats((prev) => prev.filter((chat) => chat.id !== chatId)))
+      .catch((err: Error) => toast.error(err.message));
+  };
+
   return (
     <div>
       <h2>Список чатов:</h2>
@@ -38,7 +45,9 @@ function ModelList() {
         ) : chats.length === 0 ? (
           <span>Создайте первый чат, выбрав нужную модель ниже.</span>
         ) : (
-          chats.map((chat) => <ChatCard chat={chat} key={chat.id} />)
+          chats.map((chat) => (
+            <ChatCard key={chat.id} chat={chat} onDelete={() => onChatDelete(chat.id)} />
+          ))
         )}
       </div>
 
@@ -52,7 +61,7 @@ function ModelList() {
         ) : models.length === 0 ? (
           <span>Модели отсутствуют.</span>
         ) : (
-          models.map((model) => <ModelCard model={model} key={model.id} />)
+          models.map((model) => <ModelCard key={model.id} model={model} />)
         )}
       </div>
     </div>
