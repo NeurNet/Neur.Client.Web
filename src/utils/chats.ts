@@ -1,5 +1,4 @@
 import { fetchBackend } from './fetch';
-import type { Model } from './models';
 
 export interface CreateChatResponse {
   chatId: string;
@@ -8,10 +7,9 @@ export interface CreateChatResponse {
 
 export interface Chat {
   id: string;
-  modelId: string;
-  createdAt: string;
-  updatedAt: string | null;
-  model: Model;
+  model_id: string;
+  created_at: string;
+  updated_at: string | null;
 }
 
 export async function createChat(modelId: string): Promise<CreateChatResponse> {
