@@ -1,7 +1,7 @@
 import { useRef, useState, type FormEvent } from 'react';
 import { useParams } from 'react-router-dom';
 import { generateResponse } from '@/utils/chats';
-import type { IChatMessage } from '@/utils/messages';
+import type { ChatMessageState } from '@/utils/messages';
 import { useAuth } from '@/contexts/AuthContext';
 import ChatMessage from '@/components/ChatMessage';
 import classes from './Chat.module.scss';
@@ -13,30 +13,43 @@ function Chat() {
 
   const [prompt, setPrompt] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
-  const [chatMessages, setChatMessages] = useState<IChatMessage[]>([]);
+  const [chatMessages, setChatMessages] = useState<ChatMessageState[]>([]);
 
   const messagesRef = useRef<HTMLDivElement | null>(null);
 
-  const appendUserMessage = (text: string) => {
-    setChatMessages((prev) => [...prev, { author: 'user', body: text, thinkingText: '' }]);
+  const appendUserMessage = (content: string) => {
+    setChatMessages((prev) => [
+      ...prev,
+      {
+        id: crypto.randomUUID(),
+        role: 'User',
+        content,
+      },
+    ]);
   };
 
-  const appendBotChunk = (chunk: string, isThinking: boolean) => {
+  const appendAssistantChunk = (chunk: string) => {
     setChatMessages((prev) => {
-      const last = prev.at(-1);
-      const botMsg =
-        last?.author === 'bot'
-          ? { ...last }
-          : ({ author: 'bot', body: '', thinkingText: '' } satisfies IChatMessage);
+      const last = prev[prev.length - 1];
 
-      if (isThinking) {
-        botMsg.thinkingText += chunk;
+      if (last.role === 'Assistant') {
+        return [
+          ...prev.slice(0, -1),
+          {
+            ...last,
+            content: last.content + chunk,
+          },
+        ];
       } else {
-        botMsg.body += chunk;
+        return [
+          ...prev,
+          {
+            id: crypto.randomUUID(),
+            role: 'Assistant',
+            content: chunk,
+          },
+        ];
       }
-
-      const updated = last?.author === 'bot' ? prev.slice(0, -1) : prev;
-      return [...updated, botMsg];
     });
 
     if (messagesRef.current) {
@@ -44,58 +57,45 @@ function Chat() {
     }
   };
 
-  const generateHandler = async (e: FormEvent) => {
+  const submitHandler = (e: FormEvent) => {
     e.preventDefault();
-    if (!chatId || !prompt.trim()) return;
+
+    if (!chatId) {
+      return;
+    }
 
     appendUserMessage(prompt);
     setIsGenerating(true);
     setPrompt('');
 
-    try {
-      const reader = await generateResponse(chatId, prompt);
-      await refreshAuth();
+    generateResponse(chatId, prompt)
+      .then(async (stream) => {
+        const decoder = new TextDecoder();
 
-      const decoder = new TextDecoder();
-      let isThinking = false;
+        while (true) {
+          const { done, value } = await stream.read();
+          if (done) {
+            break;
+          }
 
-      while (true) {
-        const { value, done } = await reader.read();
-        if (done) {
-          break;
+          const chunk = decoder.decode(value);
+          appendAssistantChunk(chunk);
         }
-
-        const chunk = decoder.decode(value);
-        console.log(JSON.stringify(chunk));
-
-        if (chunk.includes('<think>')) {
-          isThinking = true;
-        } else if (chunk.includes('</think>')) {
-          isThinking = false;
-        } else {
-          appendBotChunk(chunk, isThinking);
-        }
-      }
-    } catch (err) {
-      if (err instanceof Error) {
-        toast.error(err.message);
-      } else {
-        toast.error('Что-то пошло не так!');
-      }
-    }
-
-    setIsGenerating(false);
+      })
+      .then(refreshAuth)
+      .catch((err: Error) => toast.error(err.message))
+      .finally(() => setIsGenerating(false));
   };
 
   return (
     <div className={classes.wrapper}>
       <div className={classes.messages} ref={messagesRef}>
-        {chatMessages.map((message, i) => (
-          <ChatMessage chatMessage={message} key={i} />
+        {chatMessages.map((message) => (
+          <ChatMessage chatMessage={message} key={message.id} />
         ))}
       </div>
 
-      <form onSubmit={(e) => void generateHandler(e)} className={classes.form}>
+      <form onSubmit={submitHandler} className={classes.form}>
         <input
           type="text"
           placeholder="Напишите сообщение"

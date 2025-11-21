@@ -1,31 +1,17 @@
-import { useEffect, useRef } from 'react';
-import type { IChatMessage } from '@/utils/messages';
+import type { ChatMessageState } from '@/utils/messages';
 import classes from './ChatMessage.module.scss';
 
-function ChatMessage({ chatMessage }: { chatMessage: IChatMessage }) {
-  const thinkingRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    if (thinkingRef.current) {
-      thinkingRef.current.scrollTo(thinkingRef.current.scrollWidth, 0);
-    }
-  }, [chatMessage.thinkingText]);
-
+function ChatMessage({ chatMessage }: { chatMessage: ChatMessageState }) {
   return (
     <div
       className={classes.message}
       style={
-        chatMessage.author === 'user'
+        chatMessage.role === 'User'
           ? { marginLeft: 'auto', borderBottomRightRadius: 0 }
           : { borderBottomLeftRadius: 0 }
       }
     >
-      {chatMessage.thinkingText && (
-        <div className={classes.thinking} ref={thinkingRef}>
-          Думает: {chatMessage.thinkingText}
-        </div>
-      )}
-      <pre className={classes.messageBody}>{chatMessage.body}</pre>
+      <pre className={classes.messageBody}>{chatMessage.content}</pre>
     </div>
   );
 }
