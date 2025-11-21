@@ -11,6 +11,7 @@ function ChatMessage({ chatMessage }: { chatMessage: IChatMessage }) {
           : { borderBottomLeftRadius: 0 }
       }
     >
+      <b>{chatMessage.role}</b>
       <pre className={classes.messageBody}>{chatMessage.content}</pre>
     </div>
   );
