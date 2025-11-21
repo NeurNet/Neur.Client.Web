@@ -91,6 +91,12 @@ function Chat() {
     }
   }, [chatId]);
 
+  useEffect(() => {
+    if (messagesRef.current) {
+      messagesRef.current.scrollTo(0, messagesRef.current.scrollHeight);
+    }
+  }, [chatMessages]);
+
   return (
     <div className={classes.wrapper}>
       <div className={classes.messages} ref={messagesRef}>
