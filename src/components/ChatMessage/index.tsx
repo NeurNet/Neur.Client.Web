@@ -1,7 +1,7 @@
-import type { ChatMessageState } from '@/utils/messages';
+import type { IChatMessage } from '@/utils/messages';
 import classes from './ChatMessage.module.scss';
 
-function ChatMessage({ chatMessage }: { chatMessage: ChatMessageState }) {
+function ChatMessage({ chatMessage }: { chatMessage: IChatMessage }) {
   return (
     <div
       className={classes.message}

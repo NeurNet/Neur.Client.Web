@@ -1,7 +1,7 @@
-import { useRef, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { useParams } from 'react-router-dom';
 import { generateResponse } from '@/utils/chats';
-import type { ChatMessageState } from '@/utils/messages';
+import { getMessages, type IChatMessage } from '@/utils/messages';
 import { useAuth } from '@/contexts/AuthContext';
 import ChatMessage from '@/components/ChatMessage';
 import classes from './Chat.module.scss';
@@ -13,7 +13,7 @@ function Chat() {
 
   const [prompt, setPrompt] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
-  const [chatMessages, setChatMessages] = useState<ChatMessageState[]>([]);
+  const [chatMessages, setChatMessages] = useState<IChatMessage[]>([]);
 
   const messagesRef = useRef<HTMLDivElement | null>(null);
 
@@ -21,7 +21,7 @@ function Chat() {
     setChatMessages((prev) => [
       ...prev,
       {
-        id: crypto.randomUUID(),
+        created_at: new Date().toISOString(),
         role: 'User',
         content,
       },
@@ -44,17 +44,13 @@ function Chat() {
         return [
           ...prev,
           {
-            id: crypto.randomUUID(),
+            created_at: new Date().toISOString(),
             role: 'Assistant',
             content: chunk,
           },
         ];
       }
     });
-
-    if (messagesRef.current) {
-      messagesRef.current.scrollTo(0, messagesRef.current.scrollHeight);
-    }
   };
 
   const submitHandler = (e: FormEvent) => {
@@ -87,11 +83,19 @@ function Chat() {
       .finally(() => setIsGenerating(false));
   };
 
+  useEffect(() => {
+    if (chatId) {
+      getMessages(chatId)
+        .then((messages) => setChatMessages(messages))
+        .catch((err: Error) => toast.error(err.message));
+    }
+  }, [chatId]);
+
   return (
     <div className={classes.wrapper}>
       <div className={classes.messages} ref={messagesRef}>
         {chatMessages.map((message) => (
-          <ChatMessage chatMessage={message} key={message.id} />
+          <ChatMessage chatMessage={message} key={message.created_at} />
         ))}
       </div>
 
