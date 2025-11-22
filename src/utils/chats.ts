@@ -5,11 +5,20 @@ export interface CreateChatResponse {
   modelId: string;
 }
 
+export interface IChatMessage {
+  created_at: string;
+  role: 'user' | 'assistant';
+  content: string;
+}
+
 export interface Chat {
   id: string;
   model_id: string;
+  model_name: string;
+  model: string;
   created_at: string;
   updated_at: string | null;
+  messages: IChatMessage[];
 }
 
 export async function createChat(modelId: string): Promise<CreateChatResponse> {

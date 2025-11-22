@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { useParams } from 'react-router-dom';
-import { generateResponse } from '@/utils/chats';
-import { getMessages, type IChatMessage } from '@/utils/messages';
+import { generateResponse, getChat, type Chat, type IChatMessage } from '@/utils/chats';
 import { useAuth } from '@/contexts/AuthContext';
 import ChatMessage from '@/components/ChatMessage';
 import classes from './Chat.module.scss';
@@ -13,6 +12,7 @@ function Chat() {
 
   const [prompt, setPrompt] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
+  const [chat, setChat] = useState<Chat | null>(null);
   const [chatMessages, setChatMessages] = useState<IChatMessage[]>([]);
 
   const messagesRef = useRef<HTMLDivElement | null>(null);
@@ -22,7 +22,7 @@ function Chat() {
       ...prev,
       {
         created_at: new Date().toISOString(),
-        role: 'User',
+        role: 'user',
         content,
       },
     ]);
@@ -32,7 +32,7 @@ function Chat() {
     setChatMessages((prev) => {
       const last = prev[prev.length - 1];
 
-      if (last.role === 'Assistant') {
+      if (last.role === 'assistant') {
         return [
           ...prev.slice(0, -1),
           {
@@ -45,7 +45,7 @@ function Chat() {
           ...prev,
           {
             created_at: new Date().toISOString(),
-            role: 'Assistant',
+            role: 'assistant',
             content: chunk,
           },
         ];
@@ -85,8 +85,12 @@ function Chat() {
 
   useEffect(() => {
     if (chatId) {
-      getMessages(chatId)
-        .then((messages) => setChatMessages(messages))
+      getChat(chatId)
+        .then((chat) => {
+          // TODO: Make it better
+          setChat(chat);
+          setChatMessages(chat.messages);
+        })
         .catch((err: Error) => toast.error(err.message));
     }
   }, [chatId]);
@@ -97,18 +101,22 @@ function Chat() {
     }
   }, [chatMessages]);
 
+  if (!chat) {
+    return <span>Загрузка...</span>;
+  }
+
   return (
     <div className={classes.wrapper}>
       <div className={classes.messages} ref={messagesRef}>
         {chatMessages.map((message) => (
-          <ChatMessage chatMessage={message} key={message.created_at} />
+          <ChatMessage chatMessage={message} modelName={chat.model_name} key={message.created_at} />
         ))}
       </div>
 
       <form onSubmit={submitHandler} className={classes.form}>
         <input
           type="text"
-          placeholder="Напишите сообщение"
+          placeholder={`Написать ${chat.model}`}
           className="input"
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
