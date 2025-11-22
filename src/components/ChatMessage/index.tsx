@@ -1,21 +1,23 @@
-import type { IChatMessage } from '@/utils/chats';
 import classes from './ChatMessage.module.scss';
-import { useAuth } from '@/contexts/AuthContext';
 
-function ChatMessage({ chatMessage, modelName }: { chatMessage: IChatMessage; modelName: string }) {
-  const { authUser } = useAuth();
+export interface MessageState {
+  id: string;
+  role: 'user' | 'assistant';
+  content: string;
+}
 
+function ChatMessage({ message }: { message: MessageState }) {
   return (
     <div
       className={classes.message}
       style={
-        chatMessage.role === 'user'
+        message.role === 'user'
           ? { marginLeft: 'auto', borderBottomRightRadius: 0 }
           : { borderBottomLeftRadius: 0 }
       }
     >
-      <b>{chatMessage.role === 'assistant' ? modelName : authUser?.username}</b>
-      <pre className={classes.messageBody}>{chatMessage.content}</pre>
+      <b>{message.role}</b>
+      <pre className={classes.messageBody}>{message.content}</pre>
     </div>
   );
 }

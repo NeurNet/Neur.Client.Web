@@ -1,6 +1,6 @@
-.wrapper {
+.messages {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  height: calc(100vh - 112px);
+  overflow-y: auto;
 }

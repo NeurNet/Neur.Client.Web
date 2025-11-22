@@ -6,6 +6,7 @@ export interface CreateChatResponse {
 }
 
 export interface IChatMessage {
+  id: string;
   created_at: string;
   role: 'user' | 'assistant';
   content: string;
