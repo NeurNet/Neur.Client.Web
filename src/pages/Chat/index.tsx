@@ -1,10 +1,10 @@
 import { useParams } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
-import type { Chat } from '@/utils/chats';
-import classes from './Chat.module.scss';
-import MessageList from '@/components/MessageList/MessageList';
 import { useChatMessages } from '@/hooks/useChatMessages';
+import type { Chat } from '@/utils/chats';
+import MessageList from '@/components/MessageList/MessageList';
 import ChatInput from '@/components/ChatInput';
+import classes from './Chat.module.scss';
 
 function Chat() {
   const { chatId } = useParams();
@@ -23,8 +23,12 @@ function Chat() {
 
   return (
     <div className={classes.wrapper}>
-      <MessageList messages={messages} />
-      <ChatInput onSend={sendHandler} disabled={isGenerating} placeholder={`Написать ${chat.model}...`} />
+      <MessageList messages={messages} isGenerating={isGenerating} />
+      <ChatInput
+        onSend={sendHandler}
+        disabled={isGenerating}
+        placeholder={`Написать ${chat.model}...`}
+      />
     </div>
   );
 }

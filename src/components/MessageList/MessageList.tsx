@@ -2,7 +2,13 @@ import { useEffect, useRef } from 'react';
 import ChatMessage, { type MessageState } from '../ChatMessage';
 import classes from './MessageList.module.scss';
 
-function MessageList({ messages }: { messages: MessageState[] }) {
+function MessageList({
+  messages,
+  isGenerating,
+}: {
+  messages: MessageState[];
+  isGenerating: boolean;
+}) {
   const messagesRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -26,6 +32,8 @@ function MessageList({ messages }: { messages: MessageState[] }) {
       {messages.map((message) => (
         <ChatMessage message={message} key={message.id} />
       ))}
+
+      {isGenerating && <span>Думает...</span>}
     </div>
   );
 }

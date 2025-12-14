@@ -69,7 +69,9 @@ export async function getChat(chatId: string): Promise<Chat> {
     throw new Error('Произошла ошибка!');
   }
 
-  return (await res.json()) as Chat;
+  // TODO: remove temporary fix
+  const json = (await res.json()) as Chat[];
+  return json[0];
 }
 
 export async function deleteChat(chatId: string) {
@@ -89,13 +91,17 @@ export async function deleteChat(chatId: string) {
 }
 
 export async function generateResponse(chatId: string, prompt: string) {
-  const res = await fetchBackend(`/chats/${chatId}/generate`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
+  const res = await fetchBackend(
+    `/chats/${chatId}/generate`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ prompt }),
     },
-    body: JSON.stringify({ prompt }),
-  }, false);
+    false
+  );
 
   switch (res.status) {
     case 401:

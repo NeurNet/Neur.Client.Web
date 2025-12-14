@@ -2,9 +2,9 @@ import { fetchBackend } from './fetch';
 
 export interface Model {
   id: string;
-  name: string | null;
-  model: string | null;
-  version: string | null;
+  name: string;
+  model: string;
+  version: string;
   status: 'open' | 'closed';
   createdAt: string;
   updatedAt: string | null;
