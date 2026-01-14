@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import classes from './Login.module.scss';
 import toast from 'react-hot-toast';
@@ -45,9 +45,6 @@ function Login() {
           Вход
         </button>
       </form>
-      <Link to="/" className="link">
-        Вернуться назад
-      </Link>
     </div>
   );
 }

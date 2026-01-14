@@ -4,6 +4,7 @@ export interface AuthUser {
   id: string;
   username: string;
   tokens: number;
+  role: string;
 }
 
 export async function requestLogin(username: string, password: string): Promise<void> {

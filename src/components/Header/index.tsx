@@ -13,17 +13,15 @@ function Header() {
 
       {isLoading ? (
         <span>Загрузка...</span>
-      ) : authUser ? (
-        <div className={classes.userInfo}>
-          <b>{authUser.tokens} токенов</b>
-          <Link to="/settings" className="link">
-            {authUser.username}
-          </Link>
-        </div>
       ) : (
-        <Link to="/login">
-          <button className="button">Войти</button>
-        </Link>
+        authUser && (
+          <div className={classes.userInfo}>
+            <b>{authUser.tokens} токенов</b>
+            <Link to="/settings" className="link">
+              {authUser.username}
+            </Link>
+          </div>
+        )
       )}
     </header>
   );

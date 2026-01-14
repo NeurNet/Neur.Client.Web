@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './contexts/AuthContext';
-import HeaderLayout from './components/HeaderLayout';
+import DefaultLayout from './layouts/DefaultLayout';
 import Home from './pages/Home';
 import Chat from './pages/Chat';
 import Login from './pages/Login';
@@ -13,7 +13,7 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route element={<HeaderLayout />}>
+          <Route element={<DefaultLayout />}>
             <Route index element={<Home />} />
             <Route path="/chat/:chatId" element={<Chat />} />
             <Route path="/settings" element={<Settings />} />
