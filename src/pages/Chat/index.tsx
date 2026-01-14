@@ -1,8 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { useChatMessages } from '@/hooks/useChatMessages';
-import type { Chat } from '@/utils/chats';
-import MessageList from '@/components/MessageList/MessageList';
+import MessageList from '@/components/MessageList';
 import ChatInput from '@/components/ChatInput';
 import classes from './Chat.module.scss';
 
