@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 0 auto;
+  width: 80%;
+  height: 100%;
+}
+
+.form {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  align-items: flex-start;
+  margin-bottom: 4px;
+}
+
+.modelInfo {
+  font-size: 14px;
+  margin-left: 16px;
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    width: 100%;
+  }
+}

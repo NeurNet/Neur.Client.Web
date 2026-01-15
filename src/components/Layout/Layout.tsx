@@ -15,7 +15,7 @@ export default function Layout() {
   }, [user, loading, navigate]);
 
   return (
-    <div>
+    <div className={classes.container}>
       <Header />
 
       <main className={classes.main}>
