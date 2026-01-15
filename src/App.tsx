@@ -1,32 +1,20 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
-import { AuthProvider } from './contexts/AuthContext';
-import DefaultLayout from './layouts/DefaultLayout';
-import Home from './pages/Home';
-import Chat from './pages/Chat';
-import Login from './pages/Login';
-import Settings from './pages/Settings';
-import NotFound from './pages/NotFound';
+import { BrowserRouter, Routes, Route } from 'react-router';
+import Layout from './components//Layout/Layout';
+import Home from './pages/Home/Home';
+import Login from './pages/Login/Login';
+import Profile from './pages/Profile';
 
-function App() {
+export default function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<DefaultLayout />}>
-            <Route index element={<Home />} />
-            <Route path="/chat/:chatId" element={<Chat />} />
-            <Route path="/settings" element={<Settings />} />
-          </Route>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+        </Route>
 
-          <Route path="/login" element={<Login />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-
-        <Toaster />
-      </BrowserRouter>
-    </AuthProvider>
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;

@@ -1,0 +1,63 @@
+import { useState, type FormEvent } from 'react';
+import { useNavigate } from 'react-router';
+import { useAuth } from '@/contexts/AuthContext/AuthContext';
+import Button from '@/components/Button/Button';
+import Input from '@/components/Input/Input';
+import classes from './Login.module.css';
+
+export default function Login() {
+  const { login } = useAuth();
+
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    login(username, password)
+      .then(() => navigate('/'))
+      .catch((error: Error) => alert(error.message))
+      .finally(() => setLoading(false));
+  };
+
+  return (
+    <div className={classes.wrapper}>
+      <span>НейроХаб</span>
+      <h1 className={classes.title}>Вход в систему</h1>
+
+      <form className={classes.form} onSubmit={handleSubmit}>
+        <div className={classes.inputContainer}>
+          <label htmlFor="username" className={classes.label}>
+            Имя пользователя
+          </label>
+          <Input
+            type="text"
+            id="username"
+            placeholder="i00s0000"
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className={classes.inputContainer}>
+          <label htmlFor="password" className={classes.label}>
+            Пароль
+          </label>
+          <Input
+            type="password"
+            id="password"
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+
+        <Button type="submit" loading={loading}>
+          Войти
+        </Button>
+      </form>
+    </div>
+  );
+}
