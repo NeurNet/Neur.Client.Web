@@ -9,6 +9,10 @@
   display: flex;
   align-items: center;
   gap: 16px;
+  transition: color 0.2s ease;
+}
+.logos:hover {
+  color: #9605ca;
 }
 
 .texts {

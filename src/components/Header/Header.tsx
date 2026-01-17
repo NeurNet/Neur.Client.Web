@@ -8,20 +8,20 @@ export default function Header() {
 
   return (
     <header className={classes.header}>
-      <div className={classes.logos}>
-        <Link to="/">
+      <Link to="/">
+        <div className={classes.logos}>
           <img
             src="https://it-college.ru/images/Logo5.png"
             alt="Логотип Колледжа Цифровых Технологий"
             width={48}
           />
-        </Link>
 
-        <div className={classes.texts}>
-          <span className={classes.college}>Колледж Цифровых Технологий</span>
-          <span className={classes.hub}>НейроХаб</span>
+          <div className={classes.texts}>
+            <span className={classes.college}>Колледж Цифровых Технологий</span>
+            <span className={classes.hub}>НейроХаб</span>
+          </div>
         </div>
-      </div>
+      </Link>
 
       {user && (
         <Link to="/profile" className={classes.userInfo}>
