@@ -7,28 +7,9 @@
   height: 100%;
 }
 
-.form {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 4px;
-}
-
 .modelInfo {
   font-size: 14px;
   margin-left: 16px;
-}
-
-.input {
-  flex: 1;
-}
-
-.messages {
-  display: flex;
-  flex-grow: 1;
-  flex-direction: column;
-  gap: 12px;
-  overflow-y: auto;
-  align-items: flex-start;
 }
 
 .messageRight {
