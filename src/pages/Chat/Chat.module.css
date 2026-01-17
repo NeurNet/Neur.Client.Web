@@ -1,7 +1,6 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   gap: 24px;
   margin: 0 auto;
   width: 80%;
@@ -11,14 +10,29 @@
 .form {
   display: flex;
   gap: 12px;
-  width: 100%;
-  align-items: flex-start;
   margin-bottom: 4px;
 }
 
 .modelInfo {
   font-size: 14px;
   margin-left: 16px;
+}
+
+.input {
+  flex: 1;
+}
+
+.messages {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  align-items: flex-start;
+}
+
+.messageRight {
+  align-self: flex-end;
 }
 
 @media screen and (max-width: 600px) {

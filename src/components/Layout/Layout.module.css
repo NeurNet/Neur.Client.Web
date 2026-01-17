@@ -5,6 +5,8 @@
 }
 
 .main {
-  margin: 24px;
+  display: flex;
+  min-height: 0;
+  padding: 24px;
   height: 100%;
 }
