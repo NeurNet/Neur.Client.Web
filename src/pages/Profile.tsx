@@ -1,5 +1,7 @@
-import Button from '@/components/Button/Button';
 import { useAuth } from '@/contexts/AuthContext/AuthContext';
+import Button from '@/components/Button/Button';
+import ModelsTable from '@/components/ModelsTable';
+import UsersTable from '@/components/UsersTable';
 
 export default function Profile() {
   const { user, logout } = useAuth();
@@ -10,10 +12,24 @@ export default function Profile() {
 
   return (
     <div>
-      <p>Имя пользователя: {user?.username}</p>
-      <p>Роль: {user?.role}</p>
-
+      <p>
+        Выполнен вход как {user.username} ({user.role})
+      </p>
       <Button onClick={logout}>Выйти</Button>
+
+      {user.role === 'admin' && (
+        <>
+          <div>
+            <h2>Пользователи</h2>
+            <UsersTable />
+          </div>
+
+          <div>
+            <h2>Модели</h2>
+            <ModelsTable />
+          </div>
+        </>
+      )}
     </div>
   );
 }

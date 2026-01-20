@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { AuthContext } from './AuthContext';
-import { getCurrentUser, requestLogin, requestLogout, type CurrentUser } from '@/api/auth';
+import { getCurrentUser, requestLogin, requestLogout, type CurrentUser } from '@/api/users';
 
 export default function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<CurrentUser | null>(null);

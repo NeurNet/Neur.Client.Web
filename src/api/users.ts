@@ -1,7 +1,18 @@
+import type { Role } from './management';
+
 export type CurrentUser = {
   id: string;
   username: string;
-  role: string;
+  role: Role;
+  tokens: number;
+};
+
+export type User = {
+  user_id: string;
+  user_name: string;
+  name: string;
+  surname: string;
+  role: Role;
   tokens: number;
 };
 
@@ -36,7 +47,7 @@ export async function getCurrentUser(): Promise<CurrentUser> {
   return res.json();
 }
 
-export async function requestLogout(): Promise<void> {
+export async function requestLogout() {
   const res = await fetch(import.meta.env.VITE_API_URL + '/users/auth/logout', {
     method: 'POST',
     credentials: 'include',
@@ -45,4 +56,16 @@ export async function requestLogout(): Promise<void> {
   if (!res.ok) {
     throw new Error('Произошла ошибка!');
   }
+}
+
+export async function getUsers(): Promise<User[]> {
+  const res = await fetch(import.meta.env.VITE_API_URL + '/users', {
+    credentials: 'include',
+  });
+
+  if (!res.ok) {
+    throw new Error('Произошла ошибка!');
+  }
+
+  return res.json();
 }
