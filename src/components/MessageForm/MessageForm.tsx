@@ -14,7 +14,19 @@ export default function MessageForm({ chatId }: { chatId: string }) {
     setLoading(true);
 
     sendMessage(prompt, chatId)
-      .then()
+      .then(async (data) => {
+        const decoder = new TextDecoder();
+
+        while (true) {
+          const { done, value } = await data.read();
+          if (done) {
+            break;
+          }
+
+          const chunk = decoder.decode(value, { stream: true });
+          console.log('Received chunk:', chunk); 
+        }
+      })
       .catch((err) => setError(err.message))
       .finally(() => {
         setPrompt('');
@@ -24,14 +36,19 @@ export default function MessageForm({ chatId }: { chatId: string }) {
 
   return (
     <form className={classes.form} onSubmit={handleSubmit}>
-      <Input
-        placeholder="Напишите что-нибудь"
-        style={{ flex: 1 }}
-        onChange={(e) => setPrompt(e.target.value)}
-        disabled={loading}
-        required
-      />
-      <Button type="submit" loading={loading}>Отправить</Button>
+      <div className={classes.inputContainer}>
+        {error && <span className={classes.error}>{error}</span>}
+        <Input
+          placeholder="Напишите что-нибудь"
+          style={{ flex: 1 }}
+          onChange={(e) => setPrompt(e.target.value)}
+          disabled={loading}
+          required
+        />
+      </div>
+      <Button type="submit" loading={loading}>
+        Отправить
+      </Button>
     </form>
   );
 }

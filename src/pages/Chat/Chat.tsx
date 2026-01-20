@@ -34,7 +34,7 @@ export default function Chat() {
       <MessageList messages={data.messages} />
 
       <div>
-        <MessageForm />
+        <MessageForm chatId={data.id} />
         <span className={classes.modelInfo}>
           {data?.model_name} ({data?.model})
         </span>

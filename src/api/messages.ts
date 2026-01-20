@@ -6,8 +6,8 @@ export type Message = {
   content: string;
 };
 
-export async function sendMessage(prompt: string, chatId: string): Promise<Response> {
-  return fetch(import.meta.env.VITE_API_URL + `/chats/${chatId}/messages`, {
+export async function sendMessage(prompt: string, chatId: string) {
+  const res = await fetch(import.meta.env.VITE_API_URL + `/chats/${chatId}/messages`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -15,4 +15,6 @@ export async function sendMessage(prompt: string, chatId: string): Promise<Respo
     credentials: 'include',
     body: JSON.stringify({ prompt }),
   });
+
+  return res.body!.getReader();
 }
