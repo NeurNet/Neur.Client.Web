@@ -1,24 +1,6 @@
-import { useEffect, useState } from 'react';
-import { getModels, type Model } from '@/api/models';
+import type { Model } from '@/api/models';
 
-export default function ModelsTable() {
-  const [data, setData] = useState<Model[] | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    getModels()
-      .then((data) => setData(data))
-      .catch((err: Error) => setError(err.message));
-  }, []);
-
-  if (!data) {
-    return <span>Loading...</span>;
-  }
-
-  if (error) {
-    return <span>Error: {error}</span>;
-  }
-
+export default function ModelsTable({ models }: { models: Model[] }) {
   return (
     <table>
       <thead>
@@ -33,7 +15,7 @@ export default function ModelsTable() {
         </tr>
       </thead>
       <tbody>
-        {data.map((model) => (
+        {models.map((model) => (
           <tr key={model.id}>
             <th scope="row">{model.model}</th>
             <td>{model.name}</td>

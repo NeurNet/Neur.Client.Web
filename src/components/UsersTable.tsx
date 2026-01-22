@@ -1,24 +1,6 @@
-import { useEffect, useState } from 'react';
-import { getUsers, type User } from '@/api/users';
+import type { User } from '@/api/users';
 
-export default function UsersTable() {
-  const [data, setData] = useState<User[] | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    getUsers()
-      .then((data) => setData(data))
-      .catch((err: Error) => setError(err.message));
-  }, []);
-
-  if (!data) {
-    return <span>Loading...</span>;
-  }
-
-  if (error) {
-    return <span>Error: {error}</span>;
-  }
-
+export default function UsersTable({ users }: { users: User[] }) {
   return (
     <table>
       <thead>
@@ -30,10 +12,12 @@ export default function UsersTable() {
         </tr>
       </thead>
       <tbody>
-        {data.map((user) => (
+        {users.map((user) => (
           <tr key={user.user_id}>
             <th scope="row">{user.user_name}</th>
-            <td>{user.name} {user.surname}</td>
+            <td>
+              {user.name} {user.surname}
+            </td>
             <td>{user.role}</td>
             <td>{user.tokens}</td>
           </tr>
