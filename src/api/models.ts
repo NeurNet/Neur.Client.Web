@@ -1,10 +1,20 @@
+export type ModelType = 'text' | 'image' | 'code';
+export type ModelStatus = 'open' | 'closed';
+
+export type CreateModel = {
+  name: string;
+  model: string;
+  type: ModelType;
+  version: string;
+  status: ModelStatus;
+};
+
 export type Model = {
   id: string;
   name: string;
   model: string;
-  type: 'text' | 'image' | 'code';
   version: string;
-  status: string;
+  status: ModelStatus;
   createdAt: string;
   updatedAt: string;
 };
@@ -19,4 +29,15 @@ export async function getModels(): Promise<Model[]> {
   }
 
   return res.json();
+}
+
+export async function createModel(model: CreateModel) {
+  return fetch(import.meta.env.VITE_API_URL + `/models`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify(model),
+  });
 }

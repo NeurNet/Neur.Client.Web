@@ -2,7 +2,6 @@ import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router';
 import { useAuth } from '@/contexts/AuthContext/AuthContext';
 import Button from '@/components/Button/Button';
-import Input from '@/components/Input/Input';
 import classes from './Login.module.css';
 
 export default function Login() {
@@ -33,7 +32,7 @@ export default function Login() {
           <label htmlFor="username" className={classes.label}>
             Имя пользователя
           </label>
-          <Input
+          <input
             type="text"
             id="username"
             placeholder="i00s0000"
@@ -46,7 +45,7 @@ export default function Login() {
           <label htmlFor="password" className={classes.label}>
             Пароль
           </label>
-          <Input
+          <input
             type="password"
             id="password"
             onChange={(e) => setPassword(e.target.value)}

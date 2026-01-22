@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { sendMessage } from '@/api/messages';
-import Input from '@/components/Input/Input';
 import Button from '@/components/Button/Button';
 import classes from './MessageForm.module.css';
 
@@ -38,7 +37,7 @@ export default function MessageForm({ chatId }: { chatId: string }) {
     <form className={classes.form} onSubmit={handleSubmit}>
       <div className={classes.inputContainer}>
         {error && <span className={classes.error}>{error}</span>}
-        <Input
+        <input
           placeholder="Напишите что-нибудь"
           style={{ flex: 1 }}
           onChange={(e) => setPrompt(e.target.value)}
