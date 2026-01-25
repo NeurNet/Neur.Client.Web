@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getModels, type Model } from '@/api/models';
-import { ModelCard } from '@/components/ModelCard/ModelCard';
+import { ModelCard } from '@/components/ModelCard';
 import classes from './Home.module.css';
 
 export function Home() {

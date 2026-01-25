@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { getChat, type Chat } from '@/api/chats';
-import { MessageList } from '@/components/MessageList/MessageList';
-import { MessageForm } from '@/components/MessageForm/MessageForm';
+import { MessageList } from '@/components/MessageList';
+import { MessageForm } from '@/components/MessageForm';
 import classes from './Chat.module.css';
 
 export function Chat() {

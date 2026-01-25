@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router';
-import { useAuth } from '@/contexts/AuthContext/AuthContext';
-import { Header } from '../Header/Header';
+import { useAuth } from '@/contexts/AuthContext';
+import { Header } from '../Header';
 import classes from './Layout.module.css';
 
 export function Layout() {

@@ -1,4 +1,4 @@
-import { useAuth } from '@/contexts/AuthContext/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { Link } from 'react-router';
 import { ChevronRight } from 'lucide-react';
 import classes from './Header.module.css';
