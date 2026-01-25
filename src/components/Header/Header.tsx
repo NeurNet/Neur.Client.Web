@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { ChevronRight } from 'lucide-react';
 import classes from './Header.module.css';
 
-export default function Header() {
+export function Header() {
   const { user } = useAuth();
 
   return (

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Button from './Button/Button';
+import { Button } from './Button/Button';
 import { createModel, type CreateModel } from '@/api/models';
 
 const initialForm: CreateModel = {
@@ -10,7 +10,7 @@ const initialForm: CreateModel = {
   status: 'open',
 };
 
-export default function ModelForm() {
+export function ModelForm() {
   const [loading, setLoading] = useState<boolean>(false);
   const [form, setForm] = useState<CreateModel>(initialForm);
 

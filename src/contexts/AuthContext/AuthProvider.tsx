@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { AuthContext } from './AuthContext';
 import { getCurrentUser, requestLogin, requestLogout, type CurrentUser } from '@/api/users';
 
-export default function AuthProvider({ children }: { children: React.ReactNode }) {
+export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<CurrentUser | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 

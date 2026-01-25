@@ -3,13 +3,13 @@ import { Plus } from 'lucide-react';
 import { getUsers, type User } from '@/api/users';
 import { getModels, type Model } from '@/api/models';
 import { useAuth } from '@/contexts/AuthContext/AuthContext';
-import ModelForm from '@/components/ModelForm';
-import Button from '@/components/Button/Button';
-import ModelsTable from '@/components/ModelsTable';
-import UsersTable from '@/components/UsersTable';
+import { ModelForm } from '@/components/ModelForm';
+import { Button } from '@/components/Button/Button';
+import { ModelsTable } from '@/components/ModelsTable';
+import { UsersTable } from '@/components/UsersTable';
 import classes from './Profile.module.css';
 
-export default function Profile() {
+export function Profile() {
   const { user, logout } = useAuth();
 
   const [models, setModels] = useState<Model[]>([]);

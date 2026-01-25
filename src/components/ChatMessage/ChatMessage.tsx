@@ -1,6 +1,6 @@
 import classes from './ChatMessage.module.css';
 
-export default function ChatMessage({
+export function ChatMessage({
   children,
   className,
   author,

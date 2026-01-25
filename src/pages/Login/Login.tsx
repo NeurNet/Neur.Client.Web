@@ -1,10 +1,10 @@
 import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router';
 import { useAuth } from '@/contexts/AuthContext/AuthContext';
-import Button from '@/components/Button/Button';
+import { Button } from '@/components/Button/Button';
 import classes from './Login.module.css';
 
-export default function Login() {
+export function Login() {
   const { login } = useAuth();
 
   const [username, setUsername] = useState<string>('');

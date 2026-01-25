@@ -6,7 +6,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
 }
 
-export default function Button({ children, loading, ...props }: ButtonProps) {
+export function Button({ children, loading, ...props }: ButtonProps) {
   return (
     <button className={classes.button} disabled={loading || props.disabled} {...props}>
       {loading && <Loader2 size={18} className={classes.loader} />}

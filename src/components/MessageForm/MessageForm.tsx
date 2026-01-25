@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { sendMessage } from '@/api/messages';
-import Button from '@/components/Button/Button';
+import { Button } from '@/components/Button/Button';
 import classes from './MessageForm.module.css';
 
-export default function MessageForm({ chatId }: { chatId: string }) {
+export function MessageForm({ chatId }: { chatId: string }) {
   const [prompt, setPrompt] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);

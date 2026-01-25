@@ -1,6 +1,6 @@
 import type { Model } from '@/api/models';
 
-export default function ModelsTable({ models }: { models: Model[] }) {
+export function ModelsTable({ models }: { models: Model[] }) {
   const formatDate = (date: string): string => {
     return new Date(date).toLocaleString();
   };

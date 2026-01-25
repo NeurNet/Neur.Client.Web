@@ -1,6 +1,6 @@
 import type { User } from '@/api/users';
 
-export default function UsersTable({ users }: { users: User[] }) {
+export function UsersTable({ users }: { users: User[] }) {
   return (
     <table>
       <thead>

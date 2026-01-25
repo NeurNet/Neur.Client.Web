@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router';
 import { useAuth } from '@/contexts/AuthContext/AuthContext';
-import Header from '../Header/Header';
+import { Header } from '../Header/Header';
 import classes from './Layout.module.css';
 
-export default function Layout() {
+export function Layout() {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
 
