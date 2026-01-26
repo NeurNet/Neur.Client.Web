@@ -11,19 +11,3 @@
   align-items: center;
   gap: 12px;
 }
-
-.addButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  border-radius: 16px;
-  height: 32px;
-  width: 32px;
-}
-.addButton:hover {
-  background-color: #f5f5f5;
-}

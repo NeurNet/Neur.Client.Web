@@ -41,7 +41,7 @@ export function Admin() {
       <div>
         <div className={classes.modelsHeading}>
           <h2>Модели</h2>
-          <button className={classes.addButton} onClick={switchModelFormOpened}>
+          <button className="btn-icon" onClick={switchModelFormOpened}>
             {modelFormOpened ? <X /> : <Plus />}
           </button>
         </div>

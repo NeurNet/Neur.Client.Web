@@ -27,8 +27,8 @@ export function Header() {
       {user && (
         <div className={classes.rightSide}>
           {user.role === 'admin' && (
-            <Link to="/admin">
-              <Star />
+            <Link to="/admin" className="btn-icon">
+              <Star size={18} />
             </Link>
           )}
 
