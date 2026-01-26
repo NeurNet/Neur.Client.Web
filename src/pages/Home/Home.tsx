@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getModels, type Model } from '@/api/models';
 import { ModelCard } from '@/components/ModelCard';
+import { FullScreenLoader } from '@/components/FullScreenLoader';
 import classes from './Home.module.css';
 
 export function Home() {
@@ -15,17 +16,14 @@ export function Home() {
       .finally(() => setLoading(false));
   }, []);
 
+  if (loading) return <FullScreenLoader />;
+  if (error) return <span>Ошибка: {error}</span>;
+
   return (
     <div className={classes.models}>
-      {loading ? (
-        <div>Loading...</div>
-      ) : error ? (
-        <div>{error}</div>
-      ) : (
-        models.map((model) => (
-          <ModelCard model={model} />
-        ))
-      )}
+      {models.map((model) => (
+        <ModelCard key={model.id} model={model} />
+      ))}
     </div>
   );
 }
