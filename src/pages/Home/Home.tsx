@@ -21,9 +21,11 @@ export function Home() {
 
   return (
     <div className={classes.models}>
-      {models.map((model) => (
-        <ModelCard key={model.id} model={model} />
-      ))}
+      {models.length === 0 ? (
+        <span>Нет доступных моделей!</span>
+      ) : (
+        models.map((model) => <ModelCard key={model.id} model={model} />)
+      )}
     </div>
   );
 }
