@@ -36,6 +36,7 @@ export function Login() {
             type="text"
             id="username"
             placeholder="i00s0000"
+            autoComplete="username"
             onChange={(e) => setUsername(e.target.value)}
             required
           />
@@ -48,6 +49,7 @@ export function Login() {
           <input
             type="password"
             id="password"
+            autoComplete="current-password"
             onChange={(e) => setPassword(e.target.value)}
             required
           />
