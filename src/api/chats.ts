@@ -32,6 +32,18 @@ export async function createChat(modelId: string): Promise<CreateChatResponse> {
   return res.json();
 }
 
+export async function getChats(): Promise<Chat[]> {
+  const res = await fetch(import.meta.env.VITE_API_URL + `/chats`, {
+    credentials: 'include',
+  });
+
+  if (!res.ok) {
+    throw new Error('Произошла ошибка!');
+  }
+
+  return res.json();
+}
+
 export async function getChat(chatId: string): Promise<Chat> {
   const res = await fetch(import.meta.env.VITE_API_URL + `/chats/${chatId}`, {
     credentials: 'include',
