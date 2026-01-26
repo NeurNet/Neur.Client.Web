@@ -1,5 +1,5 @@
 export type ModelType = 'text' | 'image' | 'code';
-export type ModelStatus = 'open' | 'closed';
+export type ModelStatus = 'open' | 'locked';
 
 export type CreateModel = {
   name: string;

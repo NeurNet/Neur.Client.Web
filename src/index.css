@@ -46,6 +46,19 @@ select:focus {
   outline-offset: 1px;
 }
 
+label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 400px;
+  width: 100%;
+}
+
 .btn-icon {
   display: flex;
   align-items: center;
@@ -60,4 +73,10 @@ select:focus {
 }
 .btn-icon:hover {
   background-color: #f5f5f5;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }

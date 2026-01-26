@@ -27,9 +27,9 @@ export function Login() {
       <span>НейроХаб</span>
       <h1 className={classes.title}>Вход в систему</h1>
 
-      <form className={classes.form} onSubmit={handleSubmit}>
-        <div className={classes.inputContainer}>
-          <label htmlFor="username" className={classes.label}>
+      <form onSubmit={handleSubmit}>
+        <div className="input-container">
+          <label htmlFor="username">
             Имя пользователя
           </label>
           <input
@@ -42,8 +42,8 @@ export function Login() {
           />
         </div>
 
-        <div className={classes.inputContainer}>
-          <label htmlFor="password" className={classes.label}>
+        <div className="input-container">
+          <label htmlFor="password">
             Пароль
           </label>
           <input
