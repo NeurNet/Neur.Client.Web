@@ -1,10 +1,11 @@
-import { Link } from 'react-router';
+import { Link, useLocation } from 'react-router';
 import { ChevronRight, Star } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import classes from './Header.module.css';
 
 export function Header() {
   const { user } = useAuth();
+  const location = useLocation();
 
   return (
     <header className={classes.header}>
@@ -28,7 +29,7 @@ export function Header() {
         <div className={classes.rightSide}>
           {user.role === 'admin' && (
             <Link to="/admin" className="btn-icon">
-              <Star size={18} />
+              <Star size={18} fill={location.pathname === '/admin' ? '#000' : '#fff'} />
             </Link>
           )}
 
