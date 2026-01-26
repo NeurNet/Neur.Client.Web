@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Plus } from 'lucide-react';
+import { Plus, X } from 'lucide-react';
 import { getUsers, type User } from '@/api/users';
 import { getModels, type Model } from '@/api/models';
 import { useAuth } from '@/contexts/AuthContext';
@@ -61,7 +61,7 @@ export function Profile() {
             <div className={classes.modelsHeading}>
               <h2>Модели</h2>
               <button className={classes.addButton} onClick={switchModelFormOpened}>
-                <Plus />
+                {modelFormOpened ? <X /> : <Plus />}
               </button>
             </div>
 
