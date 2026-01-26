@@ -4,9 +4,3 @@
   margin: 0 64px;
   gap: 32px;
 }
-
-.modelsHeading {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}

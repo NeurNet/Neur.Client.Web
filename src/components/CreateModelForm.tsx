@@ -10,7 +10,7 @@ const initialForm: CreateModel = {
   status: 'open',
 };
 
-export function ModelForm() {
+export function CreateModelForm() {
   const [loading, setLoading] = useState<boolean>(false);
   const [form, setForm] = useState<CreateModel>(initialForm);
 
