@@ -1,9 +1,8 @@
 .admin {
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  flex-direction: column;
+  margin: 0 64px;
   gap: 32px;
-  width: 100%;
 }
 
 .modelsHeading {

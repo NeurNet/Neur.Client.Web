@@ -6,7 +6,7 @@ export type Chat = {
   model_name: string;
   model: string;
   created_at: string;
-  updated_at: string;
+  updated_at: string | null;
   messages: Message[];
 };
 

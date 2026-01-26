@@ -16,7 +16,7 @@ export type Model = {
   version: string;
   status: ModelStatus;
   createdAt: string;
-  updatedAt: string;
+  updatedAt: string | null;
 };
 
 export async function getModels(): Promise<Model[]> {
