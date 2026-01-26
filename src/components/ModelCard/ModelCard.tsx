@@ -6,14 +6,14 @@ import classes from './ModelCard.module.css';
 
 export function ModelCard({ model }: { model: Model }) {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
 
   const creationDate = new Date(model.createdAt).toLocaleString();
 
   const createChatHandler = () => {
     setLoading(true);
     createChat(model.id)
-      .then((chatId) => navigate(`/chat/${chatId}`))
+      .then((data) => navigate(`/chat/${data.chatId}`))
       .finally(() => setLoading(false));
   };
 
