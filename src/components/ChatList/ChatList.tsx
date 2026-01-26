@@ -16,8 +16,9 @@ export function ChatList() {
   return (
     <div className={classes.chats}>
       <strong className={classes.title}>ЧАТЫ</strong>
-
-      {data.length === 0 ? <span>Нет созданных чатов</span> : (
+      {data.length === 0 ? (
+        <span>Нет созданных чатов</span>
+      ) : (
         data.map((chat) => <ChatCard chat={chat} key={chat.id} />)
       )}
     </div>

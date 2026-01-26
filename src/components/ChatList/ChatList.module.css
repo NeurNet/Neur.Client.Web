@@ -14,3 +14,10 @@
   font-size: 14px;
   letter-spacing: 1px;
 }
+
+@media screen and (max-width: 600px) {
+  .chats {
+    overflow-y: visible;
+    width: auto;
+  }
+}
