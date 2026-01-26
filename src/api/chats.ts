@@ -55,3 +55,14 @@ export async function getChat(chatId: string): Promise<Chat> {
 
   return res.json();
 }
+
+export async function deleteChat(chatId: string) {
+  const res = await fetch(import.meta.env.VITE_API_URL + `/chats/${chatId}`, {
+    method: 'DELETE',
+    credentials: 'include',
+  });
+
+  if (!res.ok) {
+    throw new Error('Произошла ошибка!');
+  }
+}

@@ -1,16 +1,26 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router';
-import type { Chat } from '@/api/chats';
+import { useNavigate } from 'react-router';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { X } from 'lucide-react';
+import { deleteChat, type Chat } from '@/api/chats';
 import classes from './ChatCard.module.css';
 
 export function ChatCard({ chat }: { chat: Chat }) {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: deleteChat,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['chats'] }),
+  });
+
   const [now, setNow] = useState(() => Date.now());
 
   useEffect(() => {
     const id = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(id);
   }, []);
-  
+
   const formatDate = (dateString: string) => {
     const date = new Date(dateString).getTime();
     const diffMs = now - date;
@@ -29,10 +39,17 @@ export function ChatCard({ chat }: { chat: Chat }) {
     return `${seconds}с`;
   };
 
+  const clickHandler = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!(e.target instanceof SVGElement)) {
+      navigate(`/chat/${chat.id}`);
+    }
+  };
+
   return (
-    <Link to={`/chat/${chat.id}`} className={classes.card}>
+    <div onClick={clickHandler} className={classes.card}>
       <strong className={classes.name}>{chat.model_name}</strong>
       <span className={classes.time}>{formatDate(chat.created_at)}</span>
-    </Link>
+      <X className={classes.delete} size={16} onClick={() => mutation.mutate(chat.id)} />
+    </div>
   );
 }
