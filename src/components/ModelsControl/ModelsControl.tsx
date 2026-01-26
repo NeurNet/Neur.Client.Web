@@ -1,29 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Plus, X } from 'lucide-react';
-import { getModels, type Model } from '@/api/models';
+import { useQuery } from '@tanstack/react-query';
+import { getModels } from '@/api/models';
 import { CreateModelForm } from '../CreateModelForm';
 import { FullScreenLoader } from '../FullScreenLoader';
 import classes from './ModelsControl.module.css';
 
 export function ModelsControl() {
-  const [models, setModels] = useState<Model[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data, isPending, error } = useQuery({
+    queryKey: ['models'],
+    queryFn: getModels,
+  });
 
   const [formOpened, setFormOpened] = useState<boolean>(false);
-
-  useEffect(() => {
-    getModels()
-      .then((data) => setModels(data))
-      .catch((err: Error) => setError(err.message))
-      .finally(() => setLoading(false));
-  }, []);
 
   const switchFormOpened = () => setFormOpened(!formOpened);
   const formatDate = (date: string) => new Date(date).toLocaleString();
 
-  if (loading) return <FullScreenLoader />;
-  if (error) return <span>Ошибка: {error}</span>;
+  if (isPending) return <FullScreenLoader />;
+  if (error) return <span>Ошибка: {error.message}</span>;
 
   return (
     <div>
@@ -48,7 +43,7 @@ export function ModelsControl() {
           </tr>
         </thead>
         <tbody>
-          {models.map((model) => (
+          {data.map((model) => (
             <tr key={model.id}>
               <th scope="row">{model.name}</th>
               <td>{model.model}</td>

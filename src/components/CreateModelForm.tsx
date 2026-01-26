@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button } from './Button';
 import { createModel, type CreateModel } from '@/api/models';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const initialForm: CreateModel = {
   name: '',
@@ -11,16 +12,19 @@ const initialForm: CreateModel = {
 };
 
 export function CreateModelForm() {
-  const [loading, setLoading] = useState<boolean>(false);
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: createModel,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['models'] }),
+  });
+
   const [form, setForm] = useState<CreateModel>(initialForm);
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(form);
-
-    createModel(form)
-      .then(() => setForm(initialForm))
-      .finally(() => setLoading(false));
+    mutation.mutate(form);
+    setForm(initialForm);
   };
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -89,7 +93,7 @@ export function CreateModelForm() {
         </select>
       </div>
 
-      <Button type="submit" loading={loading}>
+      <Button type="submit" loading={mutation.isPending}>
         Добавить модель
       </Button>
     </form>

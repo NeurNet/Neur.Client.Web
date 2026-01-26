@@ -1,30 +1,24 @@
-import { useEffect, useState } from 'react';
-import { getModels, type Model } from '@/api/models';
+import { useQuery } from '@tanstack/react-query';
+import { getModels } from '@/api/models';
 import { ModelCard } from '@/components/ModelCard';
 import { FullScreenLoader } from '@/components/FullScreenLoader';
 import classes from './Home.module.css';
 
 export function Home() {
-  const [models, setModels] = useState<Model[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data, isPending, error } = useQuery({
+    queryKey: ['models'],
+    queryFn: getModels,
+  });
 
-  useEffect(() => {
-    getModels()
-      .then((data) => setModels(data))
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
-  }, []);
-
-  if (loading) return <FullScreenLoader />;
-  if (error) return <span>Ошибка: {error}</span>;
+  if (isPending) return <FullScreenLoader />;
+  if (error) return <span>Ошибка: {error.message}</span>;
 
   return (
     <div className={classes.models}>
-      {models.length === 0 ? (
+      {data.length === 0 ? (
         <span>Нет доступных моделей!</span>
       ) : (
-        models.map((model) => <ModelCard key={model.id} model={model} />)
+        data.map((model) => <ModelCard key={model.id} model={model} />)
       )}
     </div>
   );

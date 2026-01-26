@@ -1,21 +1,15 @@
-import { useEffect, useState } from 'react';
-import { getUsers, type User } from '@/api/users';
+import { useQuery } from '@tanstack/react-query';
+import { getUsers } from '@/api/users';
 import { FullScreenLoader } from './FullScreenLoader';
 
 export function UsersControl() {
-  const [users, setUsers] = useState<User[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data, isPending, error } = useQuery({
+    queryKey: ['users'],
+    queryFn: getUsers,
+  });
 
-  useEffect(() => {
-    getUsers()
-      .then((data) => setUsers(data))
-      .catch((err: Error) => setError(err.message))
-      .finally(() => setLoading(false));
-  }, []);
-
-  if (loading) return <FullScreenLoader />;
-  if (error) return <span>Ошибка: {error}</span>;
+  if (isPending) return <FullScreenLoader />;
+  if (error) return <span>Ошибка: {error.message}</span>;
 
   return (
     <div>
@@ -31,7 +25,7 @@ export function UsersControl() {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
+          {data.map((user) => (
             <tr key={user.user_id}>
               <th scope="row">{user.user_name}</th>
               <td>
