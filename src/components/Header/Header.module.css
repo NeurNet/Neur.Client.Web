@@ -52,3 +52,9 @@
 .userInfo:hover .chevron {
   transform: translateX(4px);
 }
+
+.rightSide {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}

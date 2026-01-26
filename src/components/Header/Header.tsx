@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Star } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import classes from './Header.module.css';
 
@@ -25,13 +25,21 @@ export function Header() {
       </Link>
 
       {user && (
-        <Link to="/profile" className={classes.userInfo}>
-          <div className={classes.userDetails}>
-            <span className={classes.username}>{user.username}</span>
-            <span>{user.tokens} токенов</span>
-          </div>
-          <ChevronRight className={classes.chevron} />
-        </Link>
+        <div className={classes.rightSide}>
+          {user.role === 'admin' && (
+            <Link to="/admin">
+              <Star />
+            </Link>
+          )}
+
+          <Link to="/profile" className={classes.userInfo}>
+            <div className={classes.userDetails}>
+              <span className={classes.username}>{user.username}</span>
+              <span>{user.tokens} токенов</span>
+            </div>
+            <ChevronRight className={classes.chevron} />
+          </Link>
+        </div>
       )}
     </header>
   );
