@@ -1,6 +1,6 @@
-import { useAuth } from '@/contexts/AuthContext';
 import { Link } from 'react-router';
 import { ChevronRight } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 import classes from './Header.module.css';
 
 export function Header() {
@@ -14,6 +14,7 @@ export function Header() {
             src="https://it-college.ru/images/Logo5.png"
             alt="Логотип Колледжа Цифровых Технологий"
             width={48}
+            height={48}
           />
 
           <div className={classes.texts}>

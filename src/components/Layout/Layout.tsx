@@ -1,18 +1,14 @@
-import { useEffect } from 'react';
-import { Outlet, useNavigate } from 'react-router';
+import { Navigate, Outlet } from 'react-router';
 import { useAuth } from '@/contexts/AuthContext';
+import { FullScreenLoader } from '../FullScreenLoader';
 import { Header } from '../Header';
 import classes from './Layout.module.css';
 
 export function Layout() {
   const { user, loading } = useAuth();
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!user && !loading) {
-      navigate('/login');
-    }
-  }, [user, loading, navigate]);
+  if (loading) return <FullScreenLoader />
+  if (!user) return <Navigate to="/login" replace />;
 
   return (
     <div className={classes.container}>
