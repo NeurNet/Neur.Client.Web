@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
   background-color: #f5f5f5;
+  gap: 12px;
   padding: 16px;
   border-radius: 8px;
   width: 300px;
@@ -20,10 +21,4 @@
   font-size: 24px;
   font-weight: 600;
   margin: 0;
-}
-
-.additionalInfo {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
 }

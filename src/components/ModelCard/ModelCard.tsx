@@ -20,11 +20,8 @@ export function ModelCard({ model }: { model: Model }) {
   return (
     <button className={classes.card} onClick={createChatHandler} disabled={loading}>
       <h1 className={classes.name}>{model.name}</h1>
-
-      <div className={classes.additionalInfo}>
-        <span>Создано: {creationDate}</span>
-        <span>v{model.version}</span>
-      </div>
+      <span>Создано: {creationDate}</span>
+      <span>v{model.version}</span>
     </button>
   );
 }
