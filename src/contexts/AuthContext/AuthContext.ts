@@ -1,20 +1,17 @@
-import { createContext, use } from 'react';
-import type { AuthUser } from '@/utils/auth';
+import type { CurrentUser } from '@/api/users';
+import { createContext, useContext } from 'react';
 
-export interface AuthContextData {
-  authUser: AuthUser | null;
-  isLoading: boolean;
-  refreshAuth: () => Promise<void>;
-  login: (username: string, password: string) => Promise<void>;
-  logout: () => Promise<void>;
-}
+export type AuthContextType = {
+  loading: boolean;
+  user: CurrentUser | null;
+  login: (email: string, password: string) => Promise<void>;
+  logout: () => void;
+};
 
-export const AuthContext = createContext<AuthContextData | null>(null);
+export const AuthContext = createContext<AuthContextType | null>(null);
 
 export function useAuth() {
-  const auth = use(AuthContext);
-  if (!auth) {
-    throw new Error('useAuth must be used within AuthProvider!');
-  }
+  const auth = useContext(AuthContext);
+  if (!auth) throw new Error('useAuth must be used within AuthProvider');
   return auth;
 }

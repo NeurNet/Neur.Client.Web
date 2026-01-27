@@ -1,0 +1,66 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+}
+
+.logos {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: color 0.2s ease;
+}
+.logos:hover {
+  color: #9605ca;
+}
+
+.texts {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.college {
+  font-size: 16px;
+}
+
+.hub {
+  font-weight: 600;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.userDetails {
+  display: flex;
+  flex-direction: column;
+  text-align: end;
+}
+
+.username {
+  font-weight: 600;
+}
+
+.chevron {
+  transition: transform 0.2s ease;
+}
+
+.userInfo:hover .chevron {
+  transform: translateX(4px);
+}
+
+.rightSide {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+@media screen and (max-width: 600px) {
+  .texts {
+    display: none;
+  }
+}
