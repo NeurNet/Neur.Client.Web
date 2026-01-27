@@ -27,7 +27,7 @@ export function Login() {
       <span>НейроХаб</span>
       <h1 className={classes.title}>Вход в систему</h1>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="form">
         <div className="input-container">
           <label htmlFor="username">
             Имя пользователя

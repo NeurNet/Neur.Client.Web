@@ -51,11 +51,11 @@ label {
   font-weight: 500;
 }
 
-form {
+.form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  max-width: 400px;
+  max-width: 500px;
   width: 100%;
 }
 
