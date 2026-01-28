@@ -1,23 +1,41 @@
-# Neur.Client.Web
+# RU 🇷🇺
+
+Веб-интерфейс для NeurNet
+
+## Конфигурация
+
+Перед сборкой и запуском проекта, отредактируйте файл `.env` и поменяйте значение `VITE_API_URL` на базовый эндпоинт запущенного [API NeurNet](https://github.com/NeurNet/Neur.Server.Net).
+
+## Запуск в режиме разработки
+
+```sh
+$ npm i       # или `bun i`
+$ npm run dev # или `bun run dev`
+```
+
+## Сборка
+
+```sh
+$ npm run build # или `bun run build`
+```
+
+# EN 🇺🇸
 
 Web UI for NeurNet
 
-## Run in development mode using Node
+## Configuration
+
+Before the launch of the application, edit the `.env` file and set `VITE_API_URL` value to the base endpoint of the [NeurNet API](https://github.com/NeurNet/Neur.Server.Net).
+
+## Run in development mode
 
 ```sh
-$ npm i
-$ npm run dev
-```
-
-## Run in development mode using Bun
-
-```sh
-$ bun i
-$ bun dev
+$ npm i       # or `bun i`
+$ npm run dev # or `bun run dev`
 ```
 
 ## Build
 
 ```sh
-$ bun run build # or `npm run build`
+$ npm run build # or `bun run build`
 ```
