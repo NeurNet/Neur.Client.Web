@@ -1,33 +1,21 @@
-import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import { useQuery } from '@tanstack/react-query';
 import { getChat, type Chat } from '@/api/chats';
 import { MessageList } from '@/components/MessageList';
 import { MessageForm } from '@/components/MessageForm';
+import { FullScreenLoader } from '@/components/FullScreenLoader';
 import classes from './Chat.module.css';
 
 export function Chat() {
   const { chatId } = useParams();
 
-  const [data, setData] = useState<Chat | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data, isPending, error } = useQuery({
+    queryKey: ['chats', chatId],
+    queryFn: () => getChat(chatId ?? ''),
+  });
 
-  useEffect(() => {
-    if (chatId) {
-      getChat(chatId)
-        .then((data) => setData(data))
-        .catch((err) => setError(err))
-        .finally(() => setLoading(false));
-    }
-  }, [chatId]);
-
-  if (loading || !data) {
-    return <span>Loading...</span>;
-  }
-
-  if (error) {
-    return <span>Error: {error}</span>;
-  }
+  if (isPending) return <FullScreenLoader />;
+  if (error) return <span>Ошибка: {error.message}</span>;
 
   return (
     <div className={classes.container}>
