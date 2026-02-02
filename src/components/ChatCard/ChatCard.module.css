@@ -29,6 +29,7 @@
   display: none;
   padding: 2px;
   border-radius: 500px;
+  transition: background-color 0.2s ease;
 }
 .card:hover .delete {
   display: block;
