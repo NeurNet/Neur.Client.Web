@@ -21,7 +21,7 @@ export function CreateModelForm() {
 
   const [form, setForm] = useState<CreateModel>(initialForm);
 
-  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const submitHandler = (e: React.SubmitEvent) => {
     e.preventDefault();
     mutation.mutate(form);
     setForm(initialForm);
