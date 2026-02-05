@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 0 auto;
+  width: 80%;
+  height: 100%;
+}
+
+.modelInfo {
+  font-size: 14px;
+  margin-left: 16px;
+}
+
+.messageRight {
+  align-self: flex-end;
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    width: 100%;
+  }
+}
