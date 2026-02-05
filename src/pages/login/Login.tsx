@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useAuth } from '@/providers/auth';
 import { Button } from '@/components/ui/button';
+import { Input, InputGroup } from '@/components/ui/input';
+import { Form } from '@/components/ui/form';
+import { Label } from '@/components/ui/label';
 import classes from './Login.module.css';
 
 export function Login() {
@@ -27,12 +30,12 @@ export function Login() {
       <span>НейроХаб</span>
       <h1 className={classes.title}>Вход в систему</h1>
 
-      <form onSubmit={handleSubmit} className="form">
-        <div className="input-container">
-          <label htmlFor="username">
+      <Form onSubmit={handleSubmit}>
+        <InputGroup>
+          <Label htmlFor="username">
             Имя пользователя
-          </label>
-          <input
+          </Label>
+          <Input
             type="text"
             id="username"
             placeholder="i00s0000"
@@ -40,25 +43,25 @@ export function Login() {
             onChange={(e) => setUsername(e.target.value)}
             required
           />
-        </div>
+        </InputGroup>
 
-        <div className="input-container">
-          <label htmlFor="password">
+        <InputGroup>
+          <Label htmlFor="password">
             Пароль
-          </label>
-          <input
+          </Label>
+          <Input
             type="password"
             id="password"
             autoComplete="current-password"
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </div>
+        </InputGroup>
 
         <Button type="submit" loading={loading}>
           Войти
         </Button>
-      </form>
+      </Form>
     </div>
   );
 }

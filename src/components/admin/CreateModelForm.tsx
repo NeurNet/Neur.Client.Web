@@ -1,5 +1,9 @@
 import { useState } from 'react';
 import { Button } from '../ui/button';
+import { Form } from '../ui/form';
+import { Input, InputGroup } from '../ui/input';
+import { Select } from '../ui/select';
+import { Label } from '../ui/label';
 import { createModel, type CreateModel } from '@/api/models';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -37,10 +41,10 @@ export function CreateModelForm() {
   };
 
   return (
-    <form onSubmit={submitHandler} className="form">
-      <div className="input-container">
-        <label htmlFor="name">Название</label>
-        <input
+    <Form onSubmit={submitHandler}>
+      <InputGroup>
+        <Label htmlFor="name">Название</Label>
+        <Input
           type="text"
           placeholder="Saiga"
           name="name"
@@ -49,11 +53,11 @@ export function CreateModelForm() {
           value={form.name}
           required
         />
-      </div>
+      </InputGroup>
 
-      <div className="input-container">
-        <label htmlFor="model-name">Имя модели (как в Ollama)</label>
-        <input
+      <InputGroup>
+        <Label htmlFor="model-name">Имя модели (как в Ollama)</Label>
+        <Input
           type="text"
           placeholder="saiga:7b"
           name="model"
@@ -62,20 +66,20 @@ export function CreateModelForm() {
           value={form.model}
           required
         />
-      </div>
+      </InputGroup>
 
-      <div className="input-container">
-        <label htmlFor="type">Тип модели</label>
-        <select onChange={changeHandler} value={form.type} name="type" id="type" required>
+      <InputGroup>
+        <Label htmlFor="type">Тип модели</Label>
+        <Select onChange={changeHandler} value={form.type} name="type" id="type" required>
           <option value="text">Генерация текста</option>
           <option value="code">Генерация кода</option>
           <option value="image">Генерация изображений</option>
-        </select>
-      </div>
+        </Select>
+      </InputGroup>
 
-      <div className="input-container">
-        <label htmlFor="version">Версия модели</label>
-        <input
+      <InputGroup>
+        <Label htmlFor="version">Версия модели</Label>
+        <Input
           type="text"
           name="version"
           id="version"
@@ -83,19 +87,19 @@ export function CreateModelForm() {
           value={form.version}
           required
         />
-      </div>
+      </InputGroup>
 
-      <div className="input-container">
-        <label htmlFor="status">Статус модели</label>
-        <select onChange={changeHandler} value={form.status} name="status" id="status" required>
+      <InputGroup>
+        <Label htmlFor="status">Статус модели</Label>
+        <Select onChange={changeHandler} value={form.status} name="status" id="status" required>
           <option value="locked">Приватная модель</option>
           <option value="open">Публичная модель</option>
-        </select>
-      </div>
+        </Select>
+      </InputGroup>
 
       <Button type="submit" loading={mutation.isPending}>
         Добавить модель
       </Button>
-    </form>
+    </Form>
   );
 }

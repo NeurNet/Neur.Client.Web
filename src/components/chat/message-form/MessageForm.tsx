@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { sendMessage } from '@/api/messages';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Form } from '@/components/ui/form';
 import classes from './MessageForm.module.css';
 
 export function MessageForm({ chatId }: { chatId: string }) {
@@ -34,10 +36,10 @@ export function MessageForm({ chatId }: { chatId: string }) {
   };
 
   return (
-    <form className={classes.form} onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <div className={classes.inputContainer}>
         {error && <span className={classes.error}>{error}</span>}
-        <input
+        <Input
           placeholder="Напишите что-нибудь"
           style={{ flex: 1 }}
           onChange={(e) => setPrompt(e.target.value)}
@@ -48,6 +50,6 @@ export function MessageForm({ chatId }: { chatId: string }) {
       <Button type="submit" loading={loading}>
         Отправить
       </Button>
-    </form>
+    </Form>
   );
 }
