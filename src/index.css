@@ -13,6 +13,7 @@ a {
 
 table {
   border-collapse: collapse;
+  margin: 24px 0;
 }
 
 td,
@@ -49,7 +50,7 @@ label {
   gap: 8px;
   max-width: 500px;
   width: 100%;
-  margin-bottom: 32px;
+  margin: 24px 0;
 }
 
 .btn-icon {

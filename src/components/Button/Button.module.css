@@ -10,25 +10,37 @@
   transition: background-color 0.2s ease;
   border: none;
   cursor: pointer;
+}
+
+.default {
   background-color: #9605ca;
   color: #f8f8f8;
 }
-
-.button:hover {
+.default:hover {
   background-color: #7a04a8;
 }
-
-.button:active {
+.default:active {
   background-color: #5e0376;
 }
-
-.button:focus {
+.default:focus {
   outline: 2px solid #9605ca;
   outline-offset: 1px;
 }
-
-.button:disabled {
+.default:disabled {
   background-color: #777777;
+  cursor: not-allowed;
+}
+
+.ghost {
+  background-color: transparent;
+}
+.ghost:hover {
+  background-color: #f5f5f5;
+}
+.ghost:active {
+  background-color: #e8e8e8;
+}
+.ghost:disabled {
   cursor: not-allowed;
 }
 

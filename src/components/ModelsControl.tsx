@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { Plus, X } from 'lucide-react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { getModels } from '@/api/models';
-import { CreateModelForm } from '../CreateModelForm';
-import { FullScreenLoader } from '../FullScreenLoader';
-import classes from './ModelsControl.module.css';
+import { CreateModelForm } from './CreateModelForm';
+import { FullScreenLoader } from './FullScreenLoader';
+import { Button } from './Button';
 
 export function ModelsControl() {
   const { data, isPending, error } = useQuery({
@@ -22,12 +22,9 @@ export function ModelsControl() {
 
   return (
     <div>
-      <div className={classes.modelsHeading}>
-        <h2>Модели</h2>
-        <button className="btn-icon" onClick={switchFormOpened}>
-          {formOpened ? <X /> : <Plus />}
-        </button>
-      </div>
+      <Button variant="ghost" onClick={switchFormOpened}>
+        Добавить модель {formOpened ? <ChevronUp /> : <ChevronDown />}
+      </Button>
 
       {formOpened && <CreateModelForm />}
 
