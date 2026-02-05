@@ -1,5 +1,5 @@
 import type { Message } from '@/api/messages';
-import { ChatMessage } from '../ChatMessage';
+import { ChatMessage } from '../chat-message';
 import classes from './MessageList.module.css';
 
 export function MessageList({ messages }: { messages: Message[] }) {

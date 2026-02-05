@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router';
 import { ChevronRight, Star } from 'lucide-react';
-import { useAuth } from '@/contexts/AuthContext';
+import { useAuth } from '@/providers/auth';
 import classes from './Header.module.css';
 
 export function Header() {

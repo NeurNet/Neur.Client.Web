@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { getChats } from '@/api/chats';
-import { FullScreenLoader } from '../FullScreenLoader';
-import { ChatCard } from '../ChatCard';
+import { FullScreenLoader } from '@/components/ui/full-screen-loader';
+import { ChatCard } from '../chat-card';
 import classes from './ChatList.module.css';
 
 export function ChatList() {

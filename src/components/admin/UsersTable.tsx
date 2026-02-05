@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getUsers } from '@/api/users';
-import { FullScreenLoader } from '../FullScreenLoader';
+import { FullScreenLoader } from '../ui/full-screen-loader';
 
 export function UsersTable() {
   const { data, isPending, error } = useQuery({

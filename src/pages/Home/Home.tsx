@@ -1,6 +1,6 @@
-import { ChatList } from '@/components/ChatList';
+import { ChatList } from '@/components/chat/chat-list';
+import { ModelList } from '@/components/model/model-list';
 import classes from './Home.module.css';
-import { ModelList } from '@/components/ModelList';
 
 export function Home() {
   return (

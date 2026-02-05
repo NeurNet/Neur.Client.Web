@@ -1,9 +1,9 @@
 import { Navigate, Outlet } from 'react-router';
-import type { Role } from '@/api/management';
-import { useAuth } from '@/contexts/AuthContext';
-import { FullScreenLoader } from '../FullScreenLoader';
-import { Header } from '../Header';
+import { useAuth } from '@/providers/auth';
+import { Header } from '../ui/header';
+import { FullScreenLoader } from '../ui/full-screen-loader';
 import classes from './AuthorizedLayout.module.css';
+import type { Role } from '@/api/users';
 
 export function AuthorizedLayout({ role = 'student' }: { role?: Role }) {
   const { user, loading } = useAuth();

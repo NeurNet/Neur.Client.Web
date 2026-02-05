@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router';
-import { useAuth } from '@/contexts/AuthContext';
-import { Button } from '@/components/Button';
-import { FullScreenLoader } from '@/components/FullScreenLoader';
+import { useAuth } from '@/providers/auth';
+import { Button } from '@/components/ui/button';
+import { FullScreenLoader } from '@/components/ui/full-screen-loader';
 
 export function Profile() {
   const { user, loading, logout } = useAuth();

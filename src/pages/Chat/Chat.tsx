@@ -1,9 +1,9 @@
 import { useParams } from 'react-router';
 import { useQuery } from '@tanstack/react-query';
 import { getChat, type Chat } from '@/api/chats';
-import { MessageList } from '@/components/MessageList';
-import { MessageForm } from '@/components/MessageForm';
-import { FullScreenLoader } from '@/components/FullScreenLoader';
+import { MessageList } from '@/components/chat/message-list';
+import { MessageForm } from '@/components/chat/message-form';
+import { FullScreenLoader } from '@/components/ui/full-screen-loader';
 import classes from './Chat.module.css';
 
 export function Chat() {

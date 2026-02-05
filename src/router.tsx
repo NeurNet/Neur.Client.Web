@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router';
-import { AuthorizedLayout } from './components/AuthorizedLayout';
-import { Home } from './pages/Home';
-import { Profile } from './pages/Profile';
-import { Chat } from './pages/Chat';
-import { Login } from './pages/Login';
-import { Admin } from './pages/Admin';
+import { AuthorizedLayout } from './components/authorized-layout';
+import { Home } from './pages/home';
+import { Profile } from './pages/profile';
+import { Chat } from './pages/chat';
+import { Login } from './pages/login';
+import { Admin } from './pages/admin';
 
 export const router = createBrowserRouter([
   {

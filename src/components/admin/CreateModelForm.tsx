@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button } from '../Button';
+import { Button } from '../ui/button';
 import { createModel, type CreateModel } from '@/api/models';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 

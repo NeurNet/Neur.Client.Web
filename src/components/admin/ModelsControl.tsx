@@ -3,8 +3,8 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { getModels } from '@/api/models';
 import { CreateModelForm } from './CreateModelForm';
-import { FullScreenLoader } from '../FullScreenLoader';
-import { Button } from '../Button';
+import { FullScreenLoader } from '../ui/full-screen-loader';
+import { Button } from '../ui/button';
 
 export function ModelsControl() {
   const { data, isPending, error } = useQuery({

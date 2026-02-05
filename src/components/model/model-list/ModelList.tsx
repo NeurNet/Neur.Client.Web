@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { getModels } from '@/api/models';
-import { FullScreenLoader } from '../FullScreenLoader';
-import { ModelCard } from '../ModelCard';
+import { FullScreenLoader } from '@/components/ui/full-screen-loader';
+import { ModelCard } from '../model-card';
 import classes from './ModelList.module.css';
 
 export function ModelList() {

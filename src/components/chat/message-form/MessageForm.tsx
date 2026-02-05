@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { sendMessage } from '@/api/messages';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/ui/button';
 import classes from './MessageForm.module.css';
 
 export function MessageForm({ chatId }: { chatId: string }) {
