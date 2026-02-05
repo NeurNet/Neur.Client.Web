@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { X } from 'lucide-react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteChat, type Chat } from '@/api/chats';
 import classes from './ChatCard.module.css';
 
@@ -40,7 +40,9 @@ export function ChatCard({ chat }: { chat: Chat }) {
   };
 
   const clickHandler = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!(e.target instanceof SVGElement)) {
+    if (e.target instanceof SVGElement) {
+      mutation.mutate(chat.id);
+    } else {
       navigate(`/chat/${chat.id}`);
     }
   };
@@ -49,7 +51,7 @@ export function ChatCard({ chat }: { chat: Chat }) {
     <div onClick={clickHandler} className={classes.card}>
       <strong className={classes.name}>{chat.model_name}</strong>
       <span className={classes.time}>{formatDate(chat.created_at)}</span>
-      <X className={classes.delete} size={16} onClick={() => mutation.mutate(chat.id)} />
+      <X className={classes.delete} size={16} />
     </div>
   );
 }
