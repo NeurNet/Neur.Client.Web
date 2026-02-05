@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router';
 import { ChevronRight, Star } from 'lucide-react';
 import { useAuth } from '@/providers/auth';
 import classes from './Header.module.css';
+import { Button } from '../button';
 
 export function Header() {
   const { user } = useAuth();
@@ -29,7 +30,9 @@ export function Header() {
         <div className={classes.rightSide}>
           {user.role === 'admin' && (
             <Link to="/admin" className="btn-icon">
-              <Star size={18} fill={location.pathname === '/admin' ? '#000' : '#fff'} />
+              <Button variant="ghost" size="icon">
+                <Star size={18} fill={location.pathname === '/admin' ? '#000' : 'transparent'} />
+              </Button>
             </Link>
           )}
 
