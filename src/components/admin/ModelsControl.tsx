@@ -3,8 +3,8 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { getModels } from '@/api/models';
 import { CreateModelForm } from './CreateModelForm';
-import { FullScreenLoader } from './FullScreenLoader';
-import { Button } from './Button';
+import { FullScreenLoader } from '../FullScreenLoader';
+import { Button } from '../Button';
 
 export function ModelsControl() {
   const { data, isPending, error } = useQuery({
@@ -12,7 +12,7 @@ export function ModelsControl() {
     queryFn: getModels,
   });
 
-  const [formOpened, setFormOpened] = useState<boolean>(false);
+  const [formOpened, setFormOpened] = useState(false);
 
   const switchFormOpened = () => setFormOpened(!formOpened);
   const formatDate = (date: string) => new Date(date).toLocaleString();

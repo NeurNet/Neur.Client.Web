@@ -1,19 +1,19 @@
-import { UsersTable } from '@/components/UsersTable';
-import { ModelsControl } from '@/components/ModelsControl';
+import { UsersTable } from '@/components/admin/UsersTable';
+import { ModelsControl } from '@/components/admin/ModelsControl';
 import classes from './Admin.module.css';
 
 export function Admin() {
   return (
     <div className={classes.admin}>
-      <div>
+      <section>
         <h2>Пользователи</h2>
         <UsersTable />
-      </div>
+      </section>
 
-      <div>
+      <section>
         <h2>Модели</h2>
         <ModelsControl />
-      </div>
+      </section>
     </div>
   );
 }
