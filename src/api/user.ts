@@ -1,10 +1,12 @@
 import { AxiosError } from 'axios';
 import { client } from './client';
 
+export type Role = 'student' | 'teacher' | 'admin';
+
 export type CurrentUser = {
   id: string;
   username: string;
-  role: 'student' | 'teacher' | 'admin';
+  role: Role;
   tokens: number;
 };
 
@@ -26,7 +28,7 @@ export async function requestLogout() {
   await client.post('/users/auth/logout');
 }
 
-export async function getCurrentUser() {
+export async function fetchCurrentUser() {
   const res = await client.get<CurrentUser>('/users/auth');
   return res.data;
 }
