@@ -10,6 +10,15 @@ export type CurrentUser = {
   tokens: number;
 };
 
+export type User = {
+  user_id: string;
+  user_name: string;
+  name: string;
+  surname: string;
+  role: Role;
+  tokens: number;
+};
+
 export async function requestLogin(data: { username: string; password: string }) {
   try {
     await client.post('/users/auth/login', data);
@@ -30,5 +39,10 @@ export async function requestLogout() {
 
 export async function fetchCurrentUser() {
   const res = await client.get<CurrentUser>('/users/auth');
+  return res.data;
+}
+
+export async function fetchUsers() {
+  const res = await client.get<User[]>('/users');
   return res.data;
 }
