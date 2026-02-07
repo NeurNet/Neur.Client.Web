@@ -15,9 +15,10 @@ export function ModelsTable() {
       <thead>
         <tr>
           <th>Название</th>
-          <th>Модель</th>
+          <th>Имя модели</th>
           <th>Версия</th>
           <th>Статус</th>
+          <th>Дата добавления</th>
         </tr>
       </thead>
 
@@ -28,6 +29,7 @@ export function ModelsTable() {
             <td>{model.model}</td>
             <td>{model.version}</td>
             <td>{model.status}</td>
+            <td>{new Date(model.createdAt).toLocaleDateString()}</td>
           </tr>
         ))}
       </tbody>

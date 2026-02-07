@@ -14,3 +14,13 @@ body {
 * {
   font-family: 'Montserrat Variable', sans-serif;
 }
+
+table {
+  border-collapse: collapse;
+}
+
+td,
+th {
+  border: 1px solid var(--text-color);
+  padding: 4px 8px;
+}
