@@ -1,19 +1,19 @@
-import { useAuth } from '@/providers/auth';
 import { Link } from 'react-router';
+import { useCurrentUser } from '@/hooks/useCurrentUser';
 
 export function Home() {
-  const { user, isLoading } = useAuth();
+  const { currentUser, isLoading } = useCurrentUser();
 
   if (isLoading) return <span>Loading...</span>;
 
   return (
     <>
       <h1>Home page!</h1>
-      {user ? (
+      {currentUser ? (
         <div>
-          <p>Username: {user.username}</p>
-          <p>Role: {user.role}</p>
-          <p>Tokens: {user.tokens}</p>
+          <p>Username: {currentUser.username}</p>
+          <p>Role: {currentUser.role}</p>
+          <p>Tokens: {currentUser.tokens}</p>
         </div>
       ) : (
         <span>

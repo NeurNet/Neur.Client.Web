@@ -1,21 +1,33 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { useAuth } from '@/providers/auth';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { requestLogin } from '@/api/user';
 import classes from './Login.module.css';
 
 export function Login() {
   const navigate = useNavigate();
-  const { login, isLoading } = useAuth();
+  const queryClient = useQueryClient();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const {
+    mutate: login,
+    isPending,
+    error,
+  } = useMutation({
+    mutationFn: requestLogin,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['currentUser'] });
+      navigate('/');
+    },
+  });
+
   const submitHandler = (e: React.SubmitEvent) => {
     e.preventDefault();
     login({ username, password });
-    navigate('/');
   };
 
   return (
@@ -40,8 +52,9 @@ export function Login() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <Button isLoading={isLoading}>Войти</Button>
+          <Button isLoading={isPending}>Войти</Button>
         </form>
+        {error && <span className={classes.error}>{error.message}</span>}
       </div>
     </div>
   );

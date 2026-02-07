@@ -1,11 +1,11 @@
 import { Navigate, Outlet } from 'react-router';
-import { useAuth } from '@/providers/auth';
+import { useCurrentUser } from '@/hooks/useCurrentUser';
 
 export function AuthorizedLayout() {
-  const { user, isLoading } = useAuth();
+  const { currentUser, isLoading } = useCurrentUser();
 
   if (isLoading) return <span>Loading...</span>;
-  if (!user) return <Navigate to="/login" replace />;
+  if (!currentUser) return <Navigate to="/login" replace />;
 
   return <Outlet />;
 }

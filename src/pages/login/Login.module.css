@@ -27,3 +27,8 @@
   width: 100%;
   margin: 0 24px;
 }
+
+.error {
+  color: #ea2c2c;
+  font-weight: 600;
+}
