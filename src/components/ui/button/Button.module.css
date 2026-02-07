@@ -5,8 +5,8 @@
   gap: 8px;
   font-size: 16px;
   font-weight: 500;
-  background-color: #ae1dd3;
-  color: #fff;
+  background-color: var(--primary-color);
+  color: var(--background-color);
   padding: 12px 16px;
   border-radius: 4px;
   border: none;
@@ -14,14 +14,14 @@
   transition: background-color 200ms;
 }
 .button:hover {
-  background-color: #8b1ea6;
+  background-color: var(--button-hover-color);
 }
 .button:active {
-  background-color: #621675;
+  background-color: var(--button-active-color);
 }
 .button:disabled {
-  color: #e2e2e2;
-  background-color: #767676;
+  color: var(--button-disabled-text-color);
+  background-color: var(--button-disabled-color);
 }
 
 .loader {
