@@ -1,5 +1,14 @@
+html,
+body,
+#root {
+  height: 100%;
+}
+
 body {
-  font-family: 'Montserrat Variable', sans-serif;
   margin: 0;
   padding: 0;
+}
+
+* {
+  font-family: 'Montserrat Variable', sans-serif;
 }

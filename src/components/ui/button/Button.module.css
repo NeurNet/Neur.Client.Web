@@ -1,0 +1,35 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: #ae1dd3;
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 200ms;
+}
+.button:hover {
+  background-color: #8b1ea6;
+}
+.button:active {
+  background-color: #621675;
+}
+.button:disabled {
+  color: #e2e2e2;
+  background-color: #767676;
+}
+
+.loader {
+  animation: 2s loader linear infinite;
+}
+
+@keyframes loader {
+  100% {
+    transform: rotate(360deg);
+  }
+}
