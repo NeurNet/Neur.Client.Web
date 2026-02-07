@@ -10,9 +10,9 @@ export type CurrentUser = {
   tokens: number;
 };
 
-export async function requestLogin({ username, password }: { username: string; password: string }) {
+export async function requestLogin(data: { username: string; password: string }) {
   try {
-    await client.post('/users/auth/login', { username, password });
+    await client.post('/users/auth/login', data);
   } catch (err) {
     if (err instanceof AxiosError) {
       if (err.status === 401) {

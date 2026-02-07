@@ -5,7 +5,7 @@ export type Model = {
   name: string;
   model: string;
   version: string;
-  status: string;
+  status: 'open' | 'locked';
   createdAt: string;
   updatedAt: string;
 };
