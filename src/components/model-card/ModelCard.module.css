@@ -17,13 +17,10 @@
   font-weight: 600;
 }
 
-.model {
-  font-weight: 400;
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
   font-size: 14px;
-}
-
-.version {
-  text-align: right;
-  font-size: 12px;
   font-weight: 500;
 }

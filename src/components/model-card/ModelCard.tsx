@@ -18,10 +18,11 @@ export function ModelCard({ model }: { model: Model }) {
 
   return (
     <div className={classes.card} onClick={() => mutation.mutate({ modelId: model.id })}>
-      <span className={classes.name}>
-        {model.name} <span className={classes.model}>{model.model}</span>
-      </span>
-      <span className={classes.version}>v{model.version}</span>
+      <span className={classes.name}>{model.name}</span>
+      <div className={classes.bottom}>
+        <span>{model.model}</span>
+        <span>v{model.version}</span>
+      </div>
     </div>
   );
 }
