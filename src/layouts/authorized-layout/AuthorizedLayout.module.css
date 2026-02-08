@@ -5,7 +5,9 @@
 }
 
 .sidebar {
-  border-right: 2px solid var(--input-color);
+  display: flex;
+  flex-direction: column;
+  border-right: 2px solid var(--color-bg-secondary);
   box-sizing: border-box;
   padding: 12px;
   width: 300px;
@@ -22,12 +24,16 @@
   flex-direction: column;
   font-weight: 600;
   font-size: 14px;
-  color: var(--text-color);
+  color: var(--color-text);
   text-decoration: none;
   padding: 8px;
   border-radius: 4px;
   transition: background-color 200ms ease;
 }
 .logos:hover {
-  background-color: var(--input-color);
+  background-color: var(--color-bg-secondary);
+}
+
+.exit {
+  margin-top: auto;
 }

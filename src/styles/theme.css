@@ -1,15 +1,7 @@
 :root {
-  --primary-color: #ae1dd3;
-
-  --background-color: #fff;
-  --text-color: #000;
-  --text-error-color: #ea2c2c;
-
-  --button-hover-color: #8b1ea6;
-  --button-active-color: #621675;
-  --button-disabled-color: #767676;
-  --button-text-color: #fff;
-  --button-disabled-text-color: #e2e2e2;
-
-  --input-color: #f5f5f5;
+  --color-bg: #fff;
+  --color-bg-secondary: #f5f5f5;
+  --color-text: #000;
+  --color-danger: #ff4343;
+  --color-primary: #b624db;
 }

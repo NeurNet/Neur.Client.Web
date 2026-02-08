@@ -52,7 +52,7 @@ export function Login() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <Button isLoading={isPending}>Войти</Button>
+          <Button type="submit" isLoading={isPending}>Войти</Button>
         </form>
         {error && <span className={classes.error}>{error.message}</span>}
       </div>

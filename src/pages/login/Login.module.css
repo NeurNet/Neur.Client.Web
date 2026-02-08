@@ -29,6 +29,6 @@
 }
 
 .error {
-  color: var(--text-error-color);
+  color: var(--color-danger);
   font-weight: 600;
 }

@@ -5,8 +5,8 @@ body,
 }
 
 body {
-  background-color: var(--background-color);
-  color: var(--text-color);
+  background-color: var(--color-bg);
+  color: var(--color-text);
   margin: 0;
   padding: 0;
 }
@@ -21,6 +21,6 @@ table {
 
 td,
 th {
-  border: 1px solid var(--text-color);
+  border: 1px solid var(--color-text);
   padding: 4px 8px;
 }

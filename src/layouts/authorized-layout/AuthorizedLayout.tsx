@@ -1,5 +1,7 @@
 import { Link, Navigate, Outlet } from 'react-router';
+import { LogOut } from 'lucide-react';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
+import { SidebarButton } from '@/components/ui/SidebarButton';
 import type { Role } from '@/api/user';
 import classes from './AuthorizedLayout.module.css';
 
@@ -31,6 +33,11 @@ export function AuthorizedLayout({ minimumRole = 'teacher' }: { minimumRole: Rol
           <span>{APP_NAME}</span>
           <span>НейроХаб</span>
         </Link>
+
+        <SidebarButton variant="danger" className={classes.exit}>
+          <LogOut size={20} />
+          Выйти
+        </SidebarButton>
       </nav>
 
       <main className={classes.main}>
