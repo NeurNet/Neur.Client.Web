@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
 import { requestLogout } from '@/api/user';
-import { ChevronsLeft, ChevronsRight, Home, LogOut, Settings } from 'lucide-react';
+import { ChevronsLeft, ChevronsRight, Cpu, LogOut, Settings } from 'lucide-react';
 import { SidebarButton } from '../ui/sidebar-button';
 import classes from './Sidebar.module.css';
 import clsx from 'clsx';
@@ -29,11 +29,7 @@ export function Sidebar() {
   return (
     <nav className={clsx(classes.sidebar, collapsed && classes.collapsed)}>
       <Link to="/">
-        {collapsed ? (
-          <SidebarButton icon={<Home size={20} />} />
-        ) : (
-          <span className={classes.logo}>{import.meta.env.VITE_APP_NAME}</span>
-        )}
+        <SidebarButton icon={<Cpu size={20} />}>{collapsed ? '' : 'Модели'}</SidebarButton>
       </Link>
 
       <div className={classes.bottom}>
