@@ -22,9 +22,6 @@
 .default:hover {
   background-color: var(--color-bg-secondary);
 }
-.default:active {
-  background-color: color-mix(in srgb, var(--color-bg-secondary), #000 10%);
-}
 
 .danger {
   color: var(--color-danger);
@@ -32,9 +29,6 @@
 }
 .danger:hover {
   background-color: color-mix(in srgb, var(--color-danger), #fff 90%);
-}
-.danger:active {
-  background-color: color-mix(in srgb, var(--color-danger), #fff 80%);
 }
 .danger:disabled {
   color: var(--color-text);
