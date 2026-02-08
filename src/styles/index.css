@@ -21,7 +21,7 @@ table {
 
 td,
 th {
-  border: 1px solid var(--color-text);
+  border: 2px solid var(--color-muted);
   padding: 4px 8px;
 }
 

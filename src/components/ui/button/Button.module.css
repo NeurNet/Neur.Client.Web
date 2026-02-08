@@ -8,32 +8,17 @@
   border: none;
   cursor: pointer;
   transition: background-color 200ms;
-  color: var(--color-bg);
-}
-.button:disabled {
-  background-color: color-mix(in srgb, var(--color-primary), #000 40%);
-  cursor: not-allowed;
-}
-
-.primary {
   padding: 12px 16px;
   border-radius: 4px;
   background-color: var(--color-primary);
+  color: var(--color-bg);
 }
-.primary:hover {
-  background-color: color-mix(in srgb, var(--color-primary), #000 20%);
+.button:hover {
+  background-color: var(--color-primary-accent);
 }
-.primary:disabled {
-  background-color: color-mix(in srgb, var(--color-primary), #000 40%);
-}
-
-.icon {
-  padding: 8px;
-  border-radius: 50px;
-  background-color: transparent;
-}
-.icon:hover {
-  background-color: var(--color-bg-secondary);
+.button:disabled {
+  background-color: var(--color-primary-accent);
+  cursor: not-allowed;
 }
 
 .loader {

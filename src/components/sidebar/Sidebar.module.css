@@ -1,22 +1,12 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  border-right: 2px solid var(--color-bg-secondary);
+  border-right: 2px solid var(--color-muted);
   background-color: var(--color-bg);
   box-sizing: border-box;
   padding: 12px;
   width: 300px;
   height: 100%;
-}
-
-.logo {
-  text-align: center;
-  text-decoration: none;
-  color: var(--color-text);
-  font-weight: 600;
-}
-.logo:hover {
-  text-decoration: underline;
 }
 
 .bottom {
