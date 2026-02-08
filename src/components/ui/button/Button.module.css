@@ -8,17 +8,37 @@
   border: none;
   cursor: pointer;
   transition: background-color 200ms ease;
-  padding: 12px 16px;
   border-radius: 4px;
-  background-color: var(--color-primary);
-  color: var(--color-bg);
-}
-.button:hover {
-  background-color: var(--color-primary-accent);
 }
 .button:disabled {
   background-color: var(--color-primary-accent);
   cursor: not-allowed;
+}
+
+.default {
+  padding: 12px 16px;
+}
+.icon {
+  padding: 12px;
+}
+
+.primary {
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+}
+.primary:hover {
+  background-color: var(--color-primary-accent);
+}
+
+.ghost {
+  background-color: transparent;
+  color: var(--color-text);
+}
+.ghost:hover {
+  background-color: var(--color-muted);
+}
+.ghost:disabled {
+  background-color: var(--color-muted);
 }
 
 .loader {
