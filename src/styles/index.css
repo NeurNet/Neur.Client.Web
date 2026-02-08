@@ -24,3 +24,7 @@ th {
   border: 1px solid var(--color-text);
   padding: 4px 8px;
 }
+
+a {
+  text-decoration: none;
+}

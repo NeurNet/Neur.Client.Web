@@ -9,6 +9,7 @@
   border: none;
   cursor: pointer;
   transition: background-color 200ms, color 200ms;
+  width: 100%;
 }
 .sidebarButton:disabled {
   cursor: not-allowed;

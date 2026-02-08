@@ -1,7 +1,7 @@
-import { ModelsTable } from '@/components/admin/models-table';
-import { UsersTable } from '@/components/admin/users-table';
+import { ModelsTable } from '@/components/panel/models-table';
+import { UsersTable } from '@/components/panel/users-table';
 
-export function Admin() {
+export function Panel() {
   return (
     <>
       <h1>Панель управления</h1>

@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
 import { SidebarButton } from '@/components/ui/sidebar-button';
 import { requestLogout, type Role } from '@/api/user';
-import { LogOut } from 'lucide-react';
+import { LogOut, User } from 'lucide-react';
 import classes from './AuthorizedLayout.module.css';
 
 export function AuthorizedLayout({ minimumRole = 'teacher' }: { minimumRole: Role }) {
@@ -46,15 +46,23 @@ export function AuthorizedLayout({ minimumRole = 'teacher' }: { minimumRole: Rol
           <span>НейроХаб</span>
         </Link>
 
-        <SidebarButton
-          variant="danger"
-          onClick={() => logout()}
-          showLoader={isPending}
-          className={classes.exit}
-          icon={<LogOut size={20} />}
-        >
-          Выйти
-        </SidebarButton>
+        <div className={classes.bottom}>
+          {(currentUser.role === 'admin' || currentUser.role === 'teacher') && (
+            <Link to="/panel">
+              <SidebarButton icon={<User size={20} />}>Панель управления</SidebarButton>
+            </Link>
+          )}
+
+          <SidebarButton
+            variant="danger"
+            onClick={() => logout()}
+            showLoader={isPending}
+            className={classes.exit}
+            icon={<LogOut size={20} />}
+          >
+            Выйти
+          </SidebarButton>
+        </div>
       </nav>
 
       <main className={classes.main}>

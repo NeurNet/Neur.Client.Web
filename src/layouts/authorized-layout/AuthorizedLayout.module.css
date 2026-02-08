@@ -34,6 +34,8 @@
   background-color: var(--color-bg-secondary);
 }
 
-.exit {
+.bottom {
+  display: flex;
+  flex-direction: column;
   margin-top: auto;
 }

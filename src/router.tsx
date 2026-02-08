@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router';
 import { AuthorizedLayout } from './layouts/authorized-layout';
 import { Home } from './pages/home';
 import { Login } from './pages/login';
-import { Admin } from './pages/admin';
+import { Panel } from './pages/panel';
 
 export const router = createBrowserRouter([
   {
@@ -13,7 +13,7 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <AuthorizedLayout minimumRole="admin" />,
-    children: [{ path: '/admin', element: <Admin /> }],
+    children: [{ path: '/panel', element: <Panel /> }],
   },
   { path: '/login', element: <Login /> },
 ]);
