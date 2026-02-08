@@ -1,5 +1,14 @@
 import { client } from './client';
 
+export type Chat = {
+  id: string;
+  model_id: string;
+  model_name: string;
+  model: string;
+  created_at: string;
+  updated_at: string;
+};
+
 export type CreateChatResponse = {
   chatId: string;
   modelId: string;
@@ -7,5 +16,10 @@ export type CreateChatResponse = {
 
 export async function createChat(data: { modelId: string }) {
   const res = await client.post<CreateChatResponse>('/chats', data);
+  return res.data;
+}
+
+export async function fetchChats() {
+  const res = await client.get<Chat[]>('/chats');
   return res.data;
 }

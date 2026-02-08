@@ -4,7 +4,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
 import { requestLogout } from '@/api/user';
 import { ChevronsLeft, ChevronsRight, Cpu, LogOut, Settings } from 'lucide-react';
-import { SidebarButton } from '../ui/sidebar-button';
+import { SidebarButton } from './sidebar-button';
+import { ChatList } from './chat-list';
 import classes from './Sidebar.module.css';
 import clsx from 'clsx';
 
@@ -29,14 +30,20 @@ export function Sidebar() {
   return (
     <nav className={clsx(classes.sidebar, collapsed && classes.collapsed)}>
       <Link to="/">
-        <SidebarButton icon={<Cpu size={20} />}>{collapsed ? '' : 'Модели'}</SidebarButton>
+        <SidebarButton icon={<Cpu size={20} />} hideText={collapsed}>
+          Модели
+        </SidebarButton>
       </Link>
+
+      <hr />
+
+      {!collapsed && <ChatList />}
 
       <div className={classes.bottom}>
         {(currentUser.role === 'admin' || currentUser.role === 'teacher') && (
           <Link to="/panel">
-            <SidebarButton icon={<Settings size={20} />}>
-              {collapsed ? '' : 'Панель управления'}
+            <SidebarButton icon={<Settings size={20} />} hideText={collapsed}>
+              Панель управления
             </SidebarButton>
           </Link>
         )}
@@ -47,15 +54,17 @@ export function Sidebar() {
           showLoader={isPending}
           className={classes.exit}
           icon={<LogOut size={20} />}
+          hideText={collapsed}
         >
-          {collapsed ? '' : 'Выйти'}
+          Выйти
         </SidebarButton>
 
         <SidebarButton
           icon={collapsed ? <ChevronsRight size={20} /> : <ChevronsLeft size={20} />}
           onClick={() => setCollapsed(!collapsed)}
+          hideText={collapsed}
         >
-          {collapsed ? '' : 'Свернуть'}
+          Свернуть
         </SidebarButton>
       </div>
     </nav>

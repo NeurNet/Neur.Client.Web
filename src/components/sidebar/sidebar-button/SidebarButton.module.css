@@ -8,7 +8,7 @@
   border-radius: 4px;
   border: none;
   cursor: pointer;
-  transition: background-color 200ms;
+  transition: background-color 200ms ease;
   width: 100%;
 }
 .sidebarButton:disabled {
@@ -41,4 +41,9 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+.label {
+  font-size: 12px;
+  margin-left: auto;
 }

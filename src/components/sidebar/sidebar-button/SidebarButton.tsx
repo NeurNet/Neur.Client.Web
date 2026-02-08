@@ -6,6 +6,8 @@ interface SidebarButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   showLoader?: boolean;
   icon?: React.ReactNode;
   variant?: 'default' | 'danger';
+  label?: string;
+  hideText?: boolean;
 }
 
 export function SidebarButton({
@@ -15,6 +17,8 @@ export function SidebarButton({
   children,
   icon,
   disabled,
+  label,
+  hideText,
   ...props
 }: SidebarButtonProps) {
   return (
@@ -24,7 +28,8 @@ export function SidebarButton({
       {...props}
     >
       {showLoader ? <Loader2 size={20} className={classes.loader} /> : icon}
-      {children}
+      {!hideText && <span>{children}</span>}
+      {label && <span className={classes.label}>{label}</span>}
     </button>
   );
 }
