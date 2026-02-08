@@ -1,5 +1,5 @@
-import './assets/styles/index.css';
-import './assets/styles/theme.css';
+import './styles/index.css';
+import './styles/theme.css';
 import '@fontsource-variable/montserrat';
 
 import { StrictMode } from 'react';
