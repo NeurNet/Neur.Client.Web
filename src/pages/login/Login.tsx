@@ -19,9 +19,9 @@ export function Login() {
     error,
   } = useMutation({
     mutationFn: requestLogin,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['currentUser'] });
-      navigate('/');
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['currentUser'] });
+      await navigate('/');
     },
   });
 

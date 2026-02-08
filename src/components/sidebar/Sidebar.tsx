@@ -16,9 +16,9 @@ export function Sidebar() {
 
   const { mutate: logout, isPending } = useMutation({
     mutationFn: requestLogout,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['currentUser'] });
-      navigate('/login');
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['currentUser'] });
+      await navigate('/login');
     },
   });
 

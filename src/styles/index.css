@@ -28,3 +28,8 @@ th {
 a {
   text-decoration: none;
 }
+
+h1 {
+  font-size: 24px;
+  margin: 0;
+}

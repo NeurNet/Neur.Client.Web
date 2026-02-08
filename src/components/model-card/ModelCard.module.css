@@ -1,0 +1,29 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 2px solid var(--color-muted);
+  border-radius: 4px;
+  padding: 12px;
+  transition: background-color 200ms ease;
+  cursor: pointer;
+}
+.card:hover {
+  background-color: var(--color-muted);
+}
+
+.name {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.model {
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.version {
+  text-align: right;
+  font-size: 12px;
+  font-weight: 500;
+}

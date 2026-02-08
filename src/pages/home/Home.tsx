@@ -1,25 +1,26 @@
-import { Link } from 'react-router';
-import { useCurrentUser } from '@/hooks/useCurrentUser';
+import { useQuery } from '@tanstack/react-query';
+import { fetchModels } from '@/api/model';
+import { ModelCard } from '@/components/model-card';
+import classes from './Home.module.css';
 
 export function Home() {
-  const { currentUser, isLoading } = useCurrentUser();
+  const { data, isPending, error } = useQuery({
+    queryKey: ['models'],
+    queryFn: fetchModels,
+  });
 
-  if (isLoading) return <span>Loading...</span>;
+  if (isPending) return <span>Loading...</span>;
+  if (error) return <span>{error.message}</span>;
 
   return (
     <>
-      <h1>Home page!</h1>
-      {currentUser ? (
-        <div>
-          <p>Username: {currentUser.username}</p>
-          <p>Role: {currentUser.role}</p>
-          <p>Tokens: {currentUser.tokens}</p>
-        </div>
-      ) : (
-        <span>
-          Not authorized! <Link to="/login">Login</Link>
-        </span>
-      )}
+      <h1>Доступные модели</h1>
+
+      <div className={classes.models}>
+        {data.map((model) => (
+          <ModelCard key={model.id} model={model} />
+        ))}
+      </div>
     </>
   );
 }
