@@ -1,7 +1,7 @@
 import { Link, Navigate, Outlet, useNavigate } from 'react-router';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
-import { SidebarButton } from '@/components/ui/SidebarButton';
+import { SidebarButton } from '@/components/ui/sidebar-button';
 import { requestLogout, type Role } from '@/api/user';
 import { LogOut } from 'lucide-react';
 import classes from './AuthorizedLayout.module.css';
