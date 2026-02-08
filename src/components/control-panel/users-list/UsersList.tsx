@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchUsers, type Role } from '@/api/user';
 
-export function UsersTable() {
+export function UsersList() {
   const { data, isPending, error } = useQuery({
     queryKey: ['users'],
     queryFn: fetchUsers,

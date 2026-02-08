@@ -1,5 +1,5 @@
-import { ModelsTable } from '@/components/control-panel/models-table';
-import { UsersTable } from '@/components/control-panel/users-table';
+import { ModelsList } from '@/components/control-panel/models-list';
+import { UsersList } from '@/components/control-panel/users-list';
 
 export function Panel() {
   return (
@@ -8,12 +8,12 @@ export function Panel() {
 
       <section>
         <h2>Модели</h2>
-        <ModelsTable />
+        <ModelsList />
       </section>
 
       <section>
         <h2>Пользователи</h2>
-        <UsersTable />
+        <UsersList />
       </section>
     </>
   );

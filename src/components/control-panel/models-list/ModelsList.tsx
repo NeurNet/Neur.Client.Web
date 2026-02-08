@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchModels } from '@/api/model';
 
-export function ModelsTable() {
+export function ModelsList() {
   const { data, isPending, error } = useQuery({
     queryKey: ['models'],
     queryFn: fetchModels,
