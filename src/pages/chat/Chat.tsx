@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { SendHorizonal } from 'lucide-react';
 import classes from './Chat.module.css';
+import clsx from 'clsx';
 
 export function Chat() {
   const { chatId } = useParams();
@@ -37,6 +38,17 @@ export function Chat() {
       <h1 className={classes.title}>
         {data.model} <span className={classes.modelName}>({data.model_name})</span>
       </h1>
+
+      <div className={classes.messages}>
+        {data.messages.map((message) => (
+          <div
+            key={message.id}
+            className={clsx(classes.message, message.role === 'user' && classes.userMessage)}
+          >
+            {message.content}
+          </div>
+        ))}
+      </div>
 
       <form className={classes.form} onSubmit={sendHandler}>
         <Input

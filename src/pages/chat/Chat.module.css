@@ -20,5 +20,22 @@
 .form {
   display: flex;
   gap: 8px;
-  margin-top: auto;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  flex-grow: 1;
+  gap: 12px;
+}
+
+.message {
+  padding: 12px;
+  border-radius: 8px;
+  background-color: var(--color-muted);
+  width: fit-content;
+}
+.userMessage {
+  margin-left: auto;
 }
