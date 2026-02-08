@@ -27,7 +27,6 @@
 .loader {
   animation: 2s loader linear infinite;
 }
-
 @keyframes loader {
   100% {
     transform: rotate(360deg);
