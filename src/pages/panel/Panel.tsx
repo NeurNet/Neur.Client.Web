@@ -1,5 +1,5 @@
-import { ModelsTable } from '@/components/panel/models-table';
-import { UsersTable } from '@/components/panel/users-table';
+import { ModelsTable } from '@/components/control-panel/models-table';
+import { UsersTable } from '@/components/control-panel/users-table';
 
 export function Panel() {
   return (
