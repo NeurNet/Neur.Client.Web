@@ -1,26 +1,11 @@
-import { Link, Navigate, Outlet, useNavigate } from 'react-router';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Navigate, Outlet } from 'react-router';
+import type { Role } from '@/api/user';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
-import { SidebarButton } from '@/components/ui/sidebar-button';
-import { requestLogout, type Role } from '@/api/user';
-import { LogOut, User } from 'lucide-react';
+import { Sidebar } from '@/components/sidebar';
 import classes from './AuthorizedLayout.module.css';
 
 export function AuthorizedLayout({ minimumRole = 'teacher' }: { minimumRole: Role }) {
   const { currentUser, isLoading } = useCurrentUser();
-
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
-
-  const { mutate: logout, isPending } = useMutation({
-    mutationFn: requestLogout,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['currentUser'] });
-      navigate('/login');
-    },
-  });
-
-  const APP_NAME = import.meta.env.VITE_APP_NAME;
 
   const roleToNumber = (role: Role) => {
     switch (role) {
@@ -40,30 +25,7 @@ export function AuthorizedLayout({ minimumRole = 'teacher' }: { minimumRole: Rol
 
   return (
     <div className={classes.container}>
-      <nav className={classes.sidebar}>
-        <Link to="/" className={classes.logos}>
-          <span>{APP_NAME}</span>
-          <span>НейроХаб</span>
-        </Link>
-
-        <div className={classes.bottom}>
-          {(currentUser.role === 'admin' || currentUser.role === 'teacher') && (
-            <Link to="/panel">
-              <SidebarButton icon={<User size={20} />}>Панель управления</SidebarButton>
-            </Link>
-          )}
-
-          <SidebarButton
-            variant="danger"
-            onClick={() => logout()}
-            showLoader={isPending}
-            className={classes.exit}
-            icon={<LogOut size={20} />}
-          >
-            Выйти
-          </SidebarButton>
-        </div>
-      </nav>
+      <Sidebar />
 
       <main className={classes.main}>
         <Outlet />

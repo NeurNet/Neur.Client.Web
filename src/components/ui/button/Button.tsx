@@ -4,12 +4,20 @@ import clsx from 'clsx';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   showLoader?: boolean;
+  variant?: 'primary' | 'icon';
 }
 
-export function Button({ showLoader, className, disabled, children, ...props }: ButtonProps) {
+export function Button({
+  showLoader,
+  className,
+  disabled,
+  children,
+  variant = 'primary',
+  ...props
+}: ButtonProps) {
   return (
     <button
-      className={clsx(classes.button, className)}
+      className={clsx(classes.button, classes[variant], className)}
       disabled={showLoader || disabled}
       {...props}
     >
