@@ -8,7 +8,10 @@
   border-radius: 4px;
   border: none;
   cursor: pointer;
-  transition: background-color 200ms;
+  transition: background-color 200ms, color 200ms;
+}
+.sidebarButton:disabled {
+  cursor: not-allowed;
 }
 
 .default {
@@ -31,4 +34,17 @@
 }
 .danger:active {
   background-color: color-mix(in srgb, var(--color-danger), #fff 80%);
+}
+.danger:disabled {
+  color: var(--color-text);
+  background-color: var(--color-bg-secondary);
+}
+
+.loader {
+  animation: 2s loader linear infinite;
+}
+@keyframes loader {
+  100% {
+    transform: rotate(360deg);
+  }
 }
