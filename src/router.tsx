@@ -11,7 +11,7 @@ export const router = createBrowserRouter([
     element: <AuthorizedLayout minimumRole="student" />,
     children: [
       { path: '', element: <Home /> },
-      { path: '/chats/:chatId', element: <Chat /> },
+      { path: '/chat/:chatId', element: <Chat /> },
     ],
   },
   {

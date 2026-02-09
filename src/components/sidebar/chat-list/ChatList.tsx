@@ -48,7 +48,7 @@ export function ChatList() {
   return (
     <div className={classes.chatList}>
       {reversedData.map((chat) => (
-        <Link to={`/chats/${chat.id}`} key={chat.id}>
+        <Link to={`/chat/${chat.id}`} key={chat.id}>
           <SidebarButton label={timeAgo(chat.created_at)}>{chat.model_name}</SidebarButton>
         </Link>
       ))}

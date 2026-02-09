@@ -12,7 +12,7 @@ export function ModelCard({ model }: { model: Model }) {
     mutationFn: createChat,
     onSuccess: async (response) => {
       await queryClient.invalidateQueries({ queryKey: ['chats'] });
-      await navigate(`/chats/${response.chatId}`);
+      await navigate(`/chat/${response.chatId}`);
     },
   });
 
