@@ -1,67 +1,63 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { useAuth } from '@/providers/auth';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
-import { Input, InputGroup } from '@/components/ui/input';
-import { Form } from '@/components/ui/form';
-import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { requestLogin } from '@/api/user';
 import classes from './Login.module.css';
 
 export function Login() {
-  const { login } = useAuth();
-
-  const [username, setUsername] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(false);
-
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
-  const handleSubmit = async (e: React.SubmitEvent) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const {
+    mutate: login,
+    isPending,
+    error,
+  } = useMutation({
+    mutationFn: requestLogin,
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['currentUser'] });
+      await navigate('/');
+    },
+  });
+
+  const submitHandler = (e: React.SubmitEvent) => {
     e.preventDefault();
-    setLoading(true);
-    login(username, password)
-      .then(() => navigate('/'))
-      .catch((error: Error) => alert(error.message))
-      .finally(() => setLoading(false));
+    login({ username, password });
   };
 
   return (
     <div className={classes.wrapper}>
-      <span>НейроХаб</span>
-      <h1 className={classes.title}>Вход в систему</h1>
-
-      <Form onSubmit={handleSubmit}>
-        <InputGroup>
-          <Label htmlFor="username">
-            Имя пользователя
-          </Label>
+      <div className={classes.login}>
+        <span>NeurNet</span>
+        <h1 className={classes.heading}>Вход в аккаунт</h1>
+        <form className={classes.form} onSubmit={submitHandler}>
           <Input
             type="text"
-            id="username"
-            placeholder="i00s0000"
+            placeholder="Имя пользователя"
             autoComplete="username"
+            value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
-        </InputGroup>
-
-        <InputGroup>
-          <Label htmlFor="password">
-            Пароль
-          </Label>
           <Input
             type="password"
-            id="password"
+            placeholder="Пароль"
             autoComplete="current-password"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </InputGroup>
-
-        <Button type="submit" loading={loading}>
-          Войти
-        </Button>
-      </Form>
+          <Button type="submit" showLoader={isPending}>
+            Войти
+          </Button>
+        </form>
+        {error && <span className={classes.error}>{error.message}</span>}
+      </div>
     </div>
   );
 }

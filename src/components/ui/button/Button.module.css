@@ -5,60 +5,47 @@
   gap: 8px;
   font-size: 16px;
   font-weight: 500;
-  border-radius: 8px;
-  transition: background-color 0.2s ease;
   border: none;
   cursor: pointer;
+  transition: background-color 200ms ease;
+  border-radius: 4px;
 }
-
-.defaultVariant {
-  background-color: #9605ca;
-  color: #f8f8f8;
-}
-.defaultVariant:hover {
-  background-color: #7a04a8;
-}
-.defaultVariant:active {
-  background-color: #5e0376;
-}
-.defaultVariant:focus {
-  outline: 2px solid #9605ca;
-  outline-offset: 1px;
-}
-.defaultVariant:disabled {
-  background-color: #777777;
+.button:disabled {
+  background-color: var(--color-primary-accent);
   cursor: not-allowed;
 }
 
-.ghost {
-  background-color: transparent;
-}
-.ghost:hover {
-  background-color: #f5f5f5;
-}
-.ghost:active {
-  background-color: #e8e8e8;
-}
-.ghost:disabled {
-  cursor: not-allowed;
-}
-
-.defaultSize {
+.default {
   padding: 12px 16px;
 }
 .icon {
   padding: 12px;
 }
 
-.loader {
-  animation: spin 1s linear infinite;
+.primary {
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+}
+.primary:hover {
+  background-color: var(--color-primary-accent);
 }
 
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
+.ghost {
+  background-color: transparent;
+  color: var(--color-text);
+}
+.ghost:hover {
+  background-color: var(--color-muted);
+}
+.ghost:disabled {
+  background-color: var(--color-muted);
+}
+
+.loader {
+  animation: 2s loader linear infinite;
+}
+@keyframes loader {
+  100% {
     transform: rotate(360deg);
   }
 }

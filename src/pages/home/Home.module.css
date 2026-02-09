@@ -1,11 +1,6 @@
-.container {
+.models {
   display: flex;
-  gap: 24px;
-  width: 100%;
-}
-
-@media screen and (max-width: 600px) {
-  .container {
-    flex-direction: column;
-  }
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 12px 0;
 }

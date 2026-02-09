@@ -1,23 +1,41 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 24px;
   margin: 0 auto;
-  width: 80%;
   height: 100%;
 }
 
-.modelInfo {
-  font-size: 14px;
-  margin-left: 16px;
+.title {
+  text-align: center;
 }
 
-.messageRight {
-  align-self: flex-end;
+.modelName {
+  font-weight: 400;
 }
 
-@media screen and (max-width: 600px) {
-  .container {
-    width: 100%;
-  }
+.input {
+  flex: 1;
+}
+
+.form {
+  display: flex;
+  gap: 8px;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  flex-grow: 1;
+  gap: 12px;
+}
+
+.message {
+  padding: 12px;
+  border-radius: 8px;
+  background-color: var(--color-muted);
+  width: fit-content;
+}
+.userMessage {
+  margin-left: auto;
 }

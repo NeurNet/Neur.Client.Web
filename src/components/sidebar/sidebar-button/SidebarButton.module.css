@@ -1,0 +1,49 @@
+.sidebarButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 12px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 200ms ease;
+  width: 100%;
+}
+.sidebarButton:disabled {
+  cursor: not-allowed;
+}
+
+.default {
+  color: var(--color-text);
+  background-color: transparent;
+}
+.default:hover {
+  background-color: var(--color-muted);
+}
+
+.danger {
+  color: var(--color-danger);
+  background-color: transparent;
+}
+.danger:hover {
+  background-color: var(--color-danger-accent);
+}
+.danger:disabled {
+  background-color: var(--color-danger-accent);
+}
+
+.loader {
+  animation: 2s loader linear infinite;
+}
+@keyframes loader {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.label {
+  font-size: 12px;
+  margin-left: auto;
+}

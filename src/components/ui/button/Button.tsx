@@ -1,35 +1,29 @@
-import type { ButtonHTMLAttributes } from 'react';
+import classes from './Button.module.css';
 import { Loader2 } from 'lucide-react';
 import clsx from 'clsx';
-import classes from './Button.module.css';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  loading?: boolean;
-  variant?: 'default' | 'ghost';
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  showLoader?: boolean;
   size?: 'default' | 'icon';
+  variant?: 'primary' | 'ghost';
 }
 
 export function Button({
-  children,
-  loading,
-  className,
-  variant = 'default',
   size = 'default',
+  variant = 'primary',
+  showLoader,
+  className,
+  disabled,
+  children,
   ...props
 }: ButtonProps) {
   return (
     <button
-      className={clsx(classes.button, {
-        [classes.defaultVariant]: variant === 'default',
-        [classes.ghost]: variant === 'ghost',
-        [classes.defaultSize]: size === 'default',
-        [classes.icon]: size === 'icon',
-        className,
-      })}
-      disabled={loading || props.disabled}
+      className={clsx(classes.button, classes[size], classes[variant], className)}
+      disabled={showLoader || disabled}
       {...props}
     >
-      {loading && <Loader2 size={18} className={classes.loader} />}
+      {showLoader && <Loader2 className={classes.loader} size={20} />}
       {children}
     </button>
   );
