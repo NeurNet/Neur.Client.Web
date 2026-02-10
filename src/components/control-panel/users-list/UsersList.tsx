@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchUsers, type Role } from '@/api/user';
-import classes from './UsersList.module.css';
 
 export function UsersList() {
   const { data, isPending, error } = useQuery({
@@ -22,8 +21,6 @@ export function UsersList() {
     }
   };
 
-  const addTokensHandler = () => {};
-
   return (
     <table>
       <thead>
@@ -43,13 +40,7 @@ export function UsersList() {
               {user.name} {user.surname}
             </td>
             <td>{roleToString(user.role)}</td>
-            <td>
-              {user.tokens} токенов (
-              <span className={classes.addTokens} onClick={addTokensHandler}>
-                добавить
-              </span>
-              )
-            </td>
+            <td>{user.tokens} токенов</td>
           </tr>
         ))}
       </tbody>
