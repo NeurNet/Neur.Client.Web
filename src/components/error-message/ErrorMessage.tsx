@@ -4,8 +4,7 @@ export function ErrorMessage({ message }: { message?: string }) {
   return (
     <div className={classes.container}>
       <h1 className={classes.smile}>:(</h1>
-      <span className={classes.description}>Что-то пошло не так!</span>
-      {message && <span className={classes.error}>{message}</span>}
+      <span className={classes.description}>{message || 'Что-то пошло не так!'}</span>
     </div>
   );
 }
