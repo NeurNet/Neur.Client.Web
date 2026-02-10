@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchModels } from '@/api/model';
 import { ModelCard } from '@/components/model-card';
 import classes from './Home.module.css';
+import { ErrorMessage } from '@/components/error-message';
 
 export function Home() {
   const { data, isPending, error } = useQuery({
@@ -10,7 +11,7 @@ export function Home() {
   });
 
   if (isPending) return <span>Loading...</span>;
-  if (error) return <span>{error.message}</span>;
+  if (error) return <ErrorMessage message={error.message} />;
 
   return (
     <>

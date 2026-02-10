@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchUsers, type Role } from '@/api/user';
+import { ErrorMessage } from '@/components/error-message';
 
 export function UsersList() {
   const { data, isPending, error } = useQuery({
@@ -8,7 +9,7 @@ export function UsersList() {
   });
 
   if (isPending) return <span>Loading...</span>;
-  if (error) return <span>{error.message}</span>;
+  if (error) return <ErrorMessage message={error.message} />;
 
   const roleToString = (role: Role) => {
     switch (role) {

@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchModels } from '@/api/model';
+import { ErrorMessage } from '@/components/error-message';
 
 export function ModelsList() {
   const { data, isPending, error } = useQuery({
@@ -8,7 +9,7 @@ export function ModelsList() {
   });
 
   if (isPending) return <span>Loading...</span>;
-  if (error) return <span>{error.message}</span>;
+  if (error) return <ErrorMessage message={error.message} />;
 
   return (
     <table>

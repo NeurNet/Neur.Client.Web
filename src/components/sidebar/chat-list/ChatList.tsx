@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { useQuery } from '@tanstack/react-query';
 import { fetchChats } from '@/api/chat';
+import { ErrorMessage } from '@/components/error-message';
 import { SidebarButton } from '../sidebar-button';
 import classes from './ChatList.module.css';
 
@@ -41,7 +42,7 @@ export function ChatList() {
   }, []);
 
   if (isPending) return <span>Loading...</span>;
-  if (error) return <span>{error.message}</span>;
+  if (error) return <ErrorMessage message={error.message} />;
 
   const reversedData = data.slice().reverse();
 

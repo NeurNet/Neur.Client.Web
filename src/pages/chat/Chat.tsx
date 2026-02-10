@@ -5,6 +5,7 @@ import { fetchChat } from '@/api/chat';
 import { sendMessage } from '@/api/message';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { ErrorMessage } from '@/components/error-message';
 import { SendHorizonal } from 'lucide-react';
 import classes from './Chat.module.css';
 import clsx from 'clsx';
@@ -23,15 +24,15 @@ export function Chat() {
 
   const [message, setMessage] = useState('');
 
-  if (isPending) return <span>Loading...</span>;
-  if (error) return <span>{error.message}</span>;
-
   const sendHandler = (e: React.SubmitEvent) => {
     e.preventDefault();
     if (!chatId) return;
 
     mutation.mutate({ chatId, prompt: message });
   };
+
+  if (isPending) return <span>Loading...</span>;
+  if (error) return <ErrorMessage message={error.message} />;
 
   return (
     <div className={classes.container}>

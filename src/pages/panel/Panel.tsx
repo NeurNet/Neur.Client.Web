@@ -16,6 +16,8 @@ export function Panel() {
       <section>
         <h2>Модели</h2>
 
+        <ModelsList />
+
         <Button
           className={classes.addModel}
           variant="ghost"
@@ -25,8 +27,6 @@ export function Panel() {
         </Button>
 
         {modelFormExpanded && <ModelForm />}
-
-        <ModelsList />
       </section>
 
       <section>
