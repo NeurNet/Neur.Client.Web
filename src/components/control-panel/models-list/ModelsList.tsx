@@ -28,7 +28,7 @@ export function ModelsList() {
             <td>{model.name}</td>
             <td>{model.model}</td>
             <td>{model.version}</td>
-            <td>{model.status}</td>
+            <td>{model.status === 'open' ? 'Публичная' : 'Приватная'}</td>
             <td>{new Date(model.createdAt).toLocaleDateString()}</td>
           </tr>
         ))}
