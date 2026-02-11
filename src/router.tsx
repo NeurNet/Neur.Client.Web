@@ -16,7 +16,7 @@ export const router = createBrowserRouter([
   },
   {
     path: '/',
-    element: <AuthorizedLayout minimumRole="admin" />,
+    element: <AuthorizedLayout minimumRole="teacher" />,
     children: [{ path: '/panel', element: <Panel /> }],
   },
   { path: '/login', element: <Login /> },
