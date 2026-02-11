@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { ModelCard } from '@/components/model-card';
 import { ErrorMessage } from '@/components/error-message';
+import { Loader } from '@/components/Loader';
 import { fetchModels } from '@/api/model';
 import classes from './Home.module.css';
 
@@ -10,7 +11,7 @@ export function Home() {
     queryFn: fetchModels,
   });
 
-  if (isPending) return <span>Loading...</span>;
+  if (isPending) return <Loader />;
   if (error) return <ErrorMessage message={error.message} />;
 
   return (

@@ -6,6 +6,7 @@ import { requestLogout } from '@/api/user';
 import { ChevronsLeft, ChevronsRight, Cpu, LogOut, Settings } from 'lucide-react';
 import { SidebarButton } from './sidebar-button';
 import { ChatList } from './chat-list';
+import { Loader } from '../Loader';
 import classes from './Sidebar.module.css';
 import clsx from 'clsx';
 
@@ -25,7 +26,7 @@ export function Sidebar() {
 
   const [collapsed, setCollapsed] = useState(window.innerWidth <= 800);
 
-  if (!currentUser) return <span>Loading...</span>;
+  if (!currentUser) return <Loader />;
 
   return (
     <nav className={clsx(classes.sidebar, collapsed && classes.collapsed)}>

@@ -6,6 +6,7 @@ import { sendMessage } from '@/api/message';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { ErrorMessage } from '@/components/error-message';
+import { Loader } from '@/components/Loader';
 import { SendHorizonal } from 'lucide-react';
 import classes from './Chat.module.css';
 import clsx from 'clsx';
@@ -31,7 +32,7 @@ export function Chat() {
     mutation.mutate({ chatId, prompt: message });
   };
 
-  if (isPending) return <span>Loading...</span>;
+  if (isPending) return <Loader />;
   if (error) return <ErrorMessage message={error.message} />;
 
   return (
