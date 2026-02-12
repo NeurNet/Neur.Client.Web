@@ -6,7 +6,7 @@ import { requestLogout } from '@/api/user';
 import { ChevronsLeft, ChevronsRight, Cpu, LogOut, Settings } from 'lucide-react';
 import { SidebarButton } from './sidebar-button';
 import { ChatList } from './chat-list';
-import { Loader } from '../Loader';
+import { Loader } from '../loader';
 import classes from './Sidebar.module.css';
 import clsx from 'clsx';
 
@@ -41,8 +41,8 @@ export function Sidebar() {
       {!collapsed && <ChatList />}
 
       <div className={classes.bottom}>
-        {(currentUser.role === 'admin' || currentUser.role === 'teacher') && (
-          <Link to="/panel">
+        {currentUser.role !== 'student' && (
+          <Link to={currentUser.role === 'admin' ? '/panel/admin' : '/panel/teacher'}>
             <SidebarButton icon={<Settings size={20} />} hideText={collapsed}>
               Панель управления
             </SidebarButton>

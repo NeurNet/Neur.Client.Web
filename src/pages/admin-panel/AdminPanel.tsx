@@ -1,12 +1,12 @@
 import { useState } from 'react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 import { ModelForm } from '@/components/control-panel/model-form';
 import { ModelsList } from '@/components/control-panel/models-list';
 import { UsersList } from '@/components/control-panel/users-list';
 import { Button } from '@/components/ui/button';
-import { ChevronDown, ChevronUp } from 'lucide-react';
-import classes from './Panel.module.css';
+import classes from './AdminPanel.module.css';
 
-export function Panel() {
+export function AdminPanel() {
   const [modelFormExpanded, setModelFormExpanded] = useState(false);
 
   return (
