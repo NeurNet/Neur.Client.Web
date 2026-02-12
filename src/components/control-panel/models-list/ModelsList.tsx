@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchModels } from '@/api/model';
 import { ErrorMessage } from '@/components/error-message';
-import { Loader } from '@/components/Loader';
+import { Loader } from '@/components/loader';
 
 export function ModelsList() {
   const { data, isPending, error } = useQuery({

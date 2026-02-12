@@ -6,7 +6,7 @@ import { sendMessage } from '@/api/message';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { ErrorMessage } from '@/components/error-message';
-import { Loader } from '@/components/Loader';
+import { Loader } from '@/components/loader';
 import { SendHorizonal } from 'lucide-react';
 import classes from './Chat.module.css';
 import clsx from 'clsx';

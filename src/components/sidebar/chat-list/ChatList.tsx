@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { useQuery } from '@tanstack/react-query';
 import { fetchChats } from '@/api/chat';
-import { Loader } from '@/components/Loader';
+import { Loader } from '@/components/loader';
 import { ErrorMessage } from '@/components/error-message';
 import { SidebarButton } from '../sidebar-button';
 import classes from './ChatList.module.css';

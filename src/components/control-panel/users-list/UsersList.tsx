@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchUsers, type Role } from '@/api/user';
 import { ErrorMessage } from '@/components/error-message';
-import { Loader } from '@/components/Loader';
+import { Loader } from '@/components/loader';
 
 export function UsersList() {
   const { data, isPending, error } = useQuery({

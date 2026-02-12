@@ -2,7 +2,7 @@ import { Navigate, Outlet } from 'react-router';
 import type { Role } from '@/api/user';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
 import { Sidebar } from '@/components/sidebar';
-import { Loader } from '@/components/Loader';
+import { Loader } from '@/components/loader';
 import classes from './AuthorizedLayout.module.css';
 
 export function AuthorizedLayout({ minimumRole = 'teacher' }: { minimumRole: Role }) {
