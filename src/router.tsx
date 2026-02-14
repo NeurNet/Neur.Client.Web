@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router';
-import { AuthorizedLayout } from './layouts/authorized-layout';
+import { AuthorizedLayout } from './components/authorized-layout';
 import { Home } from './pages/home';
 import { Login } from './pages/login';
 import { AdminPanel } from './pages/admin-panel';
