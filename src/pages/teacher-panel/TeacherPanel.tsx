@@ -1,4 +1,5 @@
-import { UsersList } from '@/components/control-panel/users-list';
+import { RequestList } from '@/components/control-panel/request-list';
+import { UserList } from '@/components/control-panel/user-list';
 
 export function TeacherPanel() {
   return (
@@ -7,7 +8,12 @@ export function TeacherPanel() {
 
       <section>
         <h2>Список пользователей</h2>
-        <UsersList />
+        <UserList />
+      </section>
+
+      <section>
+        <h2>История запросов</h2>
+        <RequestList />
       </section>
     </>
   );

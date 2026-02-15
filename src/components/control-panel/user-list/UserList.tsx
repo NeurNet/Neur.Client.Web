@@ -3,7 +3,7 @@ import { fetchUsers, type Role } from '@/api/user';
 import { ErrorMessage } from '@/components/error-message';
 import { Loader } from '@/components/loader';
 
-export function UsersList() {
+export function UserList() {
   const { data, isPending, error } = useQuery({
     queryKey: ['users'],
     queryFn: fetchUsers,
@@ -31,6 +31,7 @@ export function UsersList() {
           <th>Имя</th>
           <th>Роль</th>
           <th>Токены</th>
+          <th>Действие</th>
         </tr>
       </thead>
 
@@ -43,6 +44,7 @@ export function UsersList() {
             </td>
             <td>{roleToString(user.role)}</td>
             <td>{user.tokens} токенов</td>
+            <td>Изменить</td>
           </tr>
         ))}
       </tbody>

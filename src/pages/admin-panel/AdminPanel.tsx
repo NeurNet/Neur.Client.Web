@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { ModelForm } from '@/components/control-panel/model-form';
-import { ModelsList } from '@/components/control-panel/models-list';
-import { UsersList } from '@/components/control-panel/users-list';
+import { ModelList } from '@/components/control-panel/model-list';
+import { UserList } from '@/components/control-panel/user-list';
+import { RequestList } from '@/components/control-panel/request-list';
 import { Button } from '@/components/ui/button';
 import classes from './AdminPanel.module.css';
 
@@ -16,7 +17,7 @@ export function AdminPanel() {
       <section>
         <h2>Модели</h2>
 
-        <ModelsList />
+        <ModelList />
 
         <Button
           className={classes.addModel}
@@ -31,7 +32,12 @@ export function AdminPanel() {
 
       <section>
         <h2>Пользователи</h2>
-        <UsersList />
+        <UserList />
+      </section>
+
+      <section>
+        <h2>История запросов</h2>
+        <RequestList />
       </section>
     </>
   );
