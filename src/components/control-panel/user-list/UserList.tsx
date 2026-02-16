@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import { useQuery } from '@tanstack/react-query';
 import { fetchUsers, type Role } from '@/api/user';
 import { ErrorMessage } from '@/components/error-message';
@@ -31,20 +32,20 @@ export function UserList() {
           <th>Имя</th>
           <th>Роль</th>
           <th>Токены</th>
-          <th>Действие</th>
         </tr>
       </thead>
 
       <tbody>
         {data.map((user) => (
           <tr key={user.user_id}>
-            <td>{user.user_name}</td>
+            <td>
+              <Link to={`/panel/user/${user.user_id}`}>{user.user_name}</Link>
+            </td>
             <td>
               {user.name} {user.surname}
             </td>
             <td>{roleToString(user.role)}</td>
             <td>{user.tokens} токенов</td>
-            <td>Изменить</td>
           </tr>
         ))}
       </tbody>

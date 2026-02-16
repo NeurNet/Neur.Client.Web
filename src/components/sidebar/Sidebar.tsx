@@ -42,7 +42,7 @@ export function Sidebar() {
 
       <div className={classes.bottom}>
         {currentUser.role !== 'student' && (
-          <Link to={currentUser.role === 'admin' ? '/panel/admin' : '/panel/teacher'}>
+          <Link to="/panel">
             <SidebarButton icon={<Settings size={20} />} hideText={collapsed}>
               Панель управления
             </SidebarButton>

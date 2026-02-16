@@ -1,0 +1,11 @@
+.tokenForm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 400px;
+}
+
+.error {
+  color: var(--color-danger);
+  font-weight: 600;
+}

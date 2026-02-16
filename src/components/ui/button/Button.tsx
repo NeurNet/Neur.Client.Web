@@ -5,7 +5,7 @@ import clsx from 'clsx';
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   showLoader?: boolean;
   size?: 'default' | 'icon';
-  variant?: 'primary' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'ghost';
 }
 
 export function Button({
