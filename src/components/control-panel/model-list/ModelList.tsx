@@ -3,7 +3,7 @@ import { fetchModels } from '@/api/model';
 import { ErrorMessage } from '@/components/error-message';
 import { Loader } from '@/components/loader';
 
-export function ModelsList() {
+export function ModelList() {
   const { data, isPending, error } = useQuery({
     queryKey: ['models'],
     queryFn: fetchModels,

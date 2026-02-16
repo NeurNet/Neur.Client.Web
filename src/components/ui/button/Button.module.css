@@ -30,6 +30,11 @@
   background-color: var(--color-primary-accent);
 }
 
+.secondary {
+  background-color: var(--color-muted);
+  color: var(--color-text);
+}
+
 .ghost {
   background-color: transparent;
   color: var(--color-text);

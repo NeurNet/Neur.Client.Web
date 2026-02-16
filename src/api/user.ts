@@ -48,22 +48,22 @@ export async function fetchUsers() {
 }
 
 export async function fetchUserById(id: string) {
-  // TODO: replace with real data
-  return {
-    user_id: id,
-    user_name: 'i24s0274',
-    name: 'Кирилл',
-    surname: 'Сиухин',
-    role: 'student',
-    tokens: 10,
-  } satisfies User;
-
-  // const res = await client.get<User>(`/users/${id}`);
-  // return res.data;
+  const res = await client.get<User>(`/users/${id}`);
+  return res.data;
 }
 
 export async function transferTokens(data: { user_id: string; token_count: number }) {
-  await client.post('/management/user/tokens', data);
+  try {
+    await client.post('/management/user/tokens', data);
+  } catch (err) {
+    if (err instanceof AxiosError) {
+      if (err.status === 402) {
+        throw new Error('Недостаточно токенов для отправки!');
+      }
+    }
+
+    throw new Error('Что-то пошло не так!');
+  }
 }
 
 export async function updateUserRole(data: { user_id: string; role: Role }) {

@@ -1,9 +1,9 @@
 import { createBrowserRouter } from 'react-router';
-import { AuthorizedLayout } from './layouts/authorized-layout';
+import { AuthorizedLayout } from './components/authorized-layout';
 import { Home } from './pages/home';
 import { Login } from './pages/login';
-import { AdminPanel } from './pages/admin-panel';
-import { TeacherPanel } from './pages/teacher-panel';
+import { ControlPanel } from './pages/control-panel';
+import { UserControl } from './pages/user-control';
 import { Chat } from './pages/chat';
 
 export const router = createBrowserRouter([
@@ -18,12 +18,10 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <AuthorizedLayout minimumRole="teacher" />,
-    children: [{ path: '/panel/teacher', element: <TeacherPanel /> }],
-  },
-  {
-    path: '/',
-    element: <AuthorizedLayout minimumRole="admin" />,
-    children: [{ path: '/panel/admin', element: <AdminPanel /> }],
+    children: [
+      { path: '/panel', element: <ControlPanel /> },
+      { path: '/panel/user/:userId', element: <UserControl /> },
+    ],
   },
   { path: '/login', element: <Login /> },
 ]);
