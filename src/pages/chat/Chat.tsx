@@ -1,31 +1,36 @@
 import { useState } from 'react';
 import { useParams } from 'react-router';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { SendHorizonal } from 'lucide-react';
 import { fetchChat } from '@/api/chat';
 import { sendMessage } from '@/api/message';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { ErrorMessage } from '@/components/error-message';
 import { Loader } from '@/components/loader';
-import { SendHorizonal } from 'lucide-react';
+import { Messages } from './Messages';
 import classes from './Chat.module.css';
-import clsx from 'clsx';
 
 export function Chat() {
   const { chatId } = useParams();
 
-  const mutation = useMutation({
-    mutationFn: sendMessage,
-  });
+  const [message, setMessage] = useState('');
 
   const { data, isPending, error } = useQuery({
     queryKey: ['chats', chatId],
     queryFn: () => fetchChat(chatId || ''),
   });
 
-  const [message, setMessage] = useState('');
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: sendMessage,
+    onSuccess: async () => {
+      setMessage('');
+      await queryClient.invalidateQueries({ queryKey: ['chats', chatId] });
+    },
+  });
 
-  const sendHandler = (e: React.SubmitEvent) => {
+  const sendHandler = async (e: React.SubmitEvent) => {
     e.preventDefault();
     if (!chatId) return;
 
@@ -41,16 +46,7 @@ export function Chat() {
         {data.model} <span className={classes.modelName}>({data.model_name})</span>
       </h1>
 
-      <div className={classes.messages}>
-        {data.messages.map((message) => (
-          <div
-            key={message.id}
-            className={clsx(classes.message, message.role === 'user' && classes.userMessage)}
-          >
-            {message.content}
-          </div>
-        ))}
-      </div>
+      <Messages messages={data.messages} />
 
       <form className={classes.form} onSubmit={sendHandler}>
         <Input
@@ -64,6 +60,8 @@ export function Chat() {
           <SendHorizonal size={20} />
         </Button>
       </form>
+
+      {mutation.error && <span>{mutation.error.message}</span>}
     </div>
   );
 }
