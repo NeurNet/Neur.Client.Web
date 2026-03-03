@@ -1,6 +1,3 @@
-import { AxiosError } from 'axios';
-import { client } from './client';
-
 export type Message = {
   id: string;
   chat_id: string;
@@ -10,16 +7,22 @@ export type Message = {
 };
 
 export async function sendMessage({ chatId, prompt }: { chatId: string; prompt: string }) {
-  try {
-    const res = await client.post(`/chats/${chatId}/generate`, { prompt });
-    return res.data;
-  } catch (err) {
-    if (err instanceof AxiosError) {
-      if (err.status === 402) {
-        throw new Error('Недостаточно токенов для отправки сообщения');
-      }
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/chats/${chatId}/generate`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ prompt }),
+    credentials: 'include',
+  });
+
+  if (!res.ok) {
+    if (res.status === 402) {
+      throw new Error('Недостаточно токенов для отправки сообщения');
     }
 
     throw new Error('Что-то пошло не так!');
   }
+
+  return res.body;
 }
