@@ -45,11 +45,9 @@ export function ChatList() {
   if (isPending) return <Loader />;
   if (error) return <ErrorMessage message={error.message} />;
 
-  const reversedData = data.slice().reverse();
-
   return (
     <div className={classes.chatList}>
-      {reversedData.map((chat) => (
+      {data.map((chat) => (
         <Link to={`/chat/${chat.id}`} key={chat.id}>
           <SidebarButton label={timeAgo(chat.created_at)}>{chat.model_name}</SidebarButton>
         </Link>

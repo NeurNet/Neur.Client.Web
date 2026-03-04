@@ -1,8 +1,10 @@
+export type MessageRole = 'user' | 'bot';
+
 export type Message = {
   id: string;
   chat_id: string;
   created_at: string;
-  role: 'user' | 'bot';
+  role: MessageRole;
   content: string;
 };
 
@@ -22,6 +24,10 @@ export async function sendMessage({ chatId, prompt }: { chatId: string; prompt: 
     }
 
     throw new Error('Что-то пошло не так!');
+  }
+
+  if (!res.body) {
+    throw new Error('Не удалось получить ответ!');
   }
 
   return res.body;
