@@ -7,8 +7,10 @@ export function Messages({ messages }: { messages: Message[] }) {
   const messagesRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (!messagesRef.current) return;
-    messagesRef.current.scrollTo(0, messagesRef.current.scrollHeight);
+    const messages = messagesRef.current;
+    if (!messages) return;
+
+    messages.scrollTo({ top: messages.scrollHeight, behavior: 'smooth' });
   }, [messages]);
 
   return (

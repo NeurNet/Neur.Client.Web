@@ -32,6 +32,8 @@ export function Chat() {
         if (done) break;
 
         const line = decoder.decode(value, { stream: true });
+
+        // FIXME: somehow clean up SSE stuff without replacing all newlines
         const chunk = line.replaceAll('data: ', '').replaceAll('\n\n', '');
         
         appendMessageChunk(chunk, 'bot');
