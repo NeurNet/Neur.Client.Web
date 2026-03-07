@@ -28,3 +28,16 @@
     position: relative;
   }
 }
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}

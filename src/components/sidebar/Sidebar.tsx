@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
 import { requestLogout } from '@/api/user';
-import { ChevronsLeft, ChevronsRight, Cpu, LogOut, Settings } from 'lucide-react';
+import { ChevronsLeft, ChevronsRight, Cpu, LogOut, Settings, User } from 'lucide-react';
 import { SidebarButton } from './sidebar-button';
 import { ChatList } from './chat-list';
 import { Loader } from '../loader';
@@ -41,6 +41,17 @@ export function Sidebar() {
       {!collapsed && <ChatList />}
 
       <div className={classes.bottom}>
+        {!collapsed && (
+          <div className={classes.user}>
+            <User size={20} />
+
+            <div className={classes.userInfo}>
+              <b>{currentUser.username}</b>
+              <span>{currentUser.tokens} токенов</span>
+            </div>
+          </div>
+        )}
+
         {currentUser.role !== 'student' && (
           <Link to="/panel">
             <SidebarButton icon={<Settings size={20} />} hideText={collapsed}>
