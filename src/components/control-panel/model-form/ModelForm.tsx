@@ -4,11 +4,13 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Select } from '@/components/ui/select';
+import { TextArea } from '@/components/ui/text-area';
 import classes from './ModelForm.module.css';
 
 const initialData: CreateModel = {
   name: '',
   model: '',
+  context: '',
   type: 'text',
   version: '',
   status: 'open',
@@ -28,7 +30,9 @@ export function ModelForm() {
     mutation.mutate(formData);
   };
 
-  const changeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const changeHandler = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = e.target;
 
     setFormData({
@@ -55,6 +59,13 @@ export function ModelForm() {
         onChange={changeHandler}
         placeholder="Имя модели (как в Ollama, например: saiga:7b)"
         required
+      />
+
+      <TextArea
+        name="context"
+        value={formData.context}
+        onChange={changeHandler}
+        placeholder="Контекст"
       />
 
       <Select name="type" onChange={changeHandler}>

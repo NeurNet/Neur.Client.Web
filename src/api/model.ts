@@ -13,6 +13,7 @@ export type Model = {
 export type CreateModel = {
   name: string;
   model: string;
+  context: string;
   type: 'text' | 'code' | 'image';
   version: string;
   status: 'open' | 'locked';
