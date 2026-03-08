@@ -17,6 +17,7 @@ export function RequestList() {
       <thead>
         <tr>
           <th>Время запроса</th>
+          <th>Имя пользователя</th>
           <th>Имя модели</th>
           <th>Статус</th>
           <th>Ответ модели</th>
@@ -27,8 +28,10 @@ export function RequestList() {
         {data.map((req: Request) => (
           <tr key={req.id}>
             <td>{new Date(req.created_at).toLocaleString()}</td>
+            <td></td>
             <td>{req.model_name}</td>
             <td>{req.status}</td>
+            <td></td>
           </tr>
         ))}
       </tbody>
