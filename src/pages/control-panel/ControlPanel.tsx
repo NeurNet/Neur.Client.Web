@@ -2,12 +2,12 @@ import classes from './ControlPanel.module.css';
 import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
-import { ModelForm } from '@/components/control-panel/model-form';
-import { ModelList } from '@/components/control-panel/model-list';
-import { UserList } from '@/components/control-panel/user-list';
-import { RequestList } from '@/components/control-panel/request-list';
 import { Button } from '@/components/ui/button';
 import { Loader } from '@/components/loader';
+import { UserList } from './UserList';
+import { RequestList } from './RequestList';
+import { ModelList } from './ModelList';
+import { ModelForm } from './ModelForm';
 
 export function ControlPanel() {
   const { currentUser, isLoading } = useCurrentUser();

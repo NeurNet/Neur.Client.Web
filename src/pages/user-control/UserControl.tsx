@@ -4,6 +4,7 @@ import { ErrorMessage } from '@/components/error-message';
 import { Loader } from '@/components/loader';
 import { useQuery } from '@tanstack/react-query';
 import { TransferTokenForm } from './TransferTokenForm';
+import { RoleForm } from './RoleForm';
 
 export function UserControl() {
   const { userId } = useParams();
@@ -23,7 +24,7 @@ export function UserControl() {
   return (
     <>
       <h1>
-        <Link to="/panel">Панель управления</Link> &gt; {user?.user_name}
+        <Link to="/panel">Панель управления</Link> &gt; {user.user_name}
       </h1>
 
       <p>
@@ -31,6 +32,14 @@ export function UserControl() {
       </p>
       <p>Роль: {user.role}</p>
       <p>Кол-во токенов: {user.tokens}</p>
+
+      <section>
+        <h2>Изменение роли</h2>
+        <p>
+          Выберите новую роль для пользователя <b>{user.user_name}</b>:
+        </p>
+        <RoleForm user={user} />
+      </section>
 
       <section>
         <h2>Передача токенов</h2>

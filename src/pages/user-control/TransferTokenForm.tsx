@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { transferTokens } from '@/api/user';
-import classes from './TransferTokenForm.module.css';
+import classes from './UserControl.module.css';
 
 export function TransferTokenForm({ userId }: { userId: string }) {
   const [tokens, setTokens] = useState(10);
@@ -15,7 +15,7 @@ export function TransferTokenForm({ userId }: { userId: string }) {
     isPending,
     error,
   } = useMutation({
-    mutationFn: (token_count: number) => transferTokens({ user_id: userId || '', token_count }),
+    mutationFn: (token_count: number) => transferTokens({ user_id: userId, token_count }),
     onSuccess: async () => await queryClient.invalidateQueries({ queryKey: ['users', userId] }),
   });
 
@@ -25,7 +25,7 @@ export function TransferTokenForm({ userId }: { userId: string }) {
   };
 
   return (
-    <form className={classes.tokenForm} onSubmit={addTokensHandler}>
+    <form className={classes.form} onSubmit={addTokensHandler}>
       <Input type="number" value={tokens} onChange={(e) => setTokens(Number(e.target.value))} />
       <Button type="submit" showLoader={isPending}>
         Передать

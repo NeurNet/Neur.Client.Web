@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Select } from '@/components/ui/select';
 import { TextArea } from '@/components/ui/text-area';
-import classes from './ModelForm.module.css';
+import classes from './ControlPanel.module.css';
 
 const initialData: CreateModel = {
   name: '',
@@ -42,7 +42,7 @@ export function ModelForm() {
   };
 
   return (
-    <form className={classes.form} onSubmit={createModelHandler}>
+    <form className={classes.modelForm} onSubmit={createModelHandler}>
       <Input
         type="text"
         name="name"
