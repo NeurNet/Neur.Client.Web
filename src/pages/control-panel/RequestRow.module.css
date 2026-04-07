@@ -1,0 +1,7 @@
+.row {
+  cursor: pointer;
+  transition: background-color 200ms ease;
+}
+.row:hover {
+  background-color: var(--color-muted);
+}

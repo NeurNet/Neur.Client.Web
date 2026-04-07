@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { ErrorMessage } from '@/components/error-message';
 import { Loader } from '@/components/loader';
 import { fetchRequests, type Request } from '@/api/request';
+import { RequestRow } from './RequestRow';
 
 export function RequestList() {
   const { data, isPending, error } = useQuery({
@@ -26,13 +27,7 @@ export function RequestList() {
 
       <tbody>
         {data.map((req: Request) => (
-          <tr key={req.id}>
-            <td>{new Date(req.created_at).toLocaleString()}</td>
-            <td></td>
-            <td>{req.model_name}</td>
-            <td>{req.status}</td>
-            <td></td>
-          </tr>
+          <RequestRow key={req.id} request={req} />
         ))}
       </tbody>
     </table>

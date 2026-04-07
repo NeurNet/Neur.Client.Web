@@ -36,7 +36,7 @@ export function Chat() {
         // FIXME: somehow clean up SSE stuff without replacing all newlines
         const chunk = line.replaceAll('data: ', '').replaceAll('\n\n', '');
         
-        appendMessageChunk(chunk, 'bot');
+        appendMessageChunk(chunk, 'assistant');
         console.log(chunk);
       }
     },

@@ -1,4 +1,4 @@
-export type MessageRole = 'user' | 'bot';
+export type MessageRole = 'user' | 'assistant';
 
 export type Message = {
   id: string;
