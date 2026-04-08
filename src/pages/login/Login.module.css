@@ -56,3 +56,13 @@
 .copyright {
   color: hsla(228, 18%, 65%, 1);
 }
+
+@media screen and (max-width: 1300px) {
+  .wrapper {
+    padding: 0;
+  }
+  
+  .loginArt {
+    display: none;
+  }
+}

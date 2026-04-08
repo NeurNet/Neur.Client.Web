@@ -81,7 +81,7 @@ export function Login() {
         </span>
       </section>
 
-      <img src={loginArt} alt="Login art" />
+      <img src={loginArt} className={classes.loginArt} alt="Login art" />
     </div>
   );
 }
