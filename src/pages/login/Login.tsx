@@ -68,7 +68,7 @@ export function Login() {
               required
             />
 
-            <Button type="submit">
+            <Button type="submit" disabled={isPending}>
               Войти
             </Button>
 
