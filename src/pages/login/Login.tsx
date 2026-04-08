@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/redesign-button';
-import { Input } from '@/components/ui/input';
+import { Input } from '@/components/ui/redesign-input';
 import { requestLogin } from '@/api/user';
 import classes from './Login.module.css';
 import loginArt from '@/assets/login_art.png';

@@ -3,8 +3,11 @@
   font-size: 14px;
   font-weight: 600;
   color: var(--c-bg);
-  background-color: var(--c-button);
+  background-color: var(--c-primary);
   border-radius: 8px;
   border: none;
   cursor: pointer;
+}
+.button:hover {
+  background-color: var(--c-primary-accent);
 }

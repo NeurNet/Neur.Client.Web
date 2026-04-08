@@ -15,5 +15,8 @@
   --c-text: hsla(240, 5%, 4%, 1);
   --c-bg: hsla(0, 0%, 100%, 1);
 
-  --c-button: hsla(274, 96%, 30%, 1);
+  --c-primary: hsla(284, 95%, 41%, 1);
+  --c-primary-accent: hsla(274, 96%, 30%, 1);
+
+  --c-input: hsla(227, 22%, 86%, 1);
 }
