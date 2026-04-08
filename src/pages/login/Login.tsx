@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/redesign-button';
 import { Input } from '@/components/ui/input';
 import { requestLogin } from '@/api/user';
 import classes from './Login.module.css';
@@ -68,7 +68,7 @@ export function Login() {
               required
             />
 
-            <Button type="submit" showLoader={isPending}>
+            <Button type="submit">
               Войти
             </Button>
 

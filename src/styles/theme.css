@@ -1,4 +1,5 @@
 :root {
+  /* OLD THEME */
   --color-primary: #b624db;
   --color-primary-accent: #9b28b8;
 
@@ -9,4 +10,10 @@
 
   --color-bg: #f6f6f6;
   --color-text: #0c0c0c;
+
+  /* REDESIGNED THEME */
+  --c-text: hsla(240, 5%, 4%, 1);
+  --c-bg: hsla(0, 0%, 100%, 1);
+
+  --c-button: hsla(274, 96%, 30%, 1);
 }
