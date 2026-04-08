@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { requestLogin } from '@/api/user';
 import classes from './Login.module.css';
+import loginArt from '@/assets/login_art.png';
+import logo from '@/assets/logo.png';
 
 export function Login() {
   const navigate = useNavigate();
@@ -32,32 +34,54 @@ export function Login() {
 
   return (
     <div className={classes.wrapper}>
-      <div className={classes.login}>
-        <span>NeurNet</span>
-        <h1 className={classes.heading}>Вход в аккаунт</h1>
-        <form className={classes.form} onSubmit={submitHandler}>
-          <Input
-            type="text"
-            placeholder="Имя пользователя"
-            autoComplete="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-          <Input
-            type="password"
-            placeholder="Пароль"
-            autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <Button type="submit" showLoader={isPending}>
-            Войти
-          </Button>
-        </form>
-        {error && <span className={classes.error}>{error.message}</span>}
-      </div>
+      <section className={classes.formSection}>
+        <div className={classes.formWrapper}>
+          <div className={classes.logo}>
+            <img src={logo} alt="NeurNet logo" />
+
+            <div className={classes.logoText}>
+              <span className={classes.name}>NeurNet</span>
+              <span className={classes.description}>
+                Платформа для работы
+                <br />с нейросетями.
+              </span>
+            </div>
+          </div>
+
+          <form className={classes.form} onSubmit={submitHandler}>
+            <Input
+              type="text"
+              placeholder="Имя пользователя"
+              autoComplete="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              autoFocus
+              required
+            />
+
+            <Input
+              type="password"
+              placeholder="Пароль"
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+
+            <Button type="submit" showLoader={isPending}>
+              Войти
+            </Button>
+
+            {error && <span className={classes.error}>{error.message}</span>}
+          </form>
+        </div>
+
+        <span className={classes.copyright}>
+          &copy; 2025 АНПОО &quot;Колледж Цифровых Технологий&quot;
+        </span>
+      </section>
+
+      <img src={loginArt} alt="Login art" />
     </div>
   );
 }

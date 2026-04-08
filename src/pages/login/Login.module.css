@@ -1,29 +1,58 @@
 .wrapper {
   display: flex;
-  align-items: center;
-  justify-content: center;
   height: 100%;
+  width: 100%;
+  padding: 32px;
+  box-sizing: border-box;
 }
 
-.login {
+.formSection {
+  flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.formWrapper {
+  margin-bottom: 120px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.logoText {
+  display: flex;
   flex-direction: column;
-  gap: 24px;
-  width: 400px;
-  margin: 0 12px;
+}
+
+.name {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.description {
+  font-size: 14px;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  width: 100%;
-  margin: 0 24px;
+  gap: 24px;
+  width: 388px;
+  text-align: center;
 }
 
 .error {
-  color: var(--color-danger);
-  font-weight: 600;
+  font-weight: 300;
+  font-size: 12px;
+  color: hsla(0, 100%, 71%, 1);
+}
+
+.copyright {
+  color: hsla(228, 18%, 65%, 1);
 }
