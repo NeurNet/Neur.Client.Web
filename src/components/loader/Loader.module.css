@@ -1,9 +1,0 @@
-.loader {
-  animation: 3s spin linear infinite;
-}
-
-@keyframes spin {
-  100% {
-    transform: rotate(360deg);
-  }
-}
