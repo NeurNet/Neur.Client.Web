@@ -1,8 +1,8 @@
-import { HomePage } from '@/pages/home';
-import { SigninPage } from '@/pages/signin';
+import { Home } from '@/pages/home';
+import { Signin } from '@/pages/signin';
 import { createBrowserRouter } from 'react-router';
 
 export const router = createBrowserRouter([
-  { path: '/', element: <HomePage /> },
-  { path: '/signin', element: <SigninPage /> },
+  { path: '/', element: <Home /> },
+  { path: '/signin', element: <Signin /> },
 ]);

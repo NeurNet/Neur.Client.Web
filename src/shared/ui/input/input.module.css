@@ -1,0 +1,11 @@
+.input {
+  padding: 10px 14px;
+  font-size: 14px;
+  border: none;
+  border: 1px solid hsla(220, 6%, 85%, 1);
+  border-radius: 8px;
+}
+.input:focus {
+  border-color: hsla(284, 95%, 41%, 1);
+  outline: 4px solid hsla(267, 100%, 96%, 1);
+}

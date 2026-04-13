@@ -1,3 +1,3 @@
-export function HomePage() {
+export function Home() {
   return <span>Home page</span>;
 }
