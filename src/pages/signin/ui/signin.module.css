@@ -42,6 +42,13 @@
   font-size: 14px;
 }
 
+.error {
+  text-align: center;
+  color: var(--error);
+  font-size: 12px;
+  font-weight: 300;
+}
+
 @media screen and (max-width: 1400px) {
   .loginArt {
     display: none;

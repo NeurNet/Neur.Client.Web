@@ -16,3 +16,7 @@
   background-color: hsla(18, 79%, 67%, 1);
   outline: 4px solid hsla(267, 100%, 96%, 1);
 }
+.button:disabled {
+  background-color: hsla(18, 79%, 67%, 1);
+  cursor: default;
+}
