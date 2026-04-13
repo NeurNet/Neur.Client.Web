@@ -1,0 +1,32 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: hsla(284, 95%, 41%, 1);
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.button:hover {
+  background-color: hsla(274, 96%, 30%, 1);
+}
+.button:focus {
+  background-color: hsla(18, 79%, 67%, 1);
+  outline: 4px solid hsla(267, 100%, 96%, 1);
+}
+.button:disabled {
+  background-color: hsla(18, 79%, 67%, 1);
+  cursor: default;
+}
+
+.md {
+  padding: 10px 16px;
+}
+
+.icon {
+  padding: 8px;
+}
