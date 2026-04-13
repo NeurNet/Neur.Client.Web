@@ -38,7 +38,9 @@ export function Sidebar() {
         </div>
       </div>
 
-      <SidebarButton icon={<SquarePen size={18} />}>Новый чат</SidebarButton>
+      <Link to="/">
+        <SidebarButton icon={<SquarePen size={18} />}>Новый чат</SidebarButton>
+      </Link>
 
       <span className={classes.recent}>Недавнее</span>
 

@@ -21,7 +21,7 @@ export function ModelDialog({ open, onClose }: ModelDialogProps) {
   const navigate = useNavigate();
 
   const createChat = useMutation({
-    mutationFn: (modelId: string) => ChatApi.createChat({ modelId }),
+    mutationFn: ChatApi.createChat,
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ['chats'] });
       navigate(`/chat/${data.chatId}`);
