@@ -1,16 +1,30 @@
 import classes from './sidebar.module.css';
 import logo from '@/shared/assets/logo.png';
 import { ChatButton } from './chat-button';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ChatApi } from '@/entities/chat';
-import { SquarePen } from 'lucide-react';
+import { LogOut, SquarePen, User } from 'lucide-react';
 import { SidebarButton } from './sidebar-button';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+import { SessionApi, useSession } from '@/entities/session';
 
 export function Sidebar() {
+  const session = useSession();
+
   const chats = useQuery({
     queryKey: ['chats'],
     queryFn: ChatApi.fetchChats,
+  });
+
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  const signout = useMutation({
+    mutationFn: SessionApi.signout,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['session'] });
+      navigate('/signin');
+    },
   });
 
   return (
@@ -34,6 +48,27 @@ export function Sidebar() {
             <ChatButton key={chat.id} chat={chat} />
           </Link>
         ))}
+      </div>
+
+      <div className={classes.bottom}>
+        <SidebarButton icon={<LogOut size={18} />} onClick={() => signout.mutate()}>
+          Выйти
+        </SidebarButton>
+
+        {session.data && (
+          <div className={classes.user}>
+            <User size={18} />
+
+            <div>
+              <span className={classes.name}>
+                {session.data.surname} {session.data.name}
+              </span>
+              <span className={classes.tokens}>
+                {session.data.username} | {session.data.tokens} токенов
+              </span>
+            </div>
+          </div>
+        )}
       </div>
     </aside>
   );

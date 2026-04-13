@@ -36,3 +36,24 @@
   gap: 24px;
   overflow-y: auto;
 }
+
+.bottom {
+  margin-top: auto;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+}
+
+.name {
+  display: block;
+  font-weight: 600;
+}
+
+.tokens {
+  display: block;
+  font-size: 10px;
+}

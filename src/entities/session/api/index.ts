@@ -7,11 +7,7 @@ export const SessionApi = {
     try {
       const res = await client.get<Session>('/users/auth');
       return res.data;
-    } catch (err) {
-      if (err instanceof AxiosError && err.response?.status === 401) {
-        throw new Error('Неверный логин или пароль!');
-      }
-
+    } catch {
       throw new Error('Произошла ошибка!');
     }
   },
@@ -24,6 +20,14 @@ export const SessionApi = {
         throw new Error('Неверный логин или пароль!');
       }
 
+      throw new Error('Произошла ошибка!');
+    }
+  },
+
+  signout: async () => {
+    try {
+      await client.post('/users/auth/logout');
+    } catch {
       throw new Error('Произошла ошибка!');
     }
   },
