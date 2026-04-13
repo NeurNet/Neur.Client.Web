@@ -1,6 +1,9 @@
 .container {
   display: flex;
   height: 100%;
+  padding: 32px;
+  gap: 24px;
+  box-sizing: border-box;
 }
 
 .main {

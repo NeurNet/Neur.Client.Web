@@ -1,14 +1,12 @@
-import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
 import { requestLogout } from '@/api/user';
-import { ChevronsLeft, ChevronsRight, Cpu, LogOut, Settings, User } from 'lucide-react';
+import { LogOut, Settings, SquarePen, User } from 'lucide-react';
 import { SidebarButton } from './sidebar-button';
-import { ChatList } from './chat-list';
 import { Loader } from '../loader';
 import classes from './Sidebar.module.css';
-import clsx from 'clsx';
+import logo from '@/assets/logo.png';
 
 export function Sidebar() {
   const { currentUser } = useCurrentUser();
@@ -24,60 +22,46 @@ export function Sidebar() {
     },
   });
 
-  const [collapsed, setCollapsed] = useState(window.innerWidth <= 800);
-
   if (!currentUser) return <Loader />;
 
   return (
-    <nav className={clsx(classes.sidebar, collapsed && classes.collapsed)}>
-      <Link to="/">
-        <SidebarButton icon={<Cpu size={20} />} hideText={collapsed}>
-          Модели
-        </SidebarButton>
+    <nav className={classes.sidebar}>
+      <div className={classes.logo}>
+        <img src={logo} alt="NeurNet logo" width={56} height={56} />
+
+        <div className={classes.logoText}>
+          <span className={classes.name}>NeurNet</span>
+          <span className={classes.description}>Нейросети колледжа</span>
+        </div>
+      </div>
+
+      <Link to="/" className={classes.newChat}>
+        <SidebarButton icon={<SquarePen size={20} />}>Новый чат</SidebarButton>
       </Link>
 
-      <hr />
+      <span className={classes.recent}>Недавнее</span>
 
-      {!collapsed && <ChatList />}
+      <div></div>
 
       <div className={classes.bottom}>
-        {!collapsed && (
-          <div className={classes.user}>
-            <User size={20} />
-
-            <div className={classes.userInfo}>
-              <b>{currentUser.username}</b>
-              <span>{currentUser.tokens} токенов</span>
-            </div>
-          </div>
-        )}
-
         {currentUser.role !== 'student' && (
           <Link to="/panel">
-            <SidebarButton icon={<Settings size={20} />} hideText={collapsed}>
-              Панель управления
-            </SidebarButton>
+            <SidebarButton icon={<Settings size={20} />}>Панель управления</SidebarButton>
           </Link>
         )}
 
-        <SidebarButton
-          variant="danger"
-          onClick={() => logout()}
-          showLoader={isPending}
-          className={classes.exit}
-          icon={<LogOut size={20} />}
-          hideText={collapsed}
-        >
+        <SidebarButton onClick={() => logout()} showLoader={isPending} icon={<LogOut size={20} />}>
           Выйти
         </SidebarButton>
 
-        <SidebarButton
-          icon={collapsed ? <ChevronsRight size={20} /> : <ChevronsLeft size={20} />}
-          onClick={() => setCollapsed(!collapsed)}
-          hideText={collapsed}
-        >
-          Свернуть
-        </SidebarButton>
+        <div className={classes.user}>
+          <User size={20} />
+
+          <div className={classes.userInfo}>
+            <b className={classes.username}>{currentUser.username}</b>
+            <span className={classes.tokens}>{currentUser.username} | {currentUser.tokens} токенов</span>
+          </div>
+        </div>
       </div>
     </nav>
   );

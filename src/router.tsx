@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router';
-import { AuthorizedLayout } from './components/authorized-layout';
+import { Layout } from './components/layout';
 import { Home } from './pages/home';
 import { Login } from './pages/login';
 import { ControlPanel } from './pages/control-panel';
@@ -9,7 +9,7 @@ import { Chat } from './pages/chat';
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <AuthorizedLayout minimumRole="student" />,
+    element: <Layout minimumRole="student" />,
     children: [
       { path: '', element: <Home /> },
       { path: '/chat/:chatId', element: <Chat /> },
@@ -17,7 +17,7 @@ export const router = createBrowserRouter([
   },
   {
     path: '/',
-    element: <AuthorizedLayout minimumRole="teacher" />,
+    element: <Layout minimumRole="teacher" />,
     children: [
       { path: '/panel', element: <ControlPanel /> },
       { path: '/panel/user/:userId', element: <UserControl /> },

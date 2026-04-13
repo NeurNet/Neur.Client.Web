@@ -1,11 +1,11 @@
-import classes from './AuthorizedLayout.module.css';
+import classes from './Layout.module.css';
 import { Navigate, Outlet } from 'react-router';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
 import { Sidebar } from '@/components/sidebar';
 import { Loader } from '@/components/loader';
 import type { Role } from '@/api/user';
 
-export function AuthorizedLayout({ minimumRole = 'teacher' }: { minimumRole: Role }) {
+export function Layout({ minimumRole = 'teacher' }: { minimumRole: Role }) {
   const { currentUser, isLoading } = useCurrentUser();
 
   const roleToNumber = (role: Role) => {
