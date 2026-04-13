@@ -105,7 +105,7 @@ export function Chat() {
           required
         />
 
-        <Button type="submit" size="icon" disabled={sendMessageMutation.isPending}>
+        <Button type="submit" disabled={sendMessageMutation.isPending}>
           <SendHorizonal size={20} />
         </Button>
       </form>

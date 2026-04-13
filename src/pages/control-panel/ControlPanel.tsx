@@ -29,7 +29,6 @@ export function ControlPanel() {
 
           <Button
             className={classes.addModel}
-            variant="ghost"
             onClick={() => setModelFormExpanded(!modelFormExpanded)}
           >
             {modelFormExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />} Добавить

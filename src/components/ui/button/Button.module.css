@@ -1,59 +1,13 @@
 .button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-size: 16px;
-  font-weight: 500;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--c-bg);
+  background-color: var(--c-primary);
+  border-radius: 8px;
   border: none;
   cursor: pointer;
-  transition:
-    background-color 200ms ease,
-    color 200ms ease;
-  border-radius: 4px;
 }
-.button:disabled {
-  background-color: var(--color-muted);
-  color: var(--color-text);
-  cursor: not-allowed;
-}
-
-.default {
-  padding: 12px 16px;
-}
-.icon {
-  padding: 12px;
-}
-
-.primary {
-  background-color: var(--color-primary);
-  color: var(--color-bg);
-}
-.primary:hover {
-  background-color: var(--color-primary-accent);
-}
-
-.secondary {
-  background-color: var(--color-muted);
-  color: var(--color-text);
-}
-
-.ghost {
-  background-color: transparent;
-  color: var(--color-text);
-}
-.ghost:hover {
-  background-color: var(--color-muted);
-}
-.ghost:disabled {
-  background-color: var(--color-muted);
-}
-
-.loader {
-  animation: 2s loader linear infinite;
-}
-@keyframes loader {
-  100% {
-    transform: rotate(360deg);
-  }
+.button:hover {
+  background-color: var(--c-primary-accent);
 }

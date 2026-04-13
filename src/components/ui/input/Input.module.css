@@ -1,11 +1,10 @@
 .input {
-  background-color: var(--color-muted);
-  color: var(--color-text);
-  border: none;
-  border-radius: 4px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid hsla(220, 6%, 85%, 1);
   font-size: 16px;
-  padding: 12px;
 }
 .input:focus {
-  outline: 2px solid var(--color-primary);
+  outline: 4px solid hsla(267, 100%, 96%, 1);
+  border-color: var(--c-primary);
 }

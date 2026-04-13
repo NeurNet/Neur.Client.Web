@@ -10,11 +10,7 @@ export function TransferTokenForm({ userId }: { userId: string }) {
 
   const queryClient = useQueryClient();
 
-  const {
-    mutate: addTokens,
-    isPending,
-    error,
-  } = useMutation({
+  const { mutate: addTokens, error } = useMutation({
     mutationFn: (token_count: number) => transferTokens({ user_id: userId, token_count }),
     onSuccess: async () => await queryClient.invalidateQueries({ queryKey: ['users', userId] }),
   });
@@ -27,9 +23,7 @@ export function TransferTokenForm({ userId }: { userId: string }) {
   return (
     <form className={classes.form} onSubmit={addTokensHandler}>
       <Input type="number" value={tokens} onChange={(e) => setTokens(Number(e.target.value))} />
-      <Button type="submit" showLoader={isPending}>
-        Передать
-      </Button>
+      <Button type="submit">Передать</Button>
       {error && <span className={classes.error}>{error.message}</span>}
     </form>
   );

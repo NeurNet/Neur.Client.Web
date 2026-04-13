@@ -88,7 +88,7 @@ export function ModelForm() {
         <option value="locked">Приватная модель</option>
       </Select>
 
-      <Button type="submit" showLoader={mutation.isPending}>
+      <Button type="submit">
         Добавить
       </Button>
     </form>
