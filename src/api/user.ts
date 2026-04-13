@@ -6,6 +6,8 @@ export type Role = 'student' | 'teacher' | 'admin';
 export type CurrentUser = {
   id: string;
   username: string;
+  name: string;
+  surname: string;
   role: Role;
   tokens: number;
 };

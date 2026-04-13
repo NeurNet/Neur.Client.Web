@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
 import { requestLogout } from '@/api/user';
 import { LogOut, Settings, SquarePen, User } from 'lucide-react';
@@ -7,12 +7,19 @@ import { SidebarButton } from './sidebar-button';
 import { Loader } from '../loader';
 import classes from './Sidebar.module.css';
 import logo from '@/assets/logo.png';
+import { fetchChats } from '@/api/chat';
+import { ChatCard } from './ChatCard';
 
 export function Sidebar() {
   const { currentUser } = useCurrentUser();
 
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+
+  const chats = useQuery({
+    queryKey: ['chats'],
+    queryFn: fetchChats,
+  });
 
   const { mutate: logout, isPending } = useMutation({
     mutationFn: requestLogout,
@@ -41,7 +48,13 @@ export function Sidebar() {
 
       <span className={classes.recent}>Недавнее</span>
 
-      <div></div>
+      {chats.data && (
+        <div className={classes.chatList}>
+          {chats.data.map((chat) => (
+            <ChatCard key={chat.id} chat={chat} />
+          ))}
+        </div>
+      )}
 
       <div className={classes.bottom}>
         {currentUser.role !== 'student' && (
@@ -58,8 +71,12 @@ export function Sidebar() {
           <User size={20} />
 
           <div className={classes.userInfo}>
-            <b className={classes.username}>{currentUser.username}</b>
-            <span className={classes.tokens}>{currentUser.username} | {currentUser.tokens} токенов</span>
+            <b className={classes.username}>
+              {currentUser.surname} {currentUser.name}
+            </b>
+            <span className={classes.tokens}>
+              {currentUser.username} | {currentUser.tokens} токенов
+            </span>
           </div>
         </div>
       </div>

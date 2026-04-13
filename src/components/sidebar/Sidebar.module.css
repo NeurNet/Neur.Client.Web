@@ -55,6 +55,7 @@
 
 .recent {
   font-size: 14px;
+  margin-bottom: 24px;
 }
 
 .username {
@@ -64,4 +65,8 @@
 
 .tokens {
   font-size: 10px;
+}
+
+.chatList {
+  overflow-y: auto;
 }
