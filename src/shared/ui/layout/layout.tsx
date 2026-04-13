@@ -1,4 +1,6 @@
-import { useSession } from '@/features/session';
+import classes from './layout.module.css';
+import { useSession } from '@/entities/session';
+import { Sidebar } from '@/widgets/sidebar';
 import { Navigate, Outlet } from 'react-router';
 
 export function Layout() {
@@ -7,5 +9,11 @@ export function Layout() {
   if (session.isPending) return null;
   if (!session.data) return <Navigate to="/signin" replace />;
 
-  return <Outlet />;
+  return (
+    <div className={classes.wrapper}>
+      <Sidebar />
+
+      <Outlet />
+    </div>
+  );
 }

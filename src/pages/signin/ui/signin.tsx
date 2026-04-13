@@ -1,11 +1,11 @@
 import classes from './signin.module.css';
 import loginArt from './login_art.png';
-import logo from './logo.png';
+import logo from '@/shared/assets/logo.png';
 import { Input } from '@/shared/ui/input';
 import { Button } from '@/shared/ui/button';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { SessionApi, type Credentials } from '@/features/session';
+import { SessionApi, type Credentials } from '@/entities/session';
 import { useNavigate } from 'react-router';
 
 type Inputs = {
