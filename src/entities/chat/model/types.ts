@@ -6,3 +6,12 @@ export interface Chat {
   created_at: string;
   updated_at: string;
 }
+
+export interface CreateChat {
+  modelId: string;
+}
+
+export interface ChatResponse {
+  chatId: string;
+  modelId: string;
+}

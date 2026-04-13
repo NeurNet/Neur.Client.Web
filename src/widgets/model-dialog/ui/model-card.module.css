@@ -1,0 +1,17 @@
+.card {
+  padding: 16px 12px;
+  border: 1px solid hsla(284, 95%, 41%, 1);
+  border-radius: 20px;
+  min-width: 300px;
+  cursor: pointer;
+}
+
+.name {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.model {
+  font-weight: 500;
+  color: hsla(240, 4%, 46%, 1);
+}

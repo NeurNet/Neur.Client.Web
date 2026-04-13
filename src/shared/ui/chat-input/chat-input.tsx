@@ -3,7 +3,11 @@ import { Button } from '../button';
 import classes from './chat-input.module.css';
 import { useState } from 'react';
 
-export function ChatInput() {
+interface ChatInputProps {
+  onSend: (value: string) => void;
+}
+
+export function ChatInput({ onSend }: ChatInputProps) {
   const [text, setText] = useState('');
 
   return (
@@ -17,7 +21,7 @@ export function ChatInput() {
       />
 
       {text !== '' && (
-        <Button className={classes.send} size="icon">
+        <Button className={classes.send} onClick={() => onSend(text)} size="icon">
           <ChevronUp />
         </Button>
       )}

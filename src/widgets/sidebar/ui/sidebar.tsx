@@ -44,7 +44,7 @@ export function Sidebar() {
 
       <div className={classes.chats}>
         {chats.data?.map((chat) => (
-          <Link to={`/chat/${chat.id}`}>
+          <Link key={chat.id} to={`/chat/${chat.id}`}>
             <ChatButton key={chat.id} chat={chat} />
           </Link>
         ))}
