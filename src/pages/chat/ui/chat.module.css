@@ -1,0 +1,32 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  padding: 30px 30px 0 30px;
+}
+
+.header {
+  width: 100%;
+}
+
+.modelName {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.model {
+  font-weight: 500;
+  color: hsla(240, 4%, 46%, 1);
+}
+
+.chat {
+  flex: 1;
+}
+
+.disclaimer {
+  font-weight: 300;
+  font-size: 14px;
+  color: hsla(0, 0%, 53%, 1);
+  margin-top: 12px;
+}
