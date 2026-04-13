@@ -12,7 +12,6 @@ export function Layout() {
   return (
     <div className={classes.wrapper}>
       <Sidebar />
-
       <Outlet />
     </div>
   );

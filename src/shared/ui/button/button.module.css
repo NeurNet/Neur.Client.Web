@@ -1,5 +1,7 @@
 .button {
-  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: hsla(284, 95%, 41%, 1);
   color: white;
   font-weight: 600;
@@ -19,4 +21,12 @@
 .button:disabled {
   background-color: hsla(18, 79%, 67%, 1);
   cursor: default;
+}
+
+.md {
+  padding: 10px 16px;
+}
+
+.icon {
+  padding: 8px;
 }
