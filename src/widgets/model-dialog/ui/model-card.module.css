@@ -12,6 +12,14 @@
 }
 
 .model {
+  display: block;
   font-weight: 500;
   color: hsla(240, 4%, 46%, 1);
+  margin-bottom: 16px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }

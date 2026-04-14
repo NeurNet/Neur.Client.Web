@@ -1,0 +1,42 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  border-radius: 48px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 48px;
+}
+
+.text {
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.success {
+  background-color: hsla(144, 83%, 96%, 1);
+}
+
+.success .dot {
+  background-color: hsla(118, 100%, 78%, 1);
+}
+
+.success .text {
+  color: hsla(155, 96%, 24%, 1);
+}
+
+.danger {
+  background-color: hsla(4, 88%, 97%, 1);
+}
+
+.danger .dot {
+  background-color: hsla(0, 100%, 71%, 1);
+}
+
+.danger .text {
+  color: hsla(4, 76%, 40%, 1);
+}
