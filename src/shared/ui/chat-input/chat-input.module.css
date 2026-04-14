@@ -1,9 +1,14 @@
 .wrapper {
   display: flex;
   align-items: center;
-  box-shadow: 0 0 8px 0 hsla(284, 95%, 41%, 0.25);
   border-radius: 24px;
   width: 900px;
+  transition: box-shadow 0.2s;
+  box-shadow: 0 0 2px 0 hsla(284, 95%, 41%, 0.25);
+}
+.wrapper:hover,
+.wrapper:focus-within {
+  box-shadow: 0 0 8px 0 hsla(284, 95%, 41%, 0.25);
 }
 
 .chatInput {
