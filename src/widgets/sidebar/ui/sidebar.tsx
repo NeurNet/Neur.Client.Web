@@ -3,7 +3,7 @@ import logo from '@/shared/assets/logo.png';
 import { ChatButton } from './chat-button';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ChatApi } from '@/entities/chat';
-import { LogOut, SquarePen, User } from 'lucide-react';
+import { Box, LogOut, SquarePen, User } from 'lucide-react';
 import { SidebarButton } from './sidebar-button';
 import { Link, useNavigate } from 'react-router';
 import { SessionApi, useSession } from '@/entities/session';
@@ -53,6 +53,10 @@ export function Sidebar() {
       </div>
 
       <div className={classes.bottom}>
+        <Link to="/panel">
+          <SidebarButton icon={<Box size={18} />}>Панель управления</SidebarButton>
+        </Link>
+
         <SidebarButton icon={<LogOut size={18} />} onClick={() => signout.mutate()}>
           Выйти
         </SidebarButton>
