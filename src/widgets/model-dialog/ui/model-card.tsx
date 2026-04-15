@@ -1,6 +1,7 @@
 import type { Model } from '@/entities/model';
 import classes from './model-card.module.css';
 import { Badge } from './badge';
+import modelAvatar from '../assets/model_avatar.png';
 
 interface ModelCardProps {
   model: Model;
@@ -12,8 +13,14 @@ export function ModelCard({ model, onClick }: ModelCardProps) {
 
   return (
     <div className={classes.card} onClick={onClick}>
-      <h1 className={classes.name}>{model.name}</h1>
-      <span className={classes.model}>{model.model}</span>
+      <div className={classes.avatar}>
+        <img src={modelAvatar} alt="Model avatar" />
+
+        <div>
+          <h1 className={classes.name}>{model.name}</h1>
+          <span className={classes.model}>{model.model}</span>
+        </div>
+      </div>
 
       <div className={classes.tags}>
         <Badge variant="success">{type}</Badge>
