@@ -4,6 +4,10 @@
   border-radius: 20px;
   min-width: 300px;
   cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+.card:hover {
+  box-shadow: 0 0 12px 0 hsla(284, 95%, 41%, 0.25);
 }
 
 .name {
