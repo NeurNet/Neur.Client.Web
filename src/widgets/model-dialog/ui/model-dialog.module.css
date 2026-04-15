@@ -14,8 +14,10 @@
 .dialog {
   padding: 56px 80px;
   background-color: hsla(0, 0%, 100%, 1);
-  width: 60%;
+  width: 100%;
+  max-width: 1173px;
   border-radius: 24px;
+  box-sizing: border-box;
 }
 
 .header {
@@ -37,7 +39,7 @@
 }
 
 .models {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, 1fr);
 }
