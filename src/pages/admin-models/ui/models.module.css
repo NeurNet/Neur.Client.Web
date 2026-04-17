@@ -1,0 +1,15 @@
+.search {
+  min-width: 320px;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.models {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}

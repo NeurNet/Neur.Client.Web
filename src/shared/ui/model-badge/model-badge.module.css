@@ -18,25 +18,25 @@
 }
 
 .success {
-  background-color: hsla(144, 83%, 96%, 1);
+  background-color: var(--color-success-light);
 }
 
 .success .dot {
-  background-color: hsla(118, 100%, 78%, 1);
+  background-color: var(--color-success);
 }
 
 .success .text {
-  color: hsla(155, 96%, 24%, 1);
+  color: var(--color-success-dark);
 }
 
 .danger {
-  background-color: hsla(4, 88%, 97%, 1);
+  background-color: var(--color-danger-light);
 }
 
 .danger .dot {
-  background-color: hsla(0, 100%, 71%, 1);
+  background-color: var(--color-danger);
 }
 
 .danger .text {
-  color: hsla(4, 76%, 40%, 1);
+  color: var(--color-danger-dark);
 }

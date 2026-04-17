@@ -53,7 +53,7 @@ export function Sidebar() {
       </div>
 
       <div className={classes.bottom}>
-        <Link to="/admin">
+        <Link to="/admin/overview">
           <SidebarButton icon={<Box size={18} />}>Панель управления</SidebarButton>
         </Link>
 

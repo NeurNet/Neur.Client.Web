@@ -30,7 +30,7 @@
 
 .copyright {
   text-align: center;
-  color: hsla(228, 18%, 65%, 1);
+  color: var(--text-muted);
 }
 
 .title {
@@ -44,7 +44,7 @@
 
 .error {
   text-align: center;
-  color: var(--error);
+  color: var(--color-danger);
   font-size: 12px;
   font-weight: 300;
 }

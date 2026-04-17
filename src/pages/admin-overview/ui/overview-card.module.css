@@ -1,0 +1,26 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 246px;
+  box-shadow: 0 0 4px 0 var(--color-bg-muted);
+  border-radius: 24px;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.stat {
+  font-weight: 700;
+  font-size: 32px;
+}
+
+.data {
+  display: flex;
+  flex-direction: column;
+}

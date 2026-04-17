@@ -1,0 +1,52 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 12px;
+  border: 1px solid var(--color-button);
+  border-radius: 20px;
+  min-width: 300px;
+  transition: box-shadow 0.2s;
+}
+
+.clickable {
+  cursor: pointer;
+}
+.clickable:hover {
+  box-shadow: 0 0 12px 0 var(--color-chat-input-focus-outline);
+}
+
+.name {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.model {
+  display: block;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
