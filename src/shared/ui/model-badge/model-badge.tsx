@@ -1,12 +1,12 @@
 import clsx from 'clsx';
-import classes from './badge.module.css';
+import classes from './model-badge.module.css';
 
-interface BadgeProps {
+interface ModelBadgeProps {
   children: React.ReactNode;
   variant: 'success' | 'danger';
 }
 
-export function Badge({ children, variant }: BadgeProps) {
+export function ModelBadge({ children, variant }: ModelBadgeProps) {
   return (
     <div className={clsx(classes.wrapper, classes[variant])}>
       <div className={classes.dot} />

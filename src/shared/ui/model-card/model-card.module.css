@@ -1,12 +1,18 @@
 .card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   padding: 16px 12px;
   border: 1px solid var(--color-button);
   border-radius: 20px;
   min-width: 300px;
-  cursor: pointer;
   transition: box-shadow 0.2s;
 }
-.card:hover {
+
+.clickable {
+  cursor: pointer;
+}
+.clickable:hover {
   box-shadow: 0 0 12px 0 var(--color-chat-input-focus-outline);
 }
 
@@ -31,5 +37,16 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 16px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
 }
