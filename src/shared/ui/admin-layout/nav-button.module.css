@@ -1,6 +1,6 @@
 .button {
-  background-color: hsla(0, 0%, 92%, 1);
-  border: 1px solid hsla(220, 6%, 85%, 1);
+  background-color: var(--color-nav-button-bg);
+  border: 1px solid var(--color-button-border);
   padding: 6px 32px;
   font-weight: 600;
   font-size: 14px;
@@ -9,5 +9,5 @@
 }
 
 .active {
-  background-color: hsla(0, 0%, 100%, 1);
+  background-color: var(--color-bg);
 }

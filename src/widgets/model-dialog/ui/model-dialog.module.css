@@ -5,7 +5,7 @@
   left: 0;
   top: 0;
   border: none;
-  background-color: hsla(0, 0%, 0%, 0.35);
+  background-color: var(--color-bg-muted);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13,7 +13,7 @@
 
 .dialog {
   padding: 56px 80px;
-  background-color: hsla(0, 0%, 100%, 1);
+  background-color: var(--color-bg);
   width: 100%;
   max-width: 1173px;
   border-radius: 24px;
@@ -35,7 +35,7 @@
 .description {
   font-size: 12px;
   font-weight: 300;
-  color: hsla(0, 0%, 53%, 1);
+  color: var(--color-text-muted);
 }
 
 .models {

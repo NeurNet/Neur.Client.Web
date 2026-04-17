@@ -2,14 +2,14 @@
   padding: 10px 14px;
   font-size: 14px;
   border: none;
-  border: 1px solid hsla(220, 6%, 85%, 1);
+  border: 1px solid var(--color-button-border);
   border-radius: 8px;
 }
 .input:focus {
-  border-color: hsla(284, 95%, 41%, 1);
-  outline: 4px solid hsla(267, 100%, 96%, 1);
+  border-color: var(--color-button);
+  outline: 4px solid var(--color-button-focus-outline);
 }
 .input:disabled {
-  background-color: hsla(0, 0%, 98%, 1);
-  color: hsla(220, 6%, 47%, 1);
+  background-color: var(--color-input-disabled);
+  color: var(--color-input-disabled-text);
 }

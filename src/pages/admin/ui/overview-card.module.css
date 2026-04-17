@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   min-height: 246px;
-  box-shadow: 0 0 4px 0 hsla(0, 0%, 0%, 0.35);
+  box-shadow: 0 0 4px 0 var(--color-bg-muted);
   border-radius: 24px;
   padding: 24px;
   box-sizing: border-box;
