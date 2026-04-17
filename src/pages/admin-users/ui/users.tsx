@@ -47,7 +47,7 @@ export function Users() {
 
           <tbody>
             {users.data.map((user) => (
-              <tr className={classes.tr}>
+              <tr key={user.user_id} className={classes.tr}>
                 <td className={classes.td}>
                   <span>
                     {user.surname} {user.name}

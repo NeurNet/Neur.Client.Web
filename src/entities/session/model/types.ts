@@ -1,4 +1,4 @@
-import type { Role } from '@/entities/user/model/types';
+import type { UserRole } from '@/entities/user';
 
 export interface Credentials {
   username: string;
@@ -10,6 +10,6 @@ export interface Session {
   username: string;
   name: string;
   surname: string;
-  role: Role;
+  role: UserRole;
   tokens: number;
 }
