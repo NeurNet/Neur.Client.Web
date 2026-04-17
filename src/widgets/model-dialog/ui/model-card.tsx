@@ -1,7 +1,7 @@
 import type { Model } from '@/entities/model';
 import classes from './model-card.module.css';
+import modelAvatar from './model_avatar.png';
 import { Badge } from './badge';
-import modelAvatar from '../assets/model_avatar.png';
 
 interface ModelCardProps {
   model: Model;

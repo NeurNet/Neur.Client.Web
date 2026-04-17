@@ -1,3 +1,4 @@
+import { Admin } from '@/pages/admin';
 import { Chat } from '@/pages/chat';
 import { Home } from '@/pages/home';
 import { Signin } from '@/pages/signin';
@@ -11,6 +12,7 @@ export const router = createBrowserRouter([
     children: [
       { path: '/', element: <Home /> },
       { path: '/chat/:chatId', element: <Chat /> },
+      { path: '/admin', element: <Admin /> },
     ],
   },
   { path: '/signin', element: <Signin /> },
