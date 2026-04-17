@@ -5,4 +5,63 @@
 .filters {
   display: flex;
   gap: 8px;
+  margin-bottom: 24px;
+}
+
+.content {
+  border-radius: 12px;
+  box-shadow: 0 0 10px 0 var(--color-bg-muted);
+}
+
+.title {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.description {
+  font-size: 12px;
+}
+
+.header {
+  padding: 20px 24px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.th {
+  border-top: 1px solid var(--color-nav-button-bg);
+  border-bottom: 1px solid var(--color-nav-button-bg);
+  color: var(--color-text-muted);
+  padding: 12px 24px;
+  text-align: start;
+  font-weight: 600;
+  font-size: 12px;
+}
+.th:not(:first-child) {
+  text-align: center;
+}
+
+.td {
+  padding: 16px 24px;
+  font-weight: 500;
+  font-size: 14px;
+}
+.td:not(:first-child) {
+  text-align: center;
+}
+
+.tr {
+  height: 72px;
+}
+.tr:nth-child(odd) {
+  background-color: var(--color-input-disabled);
+}
+
+.username {
+  display: block;
+  font-weight: 400;
+  color: var(--color-text-muted);
 }

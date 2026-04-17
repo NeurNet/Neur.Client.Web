@@ -4,7 +4,6 @@
   border: 1px solid var(--color-button-border);
   border-radius: 8px;
   position: relative;
-  cursor: pointer;
   background-color: var(--color-input-disabled);
 }
 
@@ -16,7 +15,6 @@
   padding: 8px 16px 8px 36px;
   outline: none;
   background-color: transparent;
-  cursor: pointer;
   height: 100%;
 }
 
