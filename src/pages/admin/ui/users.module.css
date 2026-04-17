@@ -1,0 +1,8 @@
+.search {
+  min-width: 320px;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+}

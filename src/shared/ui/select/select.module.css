@@ -1,0 +1,27 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--color-button-border);
+  border-radius: 8px;
+  position: relative;
+  cursor: pointer;
+  background-color: var(--color-input-disabled);
+}
+
+.select {
+  appearance: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 16px 8px 36px;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  height: 100%;
+}
+
+.chevron {
+  position: absolute;
+  pointer-events: none;
+  left: 16px;
+}
