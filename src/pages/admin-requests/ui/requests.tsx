@@ -3,18 +3,26 @@ import { Select } from '@/shared/ui/select';
 import { Input } from '@/shared/ui/input';
 import { useQuery } from '@tanstack/react-query';
 import { RequestApi } from '@/entities/request';
+import { Button } from '@/shared/ui/button';
 
 export function Requests() {
-  const requests = useQuery({
+  const requestsQuery = useQuery({
     queryKey: ['requests'],
     queryFn: RequestApi.fetchRequests,
   });
 
-  if (requests.isPending) return null;
-  if (requests.error) return <span>{requests.error.message}</span>;
+  const truncate = (str: string, maxLength: number = 50): string => {
+    if (!str) return '';
+    if (str.length <= maxLength) return str;
+
+    return str.slice(0, maxLength) + '...';
+  };
+
+  if (requestsQuery.isPending) return null;
+  if (requestsQuery.error) return <span>{requestsQuery.error.message}</span>;
 
   return (
-    <div>
+    <>
       <div className={classes.filters}>
         <Input className={classes.search} placeholder="Поиск по пользователю" role="search" />
 
@@ -46,14 +54,30 @@ export function Requests() {
           </thead>
 
           <tbody>
-            {requests.data.map((request) => (
+            {requestsQuery.data.items.map((request) => (
               <tr key={request.id} className={classes.tr}>
-                <td key={classes.td}>{/* TODO */}</td>
+                <td className={classes.td}>{new Date(request.created_at).toLocaleString()}</td>
+                <td className={classes.td}>
+                  {request.user.surname} {request.user.name}
+                </td>
+                <td className={classes.td}>{request.model_name}</td>
+                <td className={classes.td}>{truncate(request.message.content)}</td>
+                <td className={classes.td}>{request.status}</td>
               </tr>
             ))}
           </tbody>
         </table>
+
+        <div className={classes.footer}>
+          <span>
+            Показано {requestsQuery.data.items.length} из {requestsQuery.data.total}
+          </span>
+
+          <div className={classes.pages}>
+            <Button></Button>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
