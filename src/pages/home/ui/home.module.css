@@ -5,6 +5,7 @@
   justify-content: center;
   gap: 32px;
   flex: 1;
+  height: 100%;
 }
 
 .title {

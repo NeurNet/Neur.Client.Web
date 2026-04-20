@@ -1,2 +1,2 @@
-export type { Chat } from './model/types';
+export type { Chat, IMessage } from './model/types';
 export { ChatApi } from './api';

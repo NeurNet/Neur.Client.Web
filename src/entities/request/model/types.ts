@@ -21,3 +21,8 @@ export interface IRequest {
     content: string;
   };
 }
+
+export interface RequestsResponse {
+  items: IRequest[];
+  total: number;
+}

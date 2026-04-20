@@ -12,7 +12,10 @@ export function Layout() {
   return (
     <div className={classes.wrapper}>
       <Sidebar />
-      <Outlet />
+
+      <main className={classes.main}>
+        <Outlet />
+      </main>
     </div>
   );
 }
