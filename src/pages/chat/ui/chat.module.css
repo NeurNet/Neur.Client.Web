@@ -20,12 +20,12 @@
   color: var(--text-muted);
 }
 
-.chat {
+.messages {
   display: flex;
   flex-direction: column;
   align-self: flex-start;
   overflow-y: auto;
-  margin: 12px auto;
+  margin: 32px auto;
   max-width: 900px;
   gap: 32px;
   flex: 1;

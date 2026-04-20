@@ -1,18 +1,29 @@
 import classes from './chat-input.module.css';
 import { useState } from 'react';
-import { ChevronUp } from 'lucide-react';
+import { ChevronUp, Square } from 'lucide-react';
 import { Button } from '../button';
 
 interface ChatInputProps {
+  isGenerating?: boolean;
   onSend: (value: string) => void;
+  onStop: () => void;
 }
 
-export function ChatInput({ onSend }: ChatInputProps) {
+export function ChatInput({ isGenerating, onSend, onStop }: ChatInputProps) {
   const [text, setText] = useState('');
+
+  const buttonShown = text === '' || !isGenerating;
 
   const onSubmit = (e: React.SubmitEvent) => {
     e.preventDefault();
-    onSend(text);
+
+    if (isGenerating) {
+      onStop();
+    } else {
+      onSend(text);
+    }
+
+    setText('');
   };
 
   return (
@@ -23,16 +34,16 @@ export function ChatInput({ onSend }: ChatInputProps) {
         onChange={(e) => setText(e.target.value)}
         type="text"
         placeholder="Спросите NeurNet"
-        required
+        disabled={isGenerating}
       />
 
       <Button
-        type="submit"
         className={classes.send}
-        style={{ display: text === '' ? 'none' : 'flex' }}
+        style={{ display: buttonShown ? 'flex' : 'none' }}
+        type="submit"
         size="icon"
       >
-        <ChevronUp />
+        {isGenerating ? <Square /> : <ChevronUp />}
       </Button>
     </form>
   );
