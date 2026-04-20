@@ -6,7 +6,7 @@ export const ChatApi = {
   fetchChats: async () => {
     try {
       const res = await client.get<Chat[]>('/chats');
-      return res.data;
+      return res.data.reverse();
     } catch {
       throw new Error('Произошла ошибка!');
     }
