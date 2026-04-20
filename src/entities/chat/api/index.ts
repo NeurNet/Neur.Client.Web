@@ -1,6 +1,6 @@
 import { client } from '@/shared/api';
 import type { Chat, ChatResponse } from '../model/types';
-import { AxiosError } from 'axios';
+import { AxiosError, type AxiosRequestConfig } from 'axios';
 
 export const ChatApi = {
   fetchChats: async () => {
@@ -12,7 +12,7 @@ export const ChatApi = {
     }
   },
 
-  fetchChat: async (id: string) => {
+  fetchChatById: async (id: string) => {
     try {
       const res = await client.get<Chat>(`/chats/${id}`);
       return res.data;
@@ -32,5 +32,9 @@ export const ChatApi = {
     } catch {
       throw new Error('Произошла ошибка!');
     }
+  },
+
+  sendMessage: async (chatId: string, prompt: string, config: AxiosRequestConfig) => {
+    return client.post(`/chats/${chatId}/generate`, { prompt }, config);
   },
 };

@@ -21,12 +21,20 @@
 }
 
 .chat {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  overflow-y: auto;
+  margin: 12px auto;
+  max-width: 900px;
+  gap: 32px;
   flex: 1;
+  width: 100%;
 }
 
 .disclaimer {
   font-weight: 300;
   font-size: 14px;
   color: var(--color-text-muted);
-  margin-top: 12px;
+  margin: 12px auto 0 auto;
 }
