@@ -5,14 +5,15 @@ import { Button } from '../button';
 
 interface ChatInputProps {
   isGenerating?: boolean;
+  disabled?: boolean;
   onSend: (value: string) => void;
   onStop: () => void;
 }
 
-export function ChatInput({ isGenerating, onSend, onStop }: ChatInputProps) {
+export function ChatInput({ isGenerating, disabled, onSend, onStop }: ChatInputProps) {
   const [text, setText] = useState('');
 
-  const buttonShown = text === '' || !isGenerating;
+  const buttonShown = text !== '' || isGenerating;
 
   const onSubmit = (e: React.SubmitEvent) => {
     e.preventDefault();
@@ -42,6 +43,7 @@ export function ChatInput({ isGenerating, onSend, onStop }: ChatInputProps) {
         style={{ display: buttonShown ? 'flex' : 'none' }}
         type="submit"
         size="icon"
+        disabled={disabled}
       >
         {isGenerating ? <Square /> : <ChevronUp />}
       </Button>

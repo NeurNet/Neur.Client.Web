@@ -7,6 +7,7 @@ import { ChatInput } from '@/shared/ui/chat-input';
 import { Message } from './message';
 import { isCancel, type AxiosProgressEvent } from 'axios';
 import type { MessageRole } from '@/entities/request';
+import { useSession } from '@/entities/session';
 
 interface ResponseChunk {
   data: string;
@@ -14,6 +15,8 @@ interface ResponseChunk {
 }
 
 export function Chat() {
+  const session = useSession();
+
   const { chatId } = useParams();
   const queryClient = useQueryClient();
 
@@ -131,7 +134,12 @@ export function Chat() {
         ))}
       </div>
 
-      <ChatInput onSend={onSend} onStop={stopGeneration} isGenerating={isGenerating} />
+      <ChatInput
+        onSend={onSend}
+        disabled={session.data?.tokens === 0}
+        onStop={stopGeneration}
+        isGenerating={isGenerating}
+      />
 
       <span className={classes.disclaimer}>
         NeurNet может допускать ошибки. Проверяйте важную информацию.
