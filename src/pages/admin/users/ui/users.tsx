@@ -64,7 +64,7 @@ export function Users() {
                   </RoleBadge>
                 </td>
                 <td className={classes.td}>{user.tokens} токенов</td>
-                <td className={classes.td}>Фиг знает когда был</td>
+                <td className={classes.td}>{new Date(user.last_request).toLocaleString()}</td>
                 <td className={classes.td}>
                   <Button variant="secondary" size="sm">
                     Управление
