@@ -12,6 +12,8 @@ interface ManageUserDialogProps {
 }
 
 export function ManageUserDialog({ user, onClose }: ManageUserDialogProps) {
+  const [tab, setTab] = useState<'tokens' | 'role'>('tokens');
+
   const [tokens, setTokens] = useState(10);
 
   const queryClient = useQueryClient();
@@ -30,10 +32,23 @@ export function ManageUserDialog({ user, onClose }: ManageUserDialogProps) {
         <h1 className={classes.title}>Управление пользователем</h1>
 
         <nav className={classes.buttons}>
-          <Button variant="secondary" size="sm" className={classes.button}>
+          <Button
+            variant="secondary"
+            size="sm"
+            className={classes.button}
+            selected={tab === 'tokens'}
+            onClick={() => setTab('tokens')}
+          >
             Токены
           </Button>
-          <Button variant="secondary" size="sm" className={classes.button}>
+
+          <Button
+            variant="secondary"
+            size="sm"
+            className={classes.button}
+            selected={tab === 'role'}
+            onClick={() => setTab('role')}
+          >
             Роль
           </Button>
         </nav>
@@ -45,71 +60,78 @@ export function ManageUserDialog({ user, onClose }: ManageUserDialogProps) {
             <span className={classes.name}>
               {user.surname} {user.name}
             </span>
+
             <span className={classes.tokens}>
               {user.user_name} | {user.tokens} токенов
             </span>
           </div>
         </div>
 
-        <div>
-          <span className={classes.label}>Быстрый выбор</span>
+        {tab === 'tokens' ? (
+          <>
+            <div>
+              <span className={classes.label}>Быстрый выбор</span>
 
-          <div className={classes.buttons}>
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={() => setTokens(5)}
-              className={classes.button}
-            >
-              +5
-            </Button>
+              <div className={classes.buttons}>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => setTokens(5)}
+                  className={classes.button}
+                >
+                  +5
+                </Button>
 
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={() => setTokens(10)}
-              className={classes.button}
-            >
-              +10
-            </Button>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => setTokens(10)}
+                  className={classes.button}
+                >
+                  +10
+                </Button>
 
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={() => setTokens(25)}
-              className={classes.button}
-            >
-              +25
-            </Button>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => setTokens(25)}
+                  className={classes.button}
+                >
+                  +25
+                </Button>
 
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={() => setTokens(50)}
-              className={classes.button}
-            >
-              +50
-            </Button>
-          </div>
-        </div>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => setTokens(50)}
+                  className={classes.button}
+                >
+                  +50
+                </Button>
+              </div>
+            </div>
 
-        <div>
-          <span className={classes.label}>Или введите вручную</span>
+            <div>
+              <span className={classes.label}>Или введите вручную</span>
 
-          <Input
-            type="number"
-            min={1}
-            value={tokens}
-            onChange={(e) => setTokens(Number(e.target.value))}
-            className={classes.tokensInput}
-          />
-        </div>
+              <Input
+                type="number"
+                min={1}
+                value={tokens}
+                onChange={(e) => setTokens(Number(e.target.value))}
+                className={classes.tokensInput}
+              />
+            </div>
 
-        <div className={classes.total}>
-          <span>
-            <b>После выдачи:</b> {user.tokens + tokens} токенов
-          </span>
-        </div>
+            <div className={classes.total}>
+              <span>
+                <b>После выдачи:</b> {user.tokens + tokens} токенов
+              </span>
+            </div>
+          </>
+        ) : (
+          <div></div>
+        )}
 
         <div className={classes.buttons}>
           <Button variant="secondary" className={classes.button} onClick={onClose}>

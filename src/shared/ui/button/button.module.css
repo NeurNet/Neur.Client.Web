@@ -29,7 +29,8 @@
 .primary:hover {
   background-color: var(--color-button-hover);
 }
-.primary:focus {
+.primary:focus,
+.primary.selected {
   background-color: var(--color-button-focus);
   outline: 4px solid var(--color-button-focus-outline);
 }
@@ -43,6 +44,7 @@
   border: 1px solid var(--color-button-border);
   color: var(--color-text);
 }
-.secondary:hover {
+.secondary:hover,
+.secondary.selected {
   border-color: var(--color-text-muted);
 }
