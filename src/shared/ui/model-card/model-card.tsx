@@ -1,9 +1,11 @@
-import type { Model } from '@/entities/model';
+import clsx from 'clsx';
 import classes from './model-card.module.css';
 import modelAvatar from '@/shared/assets/model_avatar.png';
+import toast from 'react-hot-toast';
+import { ModelApi, type Model } from '@/entities/model';
 import { ModelBadge } from '@/shared/ui/model-badge';
-import clsx from 'clsx';
 import { Button } from '../button';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 interface ModelCardProps {
   model: Model;
@@ -13,6 +15,17 @@ interface ModelCardProps {
 
 export function ModelCard({ model, onClick, showControls = false }: ModelCardProps) {
   const type = model.type === 'text' ? 'Текст' : model.type === 'code' ? 'Код' : 'Изображения';
+
+  const queryClient = useQueryClient();
+
+  const removeModelMutation = useMutation({
+    mutationFn: () => ModelApi.deleteModel(model.id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['models'] });
+      toast.success(`Вы удалили модель ${model.name}.`);
+    },
+    onError: (err) => toast.error(`Произошла ошибка: ${err.message}`),
+  });
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -52,12 +65,12 @@ export function ModelCard({ model, onClick, showControls = false }: ModelCardPro
 
           <div className={classes.row}>
             <span>Добавлена</span>
-            <span>{formatDate(model.createdAt)} | ?</span>
+            <span>{formatDate(model.createdAt)}</span>
           </div>
 
           <div className={classes.controls}>
             <Button size="sm">Изменить</Button>
-            <Button size="sm" variant="secondary">
+            <Button size="sm" variant="secondary" onClick={() => removeModelMutation.mutate()}>
               Удалить
             </Button>
           </div>

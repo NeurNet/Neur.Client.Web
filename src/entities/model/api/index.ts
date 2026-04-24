@@ -10,4 +10,12 @@ export const ModelApi = {
       throw new Error('Произошла ошибка!');
     }
   },
+
+  deleteModel: async (id: string) => {
+    try {
+      await client.delete(`/models/${id}`);
+    } catch {
+      throw new Error('Произошла ошибка!');
+    }
+  },
 };

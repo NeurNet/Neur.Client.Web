@@ -6,13 +6,13 @@ import { ModelApi } from '@/entities/model';
 import { ModelCard } from '@/shared/ui/model-card';
 
 export function Models() {
-  const models = useQuery({
+  const { data, isPending, error } = useQuery({
     queryKey: ['models'],
     queryFn: ModelApi.fetchModels,
   });
 
-  if (models.isPending) return null;
-  if (models.error) return <span>{models.error.message}</span>;
+  if (isPending) return null;
+  if (error) return <span>{error.message}</span>;
 
   return (
     <div>
@@ -24,7 +24,7 @@ export function Models() {
       </div>
 
       <div className={classes.models}>
-        {models.data.map((model) => (
+        {data.map((model) => (
           <ModelCard key={model.id} model={model} showControls />
         ))}
       </div>
