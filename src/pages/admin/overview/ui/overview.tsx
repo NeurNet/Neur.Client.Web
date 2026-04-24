@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { AdminApi } from '@/features/admin';
 
 export function Overview() {
-  const statsQuery = useQuery({
+  const { data, isSuccess } = useQuery({
     queryKey: ['stats'],
     queryFn: AdminApi.fetchStats,
   });
@@ -14,21 +14,21 @@ export function Overview() {
     <div className={classes.cards}>
       <OverviewCard
         icon={<Users size={40} strokeWidth={2.5} />}
-        title={String(statsQuery.data?.users_count || '...')}
+        title={isSuccess ? String(data.users_count) : '...'}
         description="пользователей"
         to="/admin/users"
       />
 
       <OverviewCard
         icon={<Globe size={40} strokeWidth={2.5} />}
-        title={String(statsQuery.data?.requests_count || '...')}
+        title={isSuccess ? String(data.requests_count) : '...'}
         description="запросов всего"
         to="/admin/requests"
       />
 
       <OverviewCard
         icon={<BrainCircuit size={40} strokeWidth={2.5} />}
-        title={String(statsQuery.data?.models_count || '...')}
+        title={isSuccess ? String(data.models_count) : '...'}
         description="моделей"
         to="/admin/models"
       />

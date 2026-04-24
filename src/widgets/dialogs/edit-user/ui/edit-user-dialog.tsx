@@ -1,5 +1,5 @@
 import { AdminApi } from '@/features/admin';
-import classes from './manage-user-dialog.module.css';
+import classes from './edit-user-dialog.module.css';
 import type { User } from '@/entities/user';
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
@@ -13,7 +13,7 @@ interface ManageUserDialogProps {
   onClose?: () => void;
 }
 
-export function ManageUserDialog({ user, onClose }: ManageUserDialogProps) {
+export function EditUserDialog({ user, onClose }: ManageUserDialogProps) {
   const [tab, setTab] = useState<'tokens' | 'role'>('tokens');
 
   const [tokens, setTokens] = useState(10);

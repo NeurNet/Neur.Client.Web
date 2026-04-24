@@ -5,7 +5,7 @@ import { Input } from '@/shared/ui/input';
 import { useQuery } from '@tanstack/react-query';
 import { UserApi, type User } from '@/entities/user';
 import { Button } from '@/shared/ui/button';
-import { ManageUserDialog } from '@/widgets/manage-user-dialog';
+import { EditUserDialog } from '@/widgets/dialogs/edit-user';
 import { useMemo, useState } from 'react';
 import { useSession } from '@/entities/session';
 
@@ -105,7 +105,9 @@ export function Users() {
                   </RoleBadge>
                 </td>
                 <td className={classes.td}>{user.tokens} токенов</td>
-                <td className={classes.td}>{new Date(user.last_request).toLocaleString()}</td>
+                <td className={classes.td}>
+                  {user.last_request ? new Date(user.last_request).toLocaleString() : ''}
+                </td>
                 <td className={classes.td}>
                   {user.user_id !== session.data?.id && (
                     <Button variant="secondary" size="sm" onClick={() => setSelectedUser(user)}>
@@ -119,9 +121,7 @@ export function Users() {
         </table>
       </div>
 
-      {selectedUser && (
-        <ManageUserDialog user={selectedUser} onClose={() => setSelectedUser(null)} />
-      )}
+      {selectedUser && <EditUserDialog user={selectedUser} onClose={() => setSelectedUser(null)} />}
     </div>
   );
 }

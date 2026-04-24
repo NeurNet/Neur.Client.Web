@@ -7,5 +7,5 @@ export interface User {
   surname: string;
   role: UserRole;
   tokens: number;
-  last_request: string;
+  last_request: string | null;
 }

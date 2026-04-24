@@ -6,8 +6,8 @@ import { Button } from '../button';
 interface ChatInputProps {
   isGenerating?: boolean;
   disabled?: boolean;
-  onSend: (value: string) => void;
-  onStop: () => void;
+  onSend?: (value: string) => void;
+  onStop?: () => void;
 }
 
 export function ChatInput({ isGenerating, disabled, onSend, onStop }: ChatInputProps) {
@@ -18,9 +18,9 @@ export function ChatInput({ isGenerating, disabled, onSend, onStop }: ChatInputP
   const onSubmit = (e: React.SubmitEvent) => {
     e.preventDefault();
 
-    if (isGenerating) {
+    if (isGenerating && onStop) {
       onStop();
-    } else {
+    } else if (onSend) {
       onSend(text);
     }
 

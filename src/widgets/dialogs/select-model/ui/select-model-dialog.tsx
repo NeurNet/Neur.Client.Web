@@ -1,4 +1,4 @@
-import classes from './model-dialog.module.css';
+import classes from './select-model-dialog.module.css';
 import { Button } from '@/shared/ui/button';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ModelApi } from '@/entities/model';
@@ -11,7 +11,7 @@ interface ModelDialogProps {
   onClose: () => void;
 }
 
-export function ModelDialog({ open, onClose }: ModelDialogProps) {
+export function SelectModelDialog({ open, onClose }: ModelDialogProps) {
   const models = useQuery({
     queryKey: ['models'],
     queryFn: ModelApi.fetchModels,
