@@ -1,4 +1,4 @@
-import type { Chat } from '@/entities/chat';
+import type { Chat } from '@/features/chat';
 import { SidebarButton } from './sidebar-button';
 import { useEffect, useState } from 'react';
 

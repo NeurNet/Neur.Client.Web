@@ -2,7 +2,7 @@ import classes from './sidebar.module.css';
 import logo from '@/shared/assets/logo.png';
 import { ChatButton } from './chat-button';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { ChatApi } from '@/entities/chat';
+import { ChatApi } from '@/features/chat';
 import { Box, LogOut, SquarePen, User } from 'lucide-react';
 import { SidebarButton } from './sidebar-button';
 import { Link, useNavigate } from 'react-router';

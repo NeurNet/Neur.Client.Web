@@ -1,4 +1,4 @@
-import type { IMessage } from '@/entities/chat';
+import type { IMessage } from '@/features/chat';
 import classes from './message.module.css';
 import clsx from 'clsx';
 

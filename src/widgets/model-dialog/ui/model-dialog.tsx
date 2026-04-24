@@ -2,7 +2,7 @@ import classes from './model-dialog.module.css';
 import { Button } from '@/shared/ui/button';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ModelApi } from '@/entities/model';
-import { ChatApi } from '@/entities/chat';
+import { ChatApi } from '@/features/chat';
 import { ModelCard } from '@/shared/ui/model-card';
 import { useNavigate } from 'react-router';
 

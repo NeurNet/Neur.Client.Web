@@ -2,7 +2,7 @@ import classes from './chat.module.css';
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { ChatApi, type Chat, type IMessage } from '@/entities/chat';
+import { ChatApi, type Chat, type IMessage } from '@/features/chat';
 import { ChatInput } from '@/shared/ui/chat-input';
 import { Message } from './message';
 import { isCancel, type AxiosProgressEvent } from 'axios';
