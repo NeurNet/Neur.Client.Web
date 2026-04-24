@@ -5,6 +5,7 @@ import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
+import { RoleCard } from './role-card';
 
 interface ManageUserDialogProps {
   user: User;
@@ -15,11 +16,20 @@ export function ManageUserDialog({ user, onClose }: ManageUserDialogProps) {
   const [tab, setTab] = useState<'tokens' | 'role'>('tokens');
 
   const [tokens, setTokens] = useState(10);
+  const [role, setRole] = useState(user.role);
 
   const queryClient = useQueryClient();
 
   const tokensMutation = useMutation({
     mutationFn: () => AdminApi.transferTokens(user.user_id, tokens),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['users'] });
+      if (onClose) onClose();
+    },
+  });
+
+  const roleMutation = useMutation({
+    mutationFn: () => AdminApi.updateRole(user.user_id, role),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['users'] });
       if (onClose) onClose();
@@ -130,7 +140,26 @@ export function ManageUserDialog({ user, onClose }: ManageUserDialogProps) {
             </div>
           </>
         ) : (
-          <div></div>
+          <div className={classes.roleList}>
+            <RoleCard
+              title="Студент"
+              description="Доступ к чату, расход токенов"
+              selected={role === 'student'}
+              onClick={() => setRole('student')}
+            />
+            <RoleCard
+              title="Преподаватель"
+              description="Управление токенами студентов"
+              selected={role === 'teacher'}
+              onClick={() => setRole('teacher')}
+            />
+            <RoleCard
+              title="Администратор"
+              description="Полный доступ, просмотр истории, управление моделями"
+              selected={role === 'admin'}
+              onClick={() => setRole('admin')}
+            />
+          </div>
         )}
 
         <div className={classes.buttons}>
@@ -138,7 +167,10 @@ export function ManageUserDialog({ user, onClose }: ManageUserDialogProps) {
             Отмена
           </Button>
 
-          <Button className={classes.button} onClick={() => tokensMutation.mutate()}>
+          <Button
+            className={classes.button}
+            onClick={() => (tab === 'tokens' ? tokensMutation.mutate() : roleMutation.mutate())}
+          >
             Сохранить
           </Button>
         </div>
