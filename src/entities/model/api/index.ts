@@ -1,7 +1,15 @@
 import { client } from '@/shared/api';
-import type { Model } from '../model/types';
+import type { CreateModel, Model } from '../model/types';
 
 export const ModelApi = {
+  createModel: async (model: CreateModel) => {
+    try {
+      await client.post('/models', model);
+    } catch {
+      throw new Error('Произошла ошибка!');
+    }
+  },
+
   fetchModels: async (): Promise<Model[]> => {
     try {
       const res = await client.get<Model[]>('/models');

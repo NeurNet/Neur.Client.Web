@@ -11,3 +11,12 @@ export interface Model {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface CreateModel {
+  name: string;
+  model: string;
+  context: string;
+  type: ModelType;
+  version: string;
+  status: ModelStatus;
+}
