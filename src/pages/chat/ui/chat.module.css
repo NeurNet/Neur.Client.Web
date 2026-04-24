@@ -28,7 +28,8 @@
   align-self: flex-start;
   overflow-y: auto;
   margin: 32px auto;
-  max-width: 900px;
+  padding: 0 200px;
+  box-sizing: border-box;
   gap: 32px;
   flex: 1;
   width: 100%;
