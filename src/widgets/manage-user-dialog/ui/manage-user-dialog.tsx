@@ -6,6 +6,7 @@ import { Input } from '@/shared/ui/input';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { RoleCard } from './role-card';
+import toast from 'react-hot-toast';
 
 interface ManageUserDialogProps {
   user: User;
@@ -24,16 +25,20 @@ export function ManageUserDialog({ user, onClose }: ManageUserDialogProps) {
     mutationFn: () => AdminApi.transferTokens(user.user_id, tokens),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['users'] });
+      toast.success(`Вы выдали ${tokens} токенов пользователю ${user.surname} ${user.name}.`);
       if (onClose) onClose();
     },
+    onError: (err) => toast.error(`Произошла ошибка: ${err.message}`),
   });
 
   const roleMutation = useMutation({
     mutationFn: () => AdminApi.updateRole(user.user_id, role),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['users'] });
+      toast.success(`Вы выдали роль ${role} пользователю ${user.surname} ${user.name}.`);
       if (onClose) onClose();
     },
+    onError: (err) => toast.error(`Произошла ошибка: ${err.message}`),
   });
 
   return (
@@ -64,7 +69,10 @@ export function ManageUserDialog({ user, onClose }: ManageUserDialogProps) {
         </nav>
 
         <div className={classes.profile}>
-          <div className={classes.avatar}>АН</div>
+          <div className={classes.avatar}>
+            {user.surname[0]}
+            {user.name[0]}
+          </div>
 
           <div className={classes.userInfo}>
             <span className={classes.name}>
