@@ -20,3 +20,5 @@ export interface CreateModel {
   version: string;
   status: ModelStatus;
 }
+
+export type UpdateModel = CreateModel;

@@ -10,10 +10,11 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 interface ModelCardProps {
   model: Model;
   onClick?: () => void;
+  onEdit?: () => void;
   showControls?: boolean;
 }
 
-export function ModelCard({ model, onClick, showControls = false }: ModelCardProps) {
+export function ModelCard({ model, onClick, onEdit, showControls = false }: ModelCardProps) {
   const type = model.type === 'text' ? 'Текст' : model.type === 'code' ? 'Код' : 'Изображения';
 
   const queryClient = useQueryClient();
@@ -69,8 +70,16 @@ export function ModelCard({ model, onClick, showControls = false }: ModelCardPro
           </div>
 
           <div className={classes.controls}>
-            <Button size="sm">Изменить</Button>
-            <Button size="sm" variant="secondary" onClick={() => removeModelMutation.mutate()}>
+            <Button type="button" size="sm" onClick={onEdit}>
+              Изменить
+            </Button>
+
+            <Button
+              type="submit"
+              size="sm"
+              variant="secondary"
+              onClick={() => removeModelMutation.mutate()}
+            >
               Удалить
             </Button>
           </div>

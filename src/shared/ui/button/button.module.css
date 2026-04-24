@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 4px;
   color: var(--color-bg);
   font-weight: 600;
   font-size: 14px;

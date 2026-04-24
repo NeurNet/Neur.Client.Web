@@ -1,5 +1,5 @@
 import { client } from '@/shared/api';
-import type { CreateModel, Model } from '../model/types';
+import type { CreateModel, Model, UpdateModel } from '../model/types';
 
 export const ModelApi = {
   createModel: async (model: CreateModel) => {
@@ -14,6 +14,14 @@ export const ModelApi = {
     try {
       const res = await client.get<Model[]>('/models');
       return res.data;
+    } catch {
+      throw new Error('Произошла ошибка!');
+    }
+  },
+
+  updateModel: async ({ id, model }: { id: string; model: UpdateModel }) => {
+    try {
+      await client.put(`/models/${id}`, model);
     } catch {
       throw new Error('Произошла ошибка!');
     }

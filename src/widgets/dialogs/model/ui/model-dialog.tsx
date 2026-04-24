@@ -1,16 +1,17 @@
+import classes from './model-dialog.module.css';
+import toast from 'react-hot-toast';
 import { Button } from '@/shared/ui/button';
-import classes from './add-modal-dialog.module.css';
 import { Input } from '@/shared/ui/input';
 import { Select } from '@/shared/ui/select';
 import { Textarea } from '@/shared/ui/textarea';
-import { ModelApi } from '@/entities/model';
+import { ModelApi, type Model } from '@/entities/model';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { OllamaApi } from '@/features/ollama';
-import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
+import { useForm, type SubmitHandler } from 'react-hook-form';
 
-interface AddModelDialogProps {
+interface ModelDialogProps {
   onClose?: () => void;
+  editModel?: Model | null;
 }
 
 type Inputs = {
@@ -22,7 +23,7 @@ type Inputs = {
   status: 'open' | 'locked';
 };
 
-export function AddModelDialog({ onClose }: AddModelDialogProps) {
+export function ModelDialog({ onClose, editModel = null }: ModelDialogProps) {
   const ollamaModelsQuery = useQuery({
     queryKey: ['ollamaModels'],
     queryFn: OllamaApi.fetchOllamaModels,
@@ -30,7 +31,12 @@ export function AddModelDialog({ onClose }: AddModelDialogProps) {
 
   const { register, handleSubmit, getValues } = useForm<Inputs>({
     defaultValues: {
-      version: '1.0',
+      name: editModel?.name || '',
+      model: editModel?.model || '',
+      context: '',
+      type: editModel?.type || 'text',
+      version: editModel?.version || '1.0',
+      status: editModel?.status || 'open',
     },
   });
 
@@ -46,15 +52,30 @@ export function AddModelDialog({ onClose }: AddModelDialogProps) {
     onError: (err) => toast.error(err.message),
   });
 
+  const updateModelMutation = useMutation({
+    mutationFn: ModelApi.updateModel,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['models'] });
+      toast.success(`Вы обновили модель ${getValues('name')}.`);
+      if (onClose) onClose();
+    },
+    onError: (err) => toast.error(err.message),
+  });
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    if (editModel) {
+      updateModelMutation.mutate({ id: editModel.id, model: data });
+    } else {
+      addModelMutation.mutate(data);
+    }
+  };
+
   return (
     <div className={classes.wrapper}>
       <div className={classes.dialog}>
-        <h1 className={classes.title}>Добавить модель</h1>
+        <h1 className={classes.title}>{editModel ? 'Редактировать модель' : 'Добавить модель'}</h1>
 
-        <form
-          className={classes.form}
-          onSubmit={handleSubmit((data) => addModelMutation.mutate(data))}
-        >
+        <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label className={classes.label} htmlFor="name">
               Название
