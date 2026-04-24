@@ -23,6 +23,8 @@ export function Requests() {
     return str.slice(0, maxLength) + '...';
   };
 
+  const currentItem = (page - 1) * 20;
+
   if (isPending) return null;
   if (error) return <span>{error.message}</span>;
 
@@ -77,7 +79,7 @@ export function Requests() {
 
         <div className={classes.footer}>
           <span className={classes.pagesText}>
-            Показано {data.items.length} из {data.total}
+            Показано {currentItem}-{currentItem + data.items.length} из {data.total}
           </span>
 
           <div className={classes.pages}>
