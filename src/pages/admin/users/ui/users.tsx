@@ -1,16 +1,23 @@
 import classes from './users.module.css';
+import { RoleBadge } from './role-badge';
 import { Select } from '@/shared/ui/select';
 import { Input } from '@/shared/ui/input';
 import { useQuery } from '@tanstack/react-query';
-import { UserApi } from '@/entities/user';
-import { RoleBadge } from './role-badge';
+import { UserApi, type User } from '@/entities/user';
 import { Button } from '@/shared/ui/button';
+import { ManageUserDialog } from '@/widgets/manage-user-dialog';
+import { useState } from 'react';
+import { useSession } from '@/entities/session';
 
 export function Users() {
   const users = useQuery({
     queryKey: ['users'],
     queryFn: UserApi.fetchUsers,
   });
+
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+
+  const session = useSession();
 
   if (users.isPending) return null;
   if (users.error) return <span>{users.error.message}</span>;
@@ -66,15 +73,21 @@ export function Users() {
                 <td className={classes.td}>{user.tokens} токенов</td>
                 <td className={classes.td}>{new Date(user.last_request).toLocaleString()}</td>
                 <td className={classes.td}>
-                  <Button variant="secondary" size="sm">
-                    Управление
-                  </Button>
+                  {user.user_id !== session.data?.id && (
+                    <Button variant="secondary" size="sm" onClick={() => setSelectedUser(user)}>
+                      Управление
+                    </Button>
+                  )}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
+      {selectedUser && (
+        <ManageUserDialog user={selectedUser} onClose={() => setSelectedUser(null)} />
+      )}
     </div>
   );
 }

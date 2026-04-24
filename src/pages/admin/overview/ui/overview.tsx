@@ -2,12 +2,12 @@ import classes from './overview.module.css';
 import { BrainCircuit, Globe, Users } from 'lucide-react';
 import { OverviewCard } from './overview-card';
 import { useQuery } from '@tanstack/react-query';
-import { DashboardApi } from '@/features/dashboard';
+import { AdminApi } from '@/features/admin';
 
 export function Overview() {
   const statsQuery = useQuery({
     queryKey: ['stats'],
-    queryFn: DashboardApi.fetchStats,
+    queryFn: AdminApi.fetchStats,
   });
 
   return (

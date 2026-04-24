@@ -1,0 +1,126 @@
+import { AdminApi } from '@/features/admin';
+import classes from './manage-user-dialog.module.css';
+import type { User } from '@/entities/user';
+import { Button } from '@/shared/ui/button';
+import { Input } from '@/shared/ui/input';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
+
+interface ManageUserDialogProps {
+  user: User;
+  onClose?: () => void;
+}
+
+export function ManageUserDialog({ user, onClose }: ManageUserDialogProps) {
+  const [tokens, setTokens] = useState(10);
+
+  const queryClient = useQueryClient();
+
+  const tokensMutation = useMutation({
+    mutationFn: () => AdminApi.transferTokens(user.user_id, tokens),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['users'] });
+      if (onClose) onClose();
+    },
+  });
+
+  return (
+    <div className={classes.wrapper}>
+      <div className={classes.dialog}>
+        <h1 className={classes.title}>Управление пользователем</h1>
+
+        <nav className={classes.buttons}>
+          <Button variant="secondary" size="sm" className={classes.button}>
+            Токены
+          </Button>
+          <Button variant="secondary" size="sm" className={classes.button}>
+            Роль
+          </Button>
+        </nav>
+
+        <div className={classes.profile}>
+          <div className={classes.avatar}>АН</div>
+
+          <div className={classes.userInfo}>
+            <span className={classes.name}>
+              {user.surname} {user.name}
+            </span>
+            <span className={classes.tokens}>
+              {user.user_name} | {user.tokens} токенов
+            </span>
+          </div>
+        </div>
+
+        <div>
+          <span className={classes.label}>Быстрый выбор</span>
+
+          <div className={classes.buttons}>
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => setTokens(5)}
+              className={classes.button}
+            >
+              +5
+            </Button>
+
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => setTokens(10)}
+              className={classes.button}
+            >
+              +10
+            </Button>
+
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => setTokens(25)}
+              className={classes.button}
+            >
+              +25
+            </Button>
+
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => setTokens(50)}
+              className={classes.button}
+            >
+              +50
+            </Button>
+          </div>
+        </div>
+
+        <div>
+          <span className={classes.label}>Или введите вручную</span>
+
+          <Input
+            type="number"
+            min={1}
+            value={tokens}
+            onChange={(e) => setTokens(Number(e.target.value))}
+            className={classes.tokensInput}
+          />
+        </div>
+
+        <div className={classes.total}>
+          <span>
+            <b>После выдачи:</b> {user.tokens + tokens} токенов
+          </span>
+        </div>
+
+        <div className={classes.buttons}>
+          <Button variant="secondary" className={classes.button} onClick={onClose}>
+            Отмена
+          </Button>
+
+          <Button className={classes.button} onClick={() => tokensMutation.mutate()}>
+            Сохранить
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+}
