@@ -48,3 +48,6 @@
 .secondary.selected {
   border-color: var(--color-text-muted);
 }
+.secondary:disabled {
+  cursor: default;
+}

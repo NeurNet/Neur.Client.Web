@@ -1,25 +1,30 @@
 import classes from './requests.module.css';
 import { Select } from '@/shared/ui/select';
 import { Input } from '@/shared/ui/input';
-import { useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { RequestApi } from '@/entities/request';
 import { Button } from '@/shared/ui/button';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState } from 'react';
 
 export function Requests() {
-  const requestsQuery = useQuery({
-    queryKey: ['requests'],
-    queryFn: RequestApi.fetchRequests,
+  const [page, setPage] = useState(1);
+
+  const { data, isPending, error, isPlaceholderData } = useQuery({
+    queryKey: ['requests', page],
+    queryFn: () => RequestApi.fetchRequests(page),
+    placeholderData: keepPreviousData,
   });
 
-  const truncate = (str: string, maxLength: number = 50): string => {
+  const truncate = (str?: string, maxLength: number = 50): string => {
     if (!str) return '';
     if (str.length <= maxLength) return str;
 
     return str.slice(0, maxLength) + '...';
   };
 
-  if (requestsQuery.isPending) return null;
-  if (requestsQuery.error) return <span>{requestsQuery.error.message}</span>;
+  if (isPending) return null;
+  if (error) return <span>{error.message}</span>;
 
   return (
     <>
@@ -54,14 +59,16 @@ export function Requests() {
           </thead>
 
           <tbody>
-            {requestsQuery.data.items.map((request) => (
+            {data.items.map((request) => (
               <tr key={request.id} className={classes.tr}>
                 <td className={classes.td}>{new Date(request.created_at).toLocaleString()}</td>
                 <td className={classes.td}>
                   {request.user.surname} {request.user.name}
+                  <br />
+                  {request.user.username}
                 </td>
                 <td className={classes.td}>{request.model_name}</td>
-                <td className={classes.td}>{truncate(request.message.content)}</td>
+                <td className={classes.td}>{truncate(request.message?.content)}</td>
                 <td className={classes.td}>{request.status}</td>
               </tr>
             ))}
@@ -69,12 +76,30 @@ export function Requests() {
         </table>
 
         <div className={classes.footer}>
-          <span>
-            Показано {requestsQuery.data.items.length} из {requestsQuery.data.total}
+          <span className={classes.pagesText}>
+            Показано {data.items.length} из {data.total}
           </span>
 
           <div className={classes.pages}>
-            <Button></Button>
+            <Button
+              variant="secondary"
+              size="icon"
+              disabled={page === 1}
+              onClick={() => setPage(page - 1)}
+            >
+              <ChevronLeft size={16} />
+            </Button>
+
+            <span>{page}</span>
+
+            <Button
+              variant="secondary"
+              size="icon"
+              disabled={isPlaceholderData || page * 20 >= data.total}
+              onClick={() => setPage(page + 1)}
+            >
+              <ChevronRight size={16} />
+            </Button>
           </div>
         </div>
       </div>

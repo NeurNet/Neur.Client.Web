@@ -15,7 +15,7 @@ export interface IRequest {
     name: string;
     surname: string;
   };
-  message: {
+  message?: {
     id: string;
     role: MessageRole;
     content: string;
