@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { ModelApi, type Model } from '@/entities/model';
 import { ModelCard } from '@/shared/ui/model-card';
 import { ModelDialog } from '@/widgets/dialogs/model';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Plus } from 'lucide-react';
 
 export function Models() {
@@ -16,6 +16,7 @@ export function Models() {
 
   const [showModelDialog, setShowModelDialog] = useState(false);
   const [selectedModel, setSelectedModel] = useState<Model | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const onModelEdit = (model: Model) => {
     setSelectedModel(model);
@@ -27,20 +28,36 @@ export function Models() {
     setSelectedModel(null);
   };
 
+  const filteredModels = useMemo(() => {
+    if (!data) return [];
+
+    const query = searchQuery.toLowerCase();
+
+    return data.filter(
+      (m) => m.name.toLowerCase().includes(query) || m.model.toLowerCase().includes(query),
+    );
+  }, [data, searchQuery]);
+
   if (isPending) return null;
   if (error) return <span>{error.message}</span>;
 
   return (
     <div>
       <div className={classes.filters}>
-        <Input className={classes.search} placeholder="Поиск по названию" role="search" />
+        <Input
+          className={classes.search}
+          placeholder="Поиск по названию"
+          role="search"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
         <Button variant="secondary" size="sm" onClick={() => setShowModelDialog(true)}>
           <Plus size={16} /> Добавить модель
         </Button>
       </div>
 
       <div className={classes.models}>
-        {data.map((model) => (
+        {filteredModels.map((model) => (
           <ModelCard key={model.id} model={model} onEdit={() => onModelEdit(model)} showControls />
         ))}
       </div>
