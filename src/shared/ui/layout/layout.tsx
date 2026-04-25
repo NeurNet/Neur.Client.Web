@@ -18,7 +18,7 @@ export function Layout() {
         <Outlet />
       </main>
 
-      <Toaster position="bottom-right" toastOptions={{ removeDelay: 5000 }} />
+      <Toaster position="bottom-right" />
     </div>
   );
 }

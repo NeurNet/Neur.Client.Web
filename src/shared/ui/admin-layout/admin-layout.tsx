@@ -1,8 +1,16 @@
 import classes from './admin-layout.module.css';
-import { Outlet } from 'react-router';
+import { Navigate, Outlet } from 'react-router';
 import { NavButton } from './nav-button';
+import { useSession } from '@/entities/session';
 
 export function AdminLayout() {
+  const session = useSession();
+
+  if (session.isPending) return null;
+  if (session.error) return <span>{session.error.message}</span>;
+
+  if (session.data.role === 'student') return <Navigate to="/" replace />;
+
   return (
     <div className={classes.wrapper}>
       <div className={classes.header}>
@@ -11,8 +19,12 @@ export function AdminLayout() {
         <nav className={classes.nav}>
           <NavButton to="/admin/overview">Обзор</NavButton>
           <NavButton to="/admin/users">Пользователи</NavButton>
-          <NavButton to="/admin/requests">История запросов</NavButton>
-          <NavButton to="/admin/models">Модели</NavButton>
+          {session.data.role === 'admin' && (
+            <>
+              <NavButton to="/admin/requests">История запросов</NavButton>
+              <NavButton to="/admin/models">Модели</NavButton>
+            </>
+          )}
         </nav>
       </div>
 

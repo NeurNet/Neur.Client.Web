@@ -3,8 +3,11 @@ import { BrainCircuit, Globe, Users } from 'lucide-react';
 import { OverviewCard } from './overview-card';
 import { useQuery } from '@tanstack/react-query';
 import { AdminApi } from '@/features/admin';
+import { useSession } from '@/entities/session';
 
 export function Overview() {
+  const session = useSession();
+
   const { data, isSuccess } = useQuery({
     queryKey: ['stats'],
     queryFn: AdminApi.fetchStats,
@@ -19,19 +22,23 @@ export function Overview() {
         to="/admin/users"
       />
 
-      <OverviewCard
-        icon={<Globe size={40} strokeWidth={2.5} />}
-        title={isSuccess ? String(data.requests_count) : '...'}
-        description="запросов всего"
-        to="/admin/requests"
-      />
+      {session.data?.role === 'admin' && (
+        <>
+          <OverviewCard
+            icon={<Globe size={40} strokeWidth={2.5} />}
+            title={isSuccess ? String(data.requests_count) : '...'}
+            description="запросов всего"
+            to="/admin/requests"
+          />
 
-      <OverviewCard
-        icon={<BrainCircuit size={40} strokeWidth={2.5} />}
-        title={isSuccess ? String(data.models_count) : '...'}
-        description="моделей"
-        to="/admin/models"
-      />
+          <OverviewCard
+            icon={<BrainCircuit size={40} strokeWidth={2.5} />}
+            title={isSuccess ? String(data.models_count) : '...'}
+            description="моделей"
+            to="/admin/models"
+          />
+        </>
+      )}
     </div>
   );
 }

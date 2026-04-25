@@ -27,6 +27,8 @@ export function Sidebar() {
     },
   });
 
+  if (!session.isSuccess) return;
+
   return (
     <aside className={classes.sidebar}>
       <div className={classes.logo}>
@@ -53,28 +55,28 @@ export function Sidebar() {
       </div>
 
       <div className={classes.bottom}>
-        <Link to="/admin/overview">
-          <SidebarButton icon={<Box size={18} />}>Панель управления</SidebarButton>
-        </Link>
+        {session.data.role !== 'student' && (
+          <Link to="/admin/overview">
+            <SidebarButton icon={<Box size={18} />}>Панель управления</SidebarButton>
+          </Link>
+        )}
 
         <SidebarButton icon={<LogOut size={18} />} onClick={() => signout.mutate()}>
           Выйти
         </SidebarButton>
 
-        {session.data && (
-          <div className={classes.user}>
-            <User size={18} />
+        <div className={classes.user}>
+          <User size={18} />
 
-            <div>
-              <span className={classes.name}>
-                {session.data.surname} {session.data.name}
-              </span>
-              <span className={classes.tokens}>
-                {session.data.username} | {session.data.tokens} токенов
-              </span>
-            </div>
+          <div>
+            <span className={classes.name}>
+              {session.data.surname} {session.data.name}
+            </span>
+            <span className={classes.tokens}>
+              {session.data.username} | {session.data.tokens} токенов
+            </span>
           </div>
-        )}
+        </div>
       </div>
     </aside>
   );

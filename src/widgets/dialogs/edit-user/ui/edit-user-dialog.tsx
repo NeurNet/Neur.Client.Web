@@ -7,6 +7,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { RoleCard } from './role-card';
 import toast from 'react-hot-toast';
+import { useSession } from '@/entities/session';
 
 interface ManageUserDialogProps {
   user: User;
@@ -14,6 +15,8 @@ interface ManageUserDialogProps {
 }
 
 export function EditUserDialog({ user, onClose }: ManageUserDialogProps) {
+  const session = useSession();
+
   const [tab, setTab] = useState<'tokens' | 'role'>('tokens');
 
   const [tokens, setTokens] = useState(10);
@@ -57,15 +60,17 @@ export function EditUserDialog({ user, onClose }: ManageUserDialogProps) {
             Токены
           </Button>
 
-          <Button
-            variant="secondary"
-            size="sm"
-            className={classes.button}
-            selected={tab === 'role'}
-            onClick={() => setTab('role')}
-          >
-            Роль
-          </Button>
+          {session.data?.role === 'admin' && (
+            <Button
+              variant="secondary"
+              size="sm"
+              className={classes.button}
+              selected={tab === 'role'}
+              onClick={() => setTab('role')}
+            >
+              Роль
+            </Button>
+          )}
         </nav>
 
         <div className={classes.profile}>
