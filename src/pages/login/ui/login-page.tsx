@@ -2,6 +2,7 @@ import classes from './login-page.module.css';
 import art from '../assets/art.png';
 import logo from '@/shared/assets/logo.png';
 import { Button } from '@/shared/ui/button';
+import { Input } from '@/shared/ui/input';
 
 export function LoginPage() {
   return (
@@ -23,8 +24,8 @@ export function LoginPage() {
           </div>
 
           <form className={classes.form}>
-            <input type="text" placeholder="Логин" />
-            <input type="text" placeholder="Пароль" />
+            <Input type="text" placeholder="Логин" autoComplete="username" />
+            <Input type="password" placeholder="Пароль" autoComplete="current-password" />
             <Button type="submit">Войти</Button>
           </form>
 

@@ -14,7 +14,12 @@
   --color-gray-100: hsl(0 0% 96%);
   --color-gray-200: hsl(220 5% 92%);
   --color-gray-300: hsl(220 6% 85%);
+  --color-gray-500: hsl(220 6% 47%);
   --color-gray-700: hsl(220 11% 29%);
+  --color-gray-900: hsl(220 24% 12%);
+
+  --color-error: hsl(0 100% 71%);
+  --color-error-light: hsl(4 95% 94%);
 
   --color-text-copyright: hsl(228 18% 65%);
 }
