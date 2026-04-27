@@ -19,6 +19,12 @@
   margin-bottom: 32px;
 }
 
+.title {
+  display: block;
+  font-size: 32px;
+  font-weight: 700;
+}
+
 .description {
   font-size: 14px;
 }
@@ -40,4 +46,10 @@
 
 .copyright {
   color: var(--color-text-copyright);
+}
+
+@media screen and (max-width: 1600px) {
+  .art {
+    display: none;
+  }
 }

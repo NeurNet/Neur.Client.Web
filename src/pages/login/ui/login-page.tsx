@@ -32,7 +32,7 @@ export function LoginPage() {
             <img src={logo} alt="NeurNet Logo" />
 
             <div>
-              <h1>NeurNet</h1>
+              <span className={classes.title}>NeurNet</span>
               <span className={classes.description}>
                 Платформа для работы
                 <br />с нейросетями
@@ -68,7 +68,7 @@ export function LoginPage() {
         </div>
       </div>
 
-      <img src={art} alt="Login Art" />
+      <img src={art} className={classes.art} alt="Login Art" />
     </div>
   );
 }
