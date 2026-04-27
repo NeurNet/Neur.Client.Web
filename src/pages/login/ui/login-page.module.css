@@ -1,0 +1,36 @@
+.wrapper {
+  display: flex;
+  gap: 32px;
+  padding: 32px;
+  height: 100%;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.description {
+  font-size: 14px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 384px;
+  margin-bottom: 120px;
+}
+
+.copyright {
+  color: var(--color-text-copyright);
+}

@@ -1,0 +1,20 @@
+:root {
+  --color-primary: hsl(284 95% 41%);
+  --color-second-primary: hsl(274 96% 30%);
+  --color-accent: hsl(18 79% 67%);
+  --color-white: hsl(0 0% 100%);
+
+  --color-brand-25: hsl(264 100% 99%);
+  --color-brand-50: hsl(264 100% 98%);
+  --color-brand-100: hsl(267 100% 96%);
+  --color-brand-300: hsl(265 89% 86%);
+  --color-brand-700: hsl(258 54% 52%);
+
+  --color-gray-50: hsl(0 0% 98%);
+  --color-gray-100: hsl(0 0% 96%);
+  --color-gray-200: hsl(220 5% 92%);
+  --color-gray-300: hsl(220 6% 85%);
+  --color-gray-700: hsl(220 11% 29%);
+
+  --color-text-copyright: hsl(228 18% 65%);
+}
