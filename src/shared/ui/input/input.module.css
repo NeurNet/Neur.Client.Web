@@ -38,11 +38,11 @@
   cursor: not-allowed;
 }
 
-.destructive {
+.error {
   border-color: var(--color-error);
 }
 
-.destructive:focus-within {
+.error:focus-within {
   outline-color: var(--color-error-light);
   border-color: var(--color-error);
 }

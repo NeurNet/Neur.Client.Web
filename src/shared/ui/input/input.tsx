@@ -3,22 +3,22 @@ import classes from './input.module.css';
 import { CircleAlert } from 'lucide-react';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  destructive?: boolean;
+  error?: boolean;
 }
 
-export function Input({ destructive = false, className, disabled, ...props }: InputProps) {
+export function Input({ error = false, className, disabled, ...props }: InputProps) {
   return (
     <label
       className={clsx(
         classes.wrapper,
-        destructive && classes.destructive,
+        error && classes.error,
         disabled && classes.disabled,
         className,
       )}
     >
       <input className={classes.input} disabled={disabled} {...props} />
 
-      {destructive && <CircleAlert className={classes.icon} size={18} />}
+      {error && <CircleAlert className={classes.icon} size={18} />}
     </label>
   );
 }
