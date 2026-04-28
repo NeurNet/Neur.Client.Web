@@ -1,0 +1,27 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  border-radius: 24px;
+  max-width: 900px;
+  width: 100%;
+  box-shadow: 0 0 8px 0 var(--color-chat-input-outline);
+  transition: box-shadow 200ms;
+}
+
+.wrapper:hover,
+.wrapper:focus-within {
+  box-shadow: 0 0 16px 0 var(--color-chat-input-outline);
+}
+
+.input {
+  font-size: 16px;
+  outline: none;
+  border: none;
+  border-radius: 24px;
+  padding: 24px 32px;
+  flex: 1;
+}
+
+.button {
+  margin: 0 32px;
+}

@@ -1,4 +1,6 @@
 .button {
+  display: flex;
+  justify-content: center;
   font-weight: 600;
   font-size: 14px;
   border-radius: 8px;
@@ -9,6 +11,10 @@
   background-color: transparent;
   cursor: pointer;
   border: none;
+}
+
+.icon {
+  padding: 8px;
 }
 
 .sm {

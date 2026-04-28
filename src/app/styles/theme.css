@@ -21,6 +21,7 @@
   --color-error: hsl(0 100% 71%);
   --color-error-light: hsl(4 95% 94%);
 
+  --color-chat-input-outline: hsl(284 95% 41% / 0.25);
   --color-sidebar-button-hover: hsl(0 0% 46% / 0.05);
   --color-shadow: hsl(0 0% 0% / 0.18);
   --color-text-copyright: hsl(228 18% 65%);
