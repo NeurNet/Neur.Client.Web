@@ -3,8 +3,12 @@ import logo from '@/shared/assets/logo.png';
 import { SidebarButton } from './sidebar-button';
 import { Box, LogOut, SquarePen, User } from 'lucide-react';
 import { Link } from 'react-router';
+import { mapUserRole, useAuth, useLogout } from '@/features/auth';
 
 export function Sidebar() {
+  const auth = useAuth();
+  const logoutMutation = useLogout();
+
   return (
     <aside className={classes.sidebar}>
       <div className={classes.logo}>
@@ -24,20 +28,26 @@ export function Sidebar() {
 
       <div className={classes.recents}></div>
 
-      <div className={classes.bottom}>
-        <Link to="/dashboard">
-          <SidebarButton icon={<Box size={18} />}>Панель управления</SidebarButton>
-        </Link>
+      {auth.isSuccess && (
+        <div className={classes.bottom}>
+          <Link to="/dashboard">
+            <SidebarButton icon={<Box size={18} />}>Панель управления</SidebarButton>
+          </Link>
 
-        <SidebarButton icon={<LogOut size={18} />}>Выйти</SidebarButton>
+          <SidebarButton icon={<LogOut size={18} />} onClick={() => logoutMutation.mutate()}>
+            Выйти
+          </SidebarButton>
 
-        <SidebarButton icon={<User size={18} />}>
-          <div>
-            <span className={classes.userName}>Лихачев Лев</span>
-            <span className={classes.userInfo}>i24s0277 | Администратор</span>
-          </div>
-        </SidebarButton>
-      </div>
+          <SidebarButton icon={<User size={18} />}>
+            <div>
+              <span className={classes.userName}>{auth.data.surname} {auth.data.name}</span>
+              <span className={classes.userInfo}>
+                {auth.data.username} | {mapUserRole(auth.data.role)}
+              </span>
+            </div>
+          </SidebarButton>
+        </div>
+      )}
     </aside>
   );
 }

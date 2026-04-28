@@ -1,5 +1,5 @@
 import { apiClient } from '@/shared/api';
-import type { Credentials } from '../model/types';
+import type { Credentials, UserAuth } from '../model/types';
 import axios from 'axios';
 
 export const AuthApi = {
@@ -11,6 +11,23 @@ export const AuthApi = {
         throw new Error('Неверное имя пользователя или пароль!', { cause: err });
       }
 
+      throw new Error('Произошла ошибка!', { cause: err });
+    }
+  },
+
+  logout: async () => {
+    try {
+      await apiClient.post('/users/auth/logout');
+    } catch (err) {
+      throw new Error('Произошла ошибка!', { cause: err });
+    }
+  },
+
+  fetchUserAuth: async () => {
+    try {
+      const res = await apiClient.get<UserAuth>('/users/auth');
+      return res.data;
+    } catch (err) {
       throw new Error('Произошла ошибка!', { cause: err });
     }
   },

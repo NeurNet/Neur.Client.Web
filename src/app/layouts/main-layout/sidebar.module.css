@@ -40,11 +40,13 @@
 }
 
 .userName {
-  text-align: start;
   display: block;
+  text-align: start;
   font-weight: 600;
 }
 
 .userInfo {
+  display: block;
+  text-align: start;
   font-size: 10px;
 }
