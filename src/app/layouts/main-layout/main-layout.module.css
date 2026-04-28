@@ -1,0 +1,11 @@
+.wrapper {
+  display: flex;
+  gap: 32px;
+  height: 100%;
+}
+
+.main {
+  padding-top: 48px;
+  overflow-y: auto;
+  flex: 1;
+}

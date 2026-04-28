@@ -1,0 +1,22 @@
+.sidebarButton {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 8px;
+  transition: background-color 200ms;
+  width: 100%;
+}
+
+.sidebarButton:hover {
+  background-color: var(--color-sidebar-button-hover);
+}
+
+.label {
+  margin-left: auto;
+  font-weight: 300;
+}
