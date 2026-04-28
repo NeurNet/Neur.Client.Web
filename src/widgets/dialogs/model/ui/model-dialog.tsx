@@ -4,7 +4,7 @@ import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
 import { Select } from '@/shared/ui/select';
 import { Textarea } from '@/shared/ui/textarea';
-import { ModelApi, type Model } from '@/entities/model';
+import { ModelApi, type Model, type ModelStatus, type ModelType } from '@/entities/model';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { OllamaApi } from '@/features/ollama';
 import { useForm, type SubmitHandler } from 'react-hook-form';
@@ -18,9 +18,9 @@ type Inputs = {
   name: string;
   model: string;
   context: string;
-  type: 'text' | 'code' | 'image';
+  type: ModelType;
   version: string;
-  status: 'open' | 'locked';
+  status: ModelStatus;
 };
 
 export function ModelDialog({ onClose, editModel = null }: ModelDialogProps) {
@@ -34,7 +34,7 @@ export function ModelDialog({ onClose, editModel = null }: ModelDialogProps) {
       name: editModel?.name || '',
       model: editModel?.model || '',
       context: '',
-      type: editModel?.type || 'text',
+      type: editModel?.type || 'Text',
       version: editModel?.version || '1.0',
       status: editModel?.status || 'open',
     },
@@ -129,9 +129,9 @@ export function ModelDialog({ onClose, editModel = null }: ModelDialogProps) {
                 Тип генерации
               </label>
               <Select id="type" {...register('type', { required: true })}>
-                <option value="text">Текст</option>
-                <option value="code">Код</option>
-                <option value="image">Изображения</option>
+                <option value="Text">Текст</option>
+                <option value="Code">Код</option>
+                <option value="Image">Изображения</option>
               </Select>
             </div>
 

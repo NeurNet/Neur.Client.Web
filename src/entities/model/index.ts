@@ -1,2 +1,2 @@
 export { ModelApi } from './api';
-export type { Model, UpdateModel } from './model/types';
+export type { Model, UpdateModel, ModelType, ModelStatus } from './model/types';

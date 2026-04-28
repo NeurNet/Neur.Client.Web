@@ -15,7 +15,7 @@ interface ModelCardProps {
 }
 
 export function ModelCard({ model, onClick, onEdit, showControls = false }: ModelCardProps) {
-  const type = model.type === 'text' ? 'Текст' : model.type === 'code' ? 'Код' : 'Изображения';
+  const type = model.type === 'Text' ? 'Текст' : model.type === 'Code' ? 'Код' : 'Изображения';
 
   const queryClient = useQueryClient();
 
