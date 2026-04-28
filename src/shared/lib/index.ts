@@ -1,0 +1,1 @@
+export { relativeDate } from './relativeDate';

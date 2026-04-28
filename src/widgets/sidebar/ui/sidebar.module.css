@@ -23,12 +23,12 @@
   font-size: 14px;
 }
 
-.recentsText {
+.recentText {
   font-size: 14px;
   color: var(--color-gray-500);
 }
 
-.recents {
+.recentChats {
   display: flex;
   flex-direction: column;
   gap: 24px;

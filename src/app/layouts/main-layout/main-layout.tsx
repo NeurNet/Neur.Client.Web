@@ -1,12 +1,12 @@
 import classes from './main-layout.module.css';
 import { Navigate, Outlet } from 'react-router';
-import { Sidebar } from './sidebar';
+import { Sidebar } from '@/widgets/sidebar';
 import { useAuth } from '@/features/auth';
 
 export function MainLayout() {
   const auth = useAuth();
 
-  if (!auth.isLoading && !auth.data) return <Navigate to="/login" replace />;
+  if (!auth.isPending && !auth.data) return <Navigate to="/login" replace />;
 
   return (
     <div className={classes.wrapper}>
