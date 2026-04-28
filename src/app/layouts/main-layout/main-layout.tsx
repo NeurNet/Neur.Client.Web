@@ -6,7 +6,8 @@ import { useAuth } from '@/features/auth';
 export function MainLayout() {
   const auth = useAuth();
 
-  if (!auth.isPending && !auth.data) return <Navigate to="/login" replace />;
+  if (auth.isPending) return null;
+  if (!auth.data) return <Navigate to="/login" replace />;
 
   return (
     <div className={classes.wrapper}>
