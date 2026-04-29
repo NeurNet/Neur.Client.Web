@@ -22,3 +22,9 @@ export interface ChatResponse {
   chatId: string;
   modelId: string;
 }
+
+export interface SendMessage {
+  conversation_id: string | null;
+  model_id: string | null;
+  message: string;
+}

@@ -1,5 +1,5 @@
 import { client } from '@/shared/api';
-import type { Chat, ChatResponse } from '../model/types';
+import type { Chat, ChatResponse, SendMessage } from '../model/types';
 import { AxiosError, type AxiosRequestConfig } from 'axios';
 
 export const ChatApi = {
@@ -12,7 +12,19 @@ export const ChatApi = {
     }
   },
 
-  fetchChatById: async (id: string) => {
+  fetchChatById: async (id: string): Promise<Chat> => {
+    if (id === 'new') {
+      return {
+        id: crypto.randomUUID(),
+        model_id: crypto.randomUUID(),
+        model_name: '',
+        model: '',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+        messages: [],
+      };
+    }
+
     try {
       const res = await client.get<Chat>(`/chats/${id}`);
       return res.data;
@@ -25,16 +37,7 @@ export const ChatApi = {
     }
   },
 
-  createChat: async (modelId: string): Promise<ChatResponse> => {
-    try {
-      const res = await client.post('/chats', { modelId });
-      return res.data;
-    } catch {
-      throw new Error('Произошла ошибка!');
-    }
-  },
-
-  sendMessage: async (chatId: string, prompt: string, config: AxiosRequestConfig) => {
-    return client.post(`/chats/${chatId}/generate`, { prompt }, config);
+  sendMessage: async (data: SendMessage, config: AxiosRequestConfig) => {
+    return client.post('/chats/generate', data, config);
   },
 };

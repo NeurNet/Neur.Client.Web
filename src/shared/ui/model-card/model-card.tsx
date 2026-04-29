@@ -9,12 +9,13 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 interface ModelCardProps {
   model: Model;
+  clickable?: boolean;
   onClick?: () => void;
   onEdit?: () => void;
   showControls?: boolean;
 }
 
-export function ModelCard({ model, onClick, onEdit, showControls = false }: ModelCardProps) {
+export function ModelCard({ model, clickable = false, onClick, onEdit, showControls = false }: ModelCardProps) {
   const type = model.type === 'Text' ? 'Текст' : model.type === 'Code' ? 'Код' : 'Изображения';
 
   const queryClient = useQueryClient();
@@ -39,7 +40,7 @@ export function ModelCard({ model, onClick, onEdit, showControls = false }: Mode
   };
 
   return (
-    <div className={clsx(classes.card, onClick && classes.clickable)} onClick={onClick}>
+    <div className={clsx(classes.card, clickable && classes.clickable)} onClick={onClick}>
       <div className={classes.avatar}>
         <img src={modelAvatar} alt="Model avatar" />
 

@@ -1,31 +1,20 @@
 import classes from './select-model-dialog.module.css';
 import { Button } from '@/shared/ui/button';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { ModelApi } from '@/entities/model';
-import { ChatApi } from '@/features/chat';
 import { ModelCard } from '@/shared/ui/model-card';
-import { Link, useNavigate } from 'react-router';
+import { Link } from 'react-router';
 
 interface ModelDialogProps {
   open: boolean;
+  message: string;
   onClose: () => void;
 }
 
-export function SelectModelDialog({ open, onClose }: ModelDialogProps) {
+export function SelectModelDialog({ open, onClose, message }: ModelDialogProps) {
   const models = useQuery({
     queryKey: ['models'],
     queryFn: ModelApi.fetchModels,
-  });
-
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
-
-  const createChat = useMutation({
-    mutationFn: ChatApi.createChat,
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ['chats'] });
-      navigate(`/chat/${data.chatId}`);
-    },
   });
 
   return open ? (
@@ -42,8 +31,11 @@ export function SelectModelDialog({ open, onClose }: ModelDialogProps) {
 
         <div className={classes.models}>
           {models.data?.map((model) => (
-            <Link to={`/models/${model.id}/chat`}>
-              <ModelCard key={model.id} model={model} onClick={() => createChat.mutate(model.id)} />
+            <Link
+              key={model.id}
+              to={`/chat/new?model_id=${model.id}&message=${encodeURI(message)}`}
+            >
+              <ModelCard key={model.id} model={model} clickable />
             </Link>
           ))}
         </div>

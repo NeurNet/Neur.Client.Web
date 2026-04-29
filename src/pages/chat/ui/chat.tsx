@@ -1,6 +1,6 @@
 import classes from './chat.module.css';
 import { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams, useSearchParams } from 'react-router';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { ChatApi, type Chat, type IMessage } from '@/features/chat';
 import { ChatInput } from '@/shared/ui/chat-input';
@@ -10,12 +10,17 @@ import type { MessageRole } from '@/entities/request';
 import { useSession } from '@/entities/session';
 
 interface ResponseChunk {
+  type: 'meta' | 'data';
   data: string;
-  completed?: boolean;
+  completed: boolean;
 }
 
 export function Chat() {
   const session = useSession();
+
+  const [searchParams] = useSearchParams();
+
+  const navigate = useNavigate();
 
   const { chatId } = useParams();
   const queryClient = useQueryClient();
@@ -23,6 +28,7 @@ export function Chat() {
   const messagesRef = useRef<HTMLDivElement | null>(null);
   const processedLengthRef = useRef(0);
   const abortControllerRef = useRef<AbortController | null>(null);
+  const chatIdRef = useRef<string | null>(null);
 
   const [isGenerating, setIsGenerating] = useState(false);
 
@@ -84,29 +90,46 @@ export function Chat() {
     setIsGenerating(true);
 
     try {
-      await ChatApi.sendMessage(chatId, message, {
-        signal: abortControllerRef.current.signal,
-        onDownloadProgress: (e: AxiosProgressEvent) => {
-          const responseText = (e.event?.target as XMLHttpRequest | null)?.response ?? '';
-          const newText = responseText.slice(processedLengthRef.current);
-          processedLengthRef.current = responseText.length;
-
-          const lines = newText.split('\n');
-
-          for (const line of lines) {
-            if (!line.trim()) continue;
-
-            try {
-              const parsed: ResponseChunk = JSON.parse(line);
-              if (parsed.data) {
-                appendChunk(parsed.data, 'assistant');
-              }
-            } catch {
-              console.warn('Failed to parse streaming chunk:', line);
-            }
-          }
+      await ChatApi.sendMessage(
+        {
+          conversation_id: chatId === 'new' ? null : chatId,
+          model_id: searchParams.get('model_id'),
+          message,
         },
-      });
+        {
+          signal: abortControllerRef.current.signal,
+          onDownloadProgress: (e: AxiosProgressEvent) => {
+            const responseText = (e.event?.target as XMLHttpRequest | null)?.response ?? '';
+            const newText = responseText.slice(processedLengthRef.current);
+            processedLengthRef.current = responseText.length;
+
+            const lines = newText.split('\n');
+
+            for (const line of lines) {
+              if (!line.trim()) continue;
+
+              try {
+                const parsed: ResponseChunk = JSON.parse(line);
+
+                if (parsed.type === 'data') {
+                  if (parsed.data) {
+                    appendChunk(parsed.data, 'assistant');
+                  }
+                } else if (parsed.type === 'meta') {
+                  chatIdRef.current = parsed.data;
+                }
+
+                if (parsed.completed && chatId === 'new') {
+                  navigate(`/chat/${chatIdRef.current}`);
+                  return;
+                }
+              } catch {
+                console.warn('Failed to parse streaming chunk:', line);
+              }
+            }
+          },
+        },
+      );
     } catch (err) {
       if (isCancel(err)) {
         console.log('Generation stopped by user');
@@ -119,26 +142,29 @@ export function Chat() {
     }
   };
 
-  if (!chat.data) return null;
-
   return (
     <div className={classes.wrapper}>
-      <div className={classes.header}>
-        <h1 className={classes.modelName}>{chat.data.model}</h1>
-        <span className={classes.model}>{chat.data.model_name}</span>
-      </div>
+      {chat.data && (
+        <>
+          <div className={classes.header}>
+            <h1 className={classes.modelName}>{chat.data.model}</h1>
+            <span className={classes.model}>{chat.data.model_name}</span>
+          </div>
 
-      <div className={classes.messages} ref={messagesRef}>
-        {chat.data.messages.map((m) => (
-          <Message key={m.id} message={m} />
-        ))}
-      </div>
+          <div className={classes.messages} ref={messagesRef}>
+            {chat.data.messages.map((m) => (
+              <Message key={m.id} message={m} />
+            ))}
+          </div>
+        </>
+      )}
 
       <ChatInput
         onSend={onSend}
         disabled={session.data?.tokens === 0}
         onStop={stopGeneration}
         isGenerating={isGenerating}
+        defaultValue={searchParams.get('message') || ''}
       />
 
       <span className={classes.disclaimer}>

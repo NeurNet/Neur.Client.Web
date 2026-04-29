@@ -6,12 +6,19 @@ import { Button } from '../button';
 interface ChatInputProps {
   isGenerating?: boolean;
   disabled?: boolean;
+  defaultValue?: string;
   onSend?: (value: string) => void;
   onStop?: () => void;
 }
 
-export function ChatInput({ isGenerating, disabled, onSend, onStop }: ChatInputProps) {
-  const [text, setText] = useState('');
+export function ChatInput({
+  isGenerating,
+  disabled,
+  defaultValue = '',
+  onSend,
+  onStop,
+}: ChatInputProps) {
+  const [text, setText] = useState(defaultValue);
 
   const buttonShown = text !== '' || isGenerating;
 
@@ -30,11 +37,11 @@ export function ChatInput({ isGenerating, disabled, onSend, onStop }: ChatInputP
   return (
     <form className={classes.wrapper} onSubmit={onSubmit}>
       <input
+        type="text"
+        placeholder="Спросите NeurNet"
         className={classes.chatInput}
         value={text}
         onChange={(e) => setText(e.target.value)}
-        type="text"
-        placeholder="Спросите NeurNet"
         disabled={isGenerating}
       />
 

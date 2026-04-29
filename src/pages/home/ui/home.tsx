@@ -5,13 +5,23 @@ import { useState } from 'react';
 
 export function Home() {
   const [dialogShown, setDialogShown] = useState(false);
+  const [message, setMessage] = useState('');
+
+  const onSend = (message: string) => {
+    setMessage(message);
+    setDialogShown(true);
+  };
 
   return (
     <div className={classes.wrapper}>
       <h1 className={classes.title}>Привет! Чем могу помочь?</h1>
-      <ChatInput onSend={() => setDialogShown(true)} />
+      <ChatInput onSend={onSend} />
 
-      <SelectModelDialog open={dialogShown} onClose={() => setDialogShown(false)} />
+      <SelectModelDialog
+        open={dialogShown}
+        onClose={() => setDialogShown(false)}
+        message={message}
+      />
     </div>
   );
 }
