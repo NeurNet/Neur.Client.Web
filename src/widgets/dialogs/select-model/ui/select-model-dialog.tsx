@@ -4,7 +4,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ModelApi } from '@/entities/model';
 import { ChatApi } from '@/features/chat';
 import { ModelCard } from '@/shared/ui/model-card';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 interface ModelDialogProps {
   open: boolean;
@@ -42,7 +42,9 @@ export function SelectModelDialog({ open, onClose }: ModelDialogProps) {
 
         <div className={classes.models}>
           {models.data?.map((model) => (
-            <ModelCard key={model.id} model={model} onClick={() => createChat.mutate(model.id)} />
+            <Link to={`/models/${model.id}/chat`}>
+              <ModelCard key={model.id} model={model} onClick={() => createChat.mutate(model.id)} />
+            </Link>
           ))}
         </div>
       </div>
