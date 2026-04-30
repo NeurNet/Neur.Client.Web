@@ -5,7 +5,7 @@ import { SidebarButton } from './sidebar-button';
 import { Box, LogOut, SquarePen, User } from 'lucide-react';
 import { mapUserRole, useAuth, useLogout } from '@/features/auth';
 import { relativeDate } from '@/shared/lib';
-import { useChats } from '@/entities/chat';
+import { useChats } from '@/features/chat';
 
 export function Sidebar() {
   const auth = useAuth();
