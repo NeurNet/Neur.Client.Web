@@ -1,6 +1,6 @@
 import classes from './sidebar.module.css';
 import logo from '@/shared/assets/logo.png';
-import { Link } from 'react-router';
+import { Link, useLocation } from 'react-router';
 import { SidebarButton } from './sidebar-button';
 import { Box, LogOut, SquarePen, User } from 'lucide-react';
 import { mapUserRole, useAuth, useLogout } from '@/features/auth';
@@ -12,6 +12,8 @@ export function Sidebar() {
   const chats = useChats();
 
   const logoutMutation = useLogout();
+
+  const { pathname } = useLocation();
 
   return (
     <aside className={classes.sidebar}>
@@ -25,7 +27,9 @@ export function Sidebar() {
       </div>
 
       <Link to="/">
-        <SidebarButton icon={<SquarePen size={18} />}>Новый чат</SidebarButton>
+        <SidebarButton icon={<SquarePen size={18} />} active={pathname === '/'}>
+          Новый чат
+        </SidebarButton>
       </Link>
 
       <span className={classes.recentText}>Недавнее</span>
@@ -44,7 +48,9 @@ export function Sidebar() {
         <div className={classes.bottom}>
           {auth.data.role !== 'student' && (
             <Link to="/dashboard">
-              <SidebarButton icon={<Box size={18} />}>Панель управления</SidebarButton>
+              <SidebarButton icon={<Box size={18} />} active={pathname === '/dashboard'}>
+                Панель управления
+              </SidebarButton>
             </Link>
           )}
 

@@ -12,7 +12,8 @@
   width: 100%;
 }
 
-.sidebarButton:hover {
+.sidebarButton:hover,
+.active {
   background-color: var(--color-sidebar-button-hover);
 }
 
