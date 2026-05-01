@@ -1,6 +1,6 @@
-import { Button } from '@/shared/ui/button';
 import classes from './dashboard-layout.module.css';
-import { Link } from 'react-router';
+import { Button } from '@/shared/ui/button';
+import { Link, Outlet } from 'react-router';
 
 export function DashboardLayout() {
   return (
@@ -26,6 +26,8 @@ export function DashboardLayout() {
           </Link>
         </nav>
       </div>
+
+      <Outlet />
     </div>
   );
 }

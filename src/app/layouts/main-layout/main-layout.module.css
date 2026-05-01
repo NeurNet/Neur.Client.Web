@@ -1,12 +1,10 @@
 .wrapper {
   display: flex;
-  gap: 32px;
   height: 100%;
 }
 
 .main {
-  padding-top: 48px;
-  padding-right: 64px;
+  padding: 48px 64px 0 64px;
   overflow-y: auto;
   flex: 1;
 }
