@@ -7,12 +7,25 @@ type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: ButtonSize;
   variant?: ButtonVariant;
+  active?: boolean;
 }
 
-export function Button({ size = 'md', variant = 'primary', className, ...props }: ButtonProps) {
+export function Button({
+  size = 'md',
+  variant = 'primary',
+  active = false,
+  className,
+  ...props
+}: ButtonProps) {
   return (
     <button
-      className={clsx(classes.button, classes[size], classes[variant], className)}
+      className={clsx(
+        classes.button,
+        classes[size],
+        classes[variant],
+        active && classes.active,
+        className,
+      )}
       {...props}
     />
   );

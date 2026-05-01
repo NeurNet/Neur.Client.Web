@@ -72,7 +72,8 @@
   border: 1px solid var(--color-gray-300);
 }
 
-.outline:hover {
+.outline:hover,
+.active {
   background-color: var(--color-gray-50);
 }
 
