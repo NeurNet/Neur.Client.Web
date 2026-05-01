@@ -15,3 +15,9 @@
   font-size: 12px;
   font-weight: 300;
 }
+
+.models {
+  display: grid;
+  grid-template-columns: repeat(1fr, 3);
+  gap: 40px;
+}
