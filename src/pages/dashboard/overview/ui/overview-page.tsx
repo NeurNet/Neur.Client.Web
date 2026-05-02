@@ -12,21 +12,21 @@ export function OverviewPage() {
   return (
     <div className={classes.stats}>
       <StatsBlock
-        icon={<Users size={40} strokeWidth={2.4} />}
+        icon={<Users size={32} />}
         count={stats.data.users_count}
         name="пользователей"
         to="/dashboard/users"
       />
 
       <StatsBlock
-        icon={<Globe size={40} strokeWidth={2.4} />}
+        icon={<Globe size={32} />}
         count={stats.data.requests_count}
         name="запросов всего"
         to="/dashboard/requests"
       />
 
       <StatsBlock
-        icon={<BrainCircuit size={40} strokeWidth={2.4} />}
+        icon={<BrainCircuit size={32} />}
         count={stats.data.models_count}
         name="моделей"
         to="/dashboard/models"
