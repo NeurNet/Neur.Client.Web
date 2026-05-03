@@ -2,6 +2,13 @@ import classes from './dashboard-layout.module.css';
 import { Button } from '@/shared/ui/button';
 import { Link, Outlet, useLocation } from 'react-router';
 
+const links = [
+  { name: 'Обзор', path: '/dashboard' },
+  { name: 'Пользователи', path: '/dashboard' },
+  { name: 'История запросов', path: '/dashboard/requests' },
+  { name: 'Модели', path: '/dashboard/models' },
+];
+
 export function DashboardLayout() {
   const { pathname } = useLocation();
 
@@ -11,29 +18,13 @@ export function DashboardLayout() {
         <h1 className={classes.title}>Панель управления</h1>
 
         <nav className={classes.nav}>
-          <Link to="/dashboard">
-            <Button variant="outline" active={pathname === '/dashboard'}>
-              Обзор
-            </Button>
-          </Link>
-
-          <Link to="/dashboard/users">
-            <Button variant="outline" active={pathname === '/dashboard/users'}>
-              Пользователи
-            </Button>
-          </Link>
-
-          <Link to="/dashboard/requests">
-            <Button variant="outline" active={pathname === '/dashboard/requests'}>
-              История запросов
-            </Button>
-          </Link>
-
-          <Link to="/dashboard/models">
-            <Button variant="outline" active={pathname === '/dashboard/models'}>
-              Модели
-            </Button>
-          </Link>
+          {links.map((link) => (
+            <Link key={link.path} to={link.path}>
+              <Button variant="outline" active={pathname === link.path}>
+                {link.name}
+              </Button>
+            </Link>
+          ))}
         </nav>
       </div>
 
