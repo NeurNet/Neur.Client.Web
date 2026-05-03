@@ -1,4 +1,6 @@
+import classes from './main-layout.module.css';
 import { useSession } from '@/features/auth';
+import { Sidebar } from '@/widgets/sidebar';
 import { Navigate, Outlet } from 'react-router';
 
 export function MainLayout() {
@@ -8,8 +10,12 @@ export function MainLayout() {
   if (!session.data) return <Navigate to="/login" replace />;
 
   return (
-    <div>
-      <Outlet />
+    <div className={classes.wrapper}>
+      <Sidebar />
+
+      <main className={classes.main}>
+        <Outlet />
+      </main>
     </div>
   );
 }

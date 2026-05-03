@@ -1,0 +1,10 @@
+.wrapper {
+  display: flex;
+  height: 100%;
+}
+
+.main {
+  padding: 48px 64px 0 64px;
+  overflow-y: auto;
+  flex: 1;
+}
