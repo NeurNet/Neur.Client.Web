@@ -1,11 +1,13 @@
 import classes from './sidebar.module.css';
 import logo from '@/shared/assets/logo.png';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router';
 import { SidebarButton } from './sidebar-button';
 import { Box, LogOut, SquarePen, User } from 'lucide-react';
 import { mapUserRole, useAuth, useLogout } from '@/features/auth';
 import { relativeDate } from '@/shared/lib';
 import { useChats } from '@/features/chat';
+import { ProfileDialog } from '@/features/view-profile';
 
 export function Sidebar() {
   const auth = useAuth();
@@ -14,6 +16,8 @@ export function Sidebar() {
   const logoutMutation = useLogout();
 
   const { pathname } = useLocation();
+
+  const [showProfileDialog, setShowProfileDialog] = useState(false);
 
   return (
     <aside className={classes.sidebar}>
@@ -58,7 +62,7 @@ export function Sidebar() {
             Выйти
           </SidebarButton>
 
-          <SidebarButton icon={<User size={18} />}>
+          <SidebarButton icon={<User size={18} />} onClick={() => setShowProfileDialog(true)}>
             <div>
               <span className={classes.userName}>
                 {auth.data.surname} {auth.data.name}
@@ -70,6 +74,8 @@ export function Sidebar() {
           </SidebarButton>
         </div>
       )}
+
+      <ProfileDialog open={showProfileDialog} onClose={() => setShowProfileDialog(false)} />
     </aside>
   );
 }
