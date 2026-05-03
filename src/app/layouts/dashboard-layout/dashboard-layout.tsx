@@ -4,7 +4,7 @@ import { Link, Outlet, useLocation } from 'react-router';
 
 const links = [
   { name: 'Обзор', path: '/dashboard' },
-  { name: 'Пользователи', path: '/dashboard' },
+  { name: 'Пользователи', path: '/dashboard/users' },
   { name: 'История запросов', path: '/dashboard/requests' },
   { name: 'Модели', path: '/dashboard/models' },
 ];
