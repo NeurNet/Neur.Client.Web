@@ -1,0 +1,19 @@
+.select {
+  width: 100%;
+  border: 1px solid var(--color-gray-300);
+  outline: 4px solid transparent;
+  padding: 8px 0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  appearance: none;
+  cursor: pointer;
+  transition:
+    background-color 200ms,
+    outline-color 200ms;
+}
+.select:focus {
+  border-color: var(--color-primary);
+  outline-color: var(--color-brand-100);
+}

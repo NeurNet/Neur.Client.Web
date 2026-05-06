@@ -18,7 +18,6 @@
   outline: none;
   border: none;
 }
-
 .input::placeholder {
   color: var(--color-gray-500);
 }
@@ -31,7 +30,6 @@
 .disabled {
   cursor: not-allowed;
 }
-
 .disabled .input {
   background-color: var(--color-gray-50);
   color: var(--color-gray-500);
@@ -41,7 +39,6 @@
 .error {
   border-color: var(--color-error);
 }
-
 .error:focus-within {
   outline-color: var(--color-error-light);
   border-color: var(--color-error);

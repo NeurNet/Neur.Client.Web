@@ -4,6 +4,7 @@ import { Dialog } from '@/shared/ui/dialog';
 import { Label } from '@/shared/ui/label';
 import { Button } from '@/shared/ui/button';
 import { Textarea } from '@/shared/ui/textarea';
+import { Select } from '@/shared/ui/select';
 
 interface CreateModelDialogProps {
   open?: boolean;
@@ -40,11 +41,11 @@ export function CreateModelDialog({ open, onClose }: CreateModelDialogProps) {
         <div className={classes.row}>
           <div className={classes.field}>
             <Label htmlFor="type">Тип генерации</Label>
-            <select id="type">
+            <Select id="type">
               <option value="text">Текст</option>
               <option value="code">Код</option>
               <option value="images">Изображения</option>
-            </select>
+            </Select>
           </div>
 
           <div className={classes.field}>
@@ -56,10 +57,10 @@ export function CreateModelDialog({ open, onClose }: CreateModelDialogProps) {
         <div className={classes.row}>
           <div className={classes.field}>
             <Label htmlFor="status">Статус доступа</Label>
-            <select id="status">
+            <Select id="status">
               <option value="open">Публичная</option>
               <option value="locked">Закрытая</option>
-            </select>
+            </Select>
           </div>
         </div>
 
