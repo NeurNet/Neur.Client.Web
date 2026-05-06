@@ -17,10 +17,14 @@ export function Sidebar() {
 
   const { pathname } = useLocation();
 
-  const [showProfileDialog, setShowProfileDialog] = useState(false);
-  const [sidebarHidden, setSidebarHidden] = useState(window.innerWidth < 1400);
+  const isMobile = window.innerWidth < 1400;
 
-  const closeSidebar = () => setSidebarHidden(true);
+  const [showProfileDialog, setShowProfileDialog] = useState(false);
+  const [sidebarHidden, setSidebarHidden] = useState(isMobile);
+
+  const onLinkClick = () => {
+    if (isMobile) setSidebarHidden(true);
+  };
 
   return sidebarHidden ? (
     <Button
@@ -46,7 +50,7 @@ export function Sidebar() {
         <SidebarButton
           icon={<SquarePen size={18} />}
           active={pathname === '/'}
-          onClick={closeSidebar}
+          onClick={onLinkClick}
         >
           Новый чат
         </SidebarButton>
@@ -66,7 +70,7 @@ export function Sidebar() {
 
       {auth.data && (
         <div className={classes.bottom}>
-          <SidebarButton icon={<ChevronsLeft size={18} />} onClick={closeSidebar}>
+          <SidebarButton icon={<ChevronsLeft size={18} />} onClick={() => setSidebarHidden(true)}>
             Скрыть
           </SidebarButton>
 
@@ -75,7 +79,7 @@ export function Sidebar() {
               <SidebarButton
                 icon={<Box size={18} />}
                 active={pathname === '/dashboard'}
-                onClick={closeSidebar}
+                onClick={onLinkClick}
               >
                 Панель управления
               </SidebarButton>
