@@ -1,6 +1,5 @@
 import classes from './overview-page.module.css';
-import { StatsBlock } from '@/entities/stats';
-import { useStats } from '@/entities/stats';
+import { StatsBlock, useStats } from '@/entities/stats';
 import { BrainCircuit, Globe, Users } from 'lucide-react';
 
 export function OverviewPage() {
