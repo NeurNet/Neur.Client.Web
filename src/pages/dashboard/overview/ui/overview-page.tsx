@@ -11,6 +11,8 @@ export function OverviewPage() {
 
   return (
     <div className={classes.stats}>
+      <title>Обзор - NeurNet</title>
+
       <StatsBlock
         icon={<Users size={32} />}
         count={stats.data.users_count}
