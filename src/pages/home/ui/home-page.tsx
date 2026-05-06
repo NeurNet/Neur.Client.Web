@@ -1,7 +1,7 @@
 import classes from './home-page.module.css';
 import { useState } from 'react';
 import { ChatInput } from '@/features/chat';
-import { ModelDialog } from '@/features/select-model';
+import { ModelDialog } from '@/features/chat';
 
 export function HomePage() {
   const [showDialog, setShowDialog] = useState(false);

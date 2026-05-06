@@ -7,7 +7,7 @@ import { Box, LogOut, SquarePen, User } from 'lucide-react';
 import { mapUserRole, useAuth, useLogout } from '@/features/auth';
 import { relativeDate } from '@/shared/lib';
 import { useChats } from '@/features/chat';
-import { ProfileDialog } from '@/features/view-profile';
+import { ProfileDialog } from '@/features/auth';
 
 export function Sidebar() {
   const auth = useAuth();
