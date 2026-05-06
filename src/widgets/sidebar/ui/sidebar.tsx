@@ -4,10 +4,9 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router';
 import { SidebarButton } from './sidebar-button';
 import { Box, ChevronsLeft, ChevronsRight, LogOut, SquarePen, User } from 'lucide-react';
-import { mapUserRole, useAuth, useLogout } from '@/features/auth';
+import { mapUserRole, useAuth, useLogout, ProfileDialog } from '@/features/auth';
 import { relativeDate } from '@/shared/lib';
 import { useChats } from '@/features/chat';
-import { ProfileDialog } from '@/features/auth';
 import { Button } from '@/shared/ui/button';
 
 export function Sidebar() {
@@ -20,6 +19,8 @@ export function Sidebar() {
 
   const [showProfileDialog, setShowProfileDialog] = useState(false);
   const [sidebarHidden, setSidebarHidden] = useState(window.innerWidth < 1400);
+
+  const closeSidebar = () => setSidebarHidden(true);
 
   return sidebarHidden ? (
     <Button
@@ -42,7 +43,11 @@ export function Sidebar() {
       </div>
 
       <Link to="/">
-        <SidebarButton icon={<SquarePen size={18} />} active={pathname === '/'}>
+        <SidebarButton
+          icon={<SquarePen size={18} />}
+          active={pathname === '/'}
+          onClick={closeSidebar}
+        >
           Новый чат
         </SidebarButton>
       </Link>
@@ -61,13 +66,17 @@ export function Sidebar() {
 
       {auth.data && (
         <div className={classes.bottom}>
-          <SidebarButton icon={<ChevronsLeft size={18} />} onClick={() => setSidebarHidden(true)}>
+          <SidebarButton icon={<ChevronsLeft size={18} />} onClick={closeSidebar}>
             Скрыть
           </SidebarButton>
 
           {auth.data.role !== 'student' && (
             <Link to="/dashboard">
-              <SidebarButton icon={<Box size={18} />} active={pathname === '/dashboard'}>
+              <SidebarButton
+                icon={<Box size={18} />}
+                active={pathname === '/dashboard'}
+                onClick={closeSidebar}
+              >
                 Панель управления
               </SidebarButton>
             </Link>
