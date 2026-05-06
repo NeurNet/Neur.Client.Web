@@ -20,7 +20,7 @@ export function DashboardLayout() {
         <nav className={classes.nav}>
           {links.map((link) => (
             <Link key={link.path} to={link.path}>
-              <Button variant="outline" active={pathname === link.path}>
+              <Button variant="outline" size="sm" active={pathname === link.path}>
                 {link.name}
               </Button>
             </Link>
