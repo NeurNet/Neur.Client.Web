@@ -1,5 +1,6 @@
 import classes from './main-layout.module.css';
 import { Navigate, Outlet } from 'react-router';
+import { Toaster } from 'react-hot-toast';
 import { Sidebar } from '@/widgets/sidebar';
 import { useAuth } from '@/features/auth';
 
@@ -16,6 +17,8 @@ export function MainLayout() {
       <main className={classes.main}>
         <Outlet />
       </main>
+
+      <Toaster position="bottom-right" />
     </div>
   );
 }

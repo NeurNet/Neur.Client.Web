@@ -1,4 +1,4 @@
-export type ModelType = 'text' | 'code' | 'images';
+export type ModelType = 'Text' | 'Code' | 'Image';
 export type ModelStatus = 'open' | 'locked';
 
 export interface Model {
