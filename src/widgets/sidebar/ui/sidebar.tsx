@@ -3,11 +3,12 @@ import logo from '@/shared/assets/logo.png';
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router';
 import { SidebarButton } from './sidebar-button';
-import { Box, LogOut, SquarePen, User } from 'lucide-react';
+import { Box, ChevronsLeft, ChevronsRight, LogOut, SquarePen, User } from 'lucide-react';
 import { mapUserRole, useAuth, useLogout } from '@/features/auth';
 import { relativeDate } from '@/shared/lib';
 import { useChats } from '@/features/chat';
 import { ProfileDialog } from '@/features/auth';
+import { Button } from '@/shared/ui/button';
 
 export function Sidebar() {
   const auth = useAuth();
@@ -18,8 +19,18 @@ export function Sidebar() {
   const { pathname } = useLocation();
 
   const [showProfileDialog, setShowProfileDialog] = useState(false);
+  const [sidebarHidden, setSidebarHidden] = useState(window.innerWidth < 1400);
 
-  return (
+  return sidebarHidden ? (
+    <Button
+      size="icon"
+      variant="outline"
+      className={classes.showButton}
+      onClick={() => setSidebarHidden(false)}
+    >
+      <ChevronsRight />
+    </Button>
+  ) : (
     <aside className={classes.sidebar}>
       <div className={classes.logo}>
         <img src={logo} alt="NeurNet Logo" width={56} />
@@ -50,6 +61,10 @@ export function Sidebar() {
 
       {auth.data && (
         <div className={classes.bottom}>
+          <SidebarButton icon={<ChevronsLeft size={18} />} onClick={() => setSidebarHidden(true)}>
+            Скрыть
+          </SidebarButton>
+
           {auth.data.role !== 'student' && (
             <Link to="/dashboard">
               <SidebarButton icon={<Box size={18} />} active={pathname === '/dashboard'}>
