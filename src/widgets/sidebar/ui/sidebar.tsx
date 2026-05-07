@@ -6,7 +6,7 @@ import { SidebarButton } from './sidebar-button';
 import { Box, ChevronsLeft, ChevronsRight, LogOut, SquarePen, User } from 'lucide-react';
 import { useAuth, useLogout, ProfileDialog } from '@/features/auth';
 import { relativeDate } from '@/shared/lib';
-import { useChats } from '@/features/chat';
+import { useChats } from '@/entities/chat';
 import { Button } from '@/shared/ui/button';
 import { mapUserRole } from '@/entities/user';
 

@@ -1,15 +1,16 @@
 import classes from './model-dialog.module.css';
-import { ModelCard } from '@/entities/model';
+import { ModelCard, useModels } from '@/entities/model';
 import { Button } from '@/shared/ui/button';
 import { Dialog } from '@/shared/ui/dialog';
-import { useModels } from '@/entities/model';
 
 interface ModelDialogProps {
   onClose: () => void;
 }
 
 export function ModelDialog({ onClose }: ModelDialogProps) {
-  const models = useModels();
+  const { data: models } = useModels();
+
+  if (!models) return null;
 
   return (
     <Dialog onClose={onClose}>
@@ -24,13 +25,11 @@ export function ModelDialog({ onClose }: ModelDialogProps) {
         </Button>
       </div>
 
-      {models.data && (
-        <div className={classes.models}>
-          {models.data.map((model) => (
-            <ModelCard key={model.id} model={model} />
-          ))}
-        </div>
-      )}
+      <div className={classes.models}>
+        {models.map((model) => (
+          <ModelCard key={model.id} model={model} />
+        ))}
+      </div>
     </Dialog>
   );
 }
