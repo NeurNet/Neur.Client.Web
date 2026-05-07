@@ -35,6 +35,7 @@ export function ChatInput({
 
   const handleSubmit = (e: React.SubmitEvent) => {
     e.preventDefault();
+    setInternalValue('');
     onSend?.(currentValue);
   };
 

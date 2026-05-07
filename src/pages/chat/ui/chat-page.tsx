@@ -30,6 +30,8 @@ export function ChatPage() {
   const [message, setMessage] = useState(initialMessage ?? '');
   const [isGenerating, setIsGenerating] = useState(false);
 
+  const activeChatIdRef = useRef(id);
+  const processedLengthRef = useRef(0);
   const abortControllerRef = useRef<AbortController | null>(null);
 
   const { data: chat } = useChat(id);
@@ -37,7 +39,7 @@ export function ChatPage() {
   const appendChunk = (chunk: string, role: MessageRole) => {
     if (!chunk.trim()) return;
 
-    queryClient.setQueryData<Chat>(['chats', id], (oldChat) => {
+    queryClient.setQueryData<Chat>(['chats', activeChatIdRef.current], (oldChat) => {
       if (!oldChat) return oldChat;
 
       const messages = [...oldChat.messages];
@@ -70,7 +72,9 @@ export function ChatPage() {
 
   const onSend = async () => {
     appendChunk(message, 'user');
+    setMessage('');
 
+    processedLengthRef.current = 0;
     abortControllerRef.current = new AbortController();
     setIsGenerating(true);
 
@@ -84,8 +88,11 @@ export function ChatPage() {
         {
           signal: abortControllerRef.current.signal,
           onDownloadProgress: (e) => {
-            const response: string = e.event.target.response;
-            const lines = response.split('\n');
+            const responseText: string = e.event.target.response;
+            const newText = responseText.slice(processedLengthRef.current);
+            processedLengthRef.current = responseText.length;
+
+            const lines = newText.split('\n');
 
             for (const line of lines) {
               if (!line.trim()) continue;
@@ -94,6 +101,7 @@ export function ChatPage() {
                 const parsed: ResponseChunk = JSON.parse(line);
 
                 if (parsed.type === 'meta') {
+                  activeChatIdRef.current = parsed.data;
                   navigate(`/chat/${parsed.data}`, { replace: true });
                 } else if (parsed.type === 'data') {
                   appendChunk(parsed.data, 'assistant');
@@ -112,6 +120,8 @@ export function ChatPage() {
       }
 
       toast.error('Произошла ошибка!');
+    } finally {
+      setIsGenerating(false);
     }
   };
 
