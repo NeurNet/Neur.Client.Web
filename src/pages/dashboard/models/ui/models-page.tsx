@@ -3,8 +3,8 @@ import { useMemo, useState } from 'react';
 import { Plus } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
-import { DashboardModelCard, useModels, useRemoveModel } from '@/entities/model';
-import { CreateModelDialog } from '@/features/dashboard/models';
+import { DashboardModelCard, useModels, useRemoveModel, type Model } from '@/entities/model';
+import { CreateModelDialog, UpdateModelDialog } from '@/features/dashboard/models';
 
 export function ModelsPage() {
   const { data } = useModels();
@@ -12,6 +12,7 @@ export function ModelsPage() {
 
   const [searchText, setSearchText] = useState('');
   const [showCreateModelDialog, setShowCreateModelDialog] = useState(false);
+  const [selectedModel, setSelectedModel] = useState<Model | null>(null);
 
   const models = useMemo(() => {
     if (!data) return [];
@@ -46,7 +47,12 @@ export function ModelsPage() {
 
       <div className={classes.models}>
         {models.map((model) => (
-          <DashboardModelCard key={model.id} model={model} onRemove={() => removeModel(model)} />
+          <DashboardModelCard
+            key={model.id}
+            model={model}
+            onRemove={() => removeModel(model)}
+            onEdit={() => setSelectedModel(model)}
+          />
         ))}
       </div>
 
@@ -54,6 +60,8 @@ export function ModelsPage() {
         open={showCreateModelDialog}
         onClose={() => setShowCreateModelDialog(false)}
       />
+
+      <UpdateModelDialog model={selectedModel} onClose={() => setSelectedModel(null)} />
     </>
   );
 }

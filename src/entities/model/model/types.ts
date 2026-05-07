@@ -1,4 +1,4 @@
-export type ModelType = 'text' | 'code' | 'images';
+export type ModelType = 'text' | 'code' | 'image';
 export type CreateModelType = 'Text' | 'Code' | 'Image';
 export type ModelStatus = 'open' | 'locked';
 
@@ -20,4 +20,9 @@ export interface CreateModel {
   type: CreateModelType;
   version: string;
   status: ModelStatus;
+}
+
+export interface UpdateModel {
+  id: string;
+  model: CreateModel;
 }

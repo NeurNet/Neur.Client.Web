@@ -8,9 +8,10 @@ import { Tag } from '@/shared/ui/tag';
 interface DashboardModelCardProps {
   model: Model;
   onRemove?: () => void;
+  onEdit?: () => void;
 }
 
-export function DashboardModelCard({ model, onRemove }: DashboardModelCardProps) {
+export function DashboardModelCard({ model, onRemove, onEdit }: DashboardModelCardProps) {
   const createdAt = new Date(model.createdAt).toLocaleDateString();
 
   return (
@@ -45,7 +46,10 @@ export function DashboardModelCard({ model, onRemove }: DashboardModelCardProps)
       </div>
 
       <div className={classes.controls}>
-        <Button size="sm">Изменить</Button>
+        <Button size="sm" onClick={onEdit}>
+          Изменить
+        </Button>
+
         <Button size="sm" variant="outline" onClick={onRemove}>
           Удалить
         </Button>

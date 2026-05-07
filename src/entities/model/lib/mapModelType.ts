@@ -6,7 +6,7 @@ export function mapModelType(type: ModelType): string {
       return 'Текст';
     case 'code':
       return 'Код';
-    case 'images':
+    case 'image':
       return 'Изображения';
     default:
       return type;

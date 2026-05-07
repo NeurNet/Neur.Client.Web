@@ -1,5 +1,5 @@
 import { apiClient } from '@/shared/api';
-import type { Model, CreateModel } from '../model/types';
+import type { Model, CreateModel, UpdateModel } from '../model/types';
 
 export const ModelApi = {
   fetchModels: async (): Promise<Model[]> => {
@@ -19,7 +19,7 @@ export const ModelApi = {
     }
   },
 
-  updateModel: async (id: string, model: CreateModel) => {
+  updateModel: async ({ id, model }: UpdateModel) => {
     try {
       await apiClient.put(`/models/${id}`, model);
     } catch (err) {
