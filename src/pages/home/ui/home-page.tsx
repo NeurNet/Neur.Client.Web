@@ -8,7 +8,7 @@ export function HomePage() {
 
   return (
     <div className={classes.wrapper}>
-      <title>Новый чат - NeurNet</title>
+      <title>NeurNet</title>
 
       <span className={classes.welcome}>Привет! Чем могу помочь?</span>
 

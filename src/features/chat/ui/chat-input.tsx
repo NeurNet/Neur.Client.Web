@@ -33,25 +33,31 @@ export function ChatInput({
     onChange?.(e);
   };
 
+  const handleSubmit = (e: React.SubmitEvent) => {
+    e.preventDefault();
+    onSend?.(currentValue);
+  };
+
   return (
-    <div className={classes.wrapper}>
+    <form className={classes.wrapper} onSubmit={handleSubmit}>
       <input
         className={classes.input}
         value={currentValue}
         onChange={handleChange}
         disabled={isGenerating}
+        required
         {...props}
       />
 
       {isGenerating ? (
-        <Button size="icon" className={classes.button} onClick={onStop}>
+        <Button type="button" size="icon" className={classes.button} onClick={onStop}>
           <Square />
         </Button>
       ) : internalValue.trim() !== '' ? (
-        <Button size="icon" className={classes.button} onClick={() => onSend?.(currentValue)}>
+        <Button type="submit" size="icon" disabled={isGenerating} className={classes.button}>
           <ChevronUp />
         </Button>
       ) : null}
-    </div>
+    </form>
   );
 }
