@@ -1,4 +1,5 @@
 export type { Model, ModelStatus, CreateModel } from './model/types';
-export { DashboardModelCard } from './ui/dashboard-model-card';
+export { ModelCard } from './ui/model-card';
 export { useModels, useRemoveModel, useCreateModel, useUpdateModel } from './model/hooks';
+export { mapModelType } from './lib/mapModelType';
 export { ModelApi } from './api/model';

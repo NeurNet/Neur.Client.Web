@@ -1,9 +1,8 @@
-import type { Model } from '../model/types';
 import classes from './dashboard-model-card.module.css';
-import avatar from '../assets/avatar.png';
-import { mapModelType } from '../lib/mapModelType';
+import avatar from '@/entities/model/assets/avatar.png';
 import { Button } from '@/shared/ui/button';
 import { Tag } from '@/shared/ui/tag';
+import { mapModelType, type Model } from '@/entities/model';
 
 interface DashboardModelCardProps {
   model: Model;

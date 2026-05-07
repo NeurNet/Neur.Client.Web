@@ -1,7 +1,7 @@
 import classes from './model-dialog.module.css';
+import { ModelCard } from '@/entities/model';
 import { Button } from '@/shared/ui/button';
 import { Dialog } from '@/shared/ui/dialog';
-import { ModelCard } from './model-card';
 import { useModels } from '@/entities/model';
 
 interface ModelDialogProps {

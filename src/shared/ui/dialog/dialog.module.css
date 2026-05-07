@@ -8,6 +8,7 @@
   align-items: center;
   justify-content: center;
   background-color: var(--color-backdrop);
+  padding: 24px;
 }
 
 .dialog {

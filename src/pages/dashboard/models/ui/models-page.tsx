@@ -3,8 +3,9 @@ import { useMemo, useState } from 'react';
 import { Plus } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
-import { DashboardModelCard, useModels, useRemoveModel, type Model } from '@/entities/model';
+import { useModels, useRemoveModel, type Model } from '@/entities/model';
 import { CreateModelDialog, UpdateModelDialog } from '@/features/dashboard/models';
+import { DashboardModelCard } from '@/features/dashboard/models';
 
 export function ModelsPage() {
   const { data } = useModels();
