@@ -1,6 +1,6 @@
-export type UserRole = 'admin' | 'teacher' | 'student';
+import type { UserRole } from '@/entities/user';
 
-export interface UserAuth {
+export interface AuthorizedUser {
   id: string;
   username: string;
   name: string;

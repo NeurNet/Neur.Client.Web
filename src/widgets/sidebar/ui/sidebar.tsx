@@ -4,10 +4,11 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router';
 import { SidebarButton } from './sidebar-button';
 import { Box, ChevronsLeft, ChevronsRight, LogOut, SquarePen, User } from 'lucide-react';
-import { mapUserRole, useAuth, useLogout, ProfileDialog } from '@/features/auth';
+import { useAuth, useLogout, ProfileDialog } from '@/features/auth';
 import { relativeDate } from '@/shared/lib';
 import { useChats } from '@/features/chat';
 import { Button } from '@/shared/ui/button';
+import { mapUserRole } from '@/entities/user';
 
 export function Sidebar() {
   const auth = useAuth();
@@ -78,7 +79,7 @@ export function Sidebar() {
             <Link to="/dashboard">
               <SidebarButton
                 icon={<Box size={18} />}
-                active={pathname === '/dashboard'}
+                active={pathname.startsWith('/dashboard')}
                 onClick={onLinkClick}
               >
                 Панель управления

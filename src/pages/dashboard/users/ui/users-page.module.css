@@ -1,0 +1,31 @@
+.filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.searchInput {
+  max-width: 320px;
+}
+
+.filterSelect {
+  max-width: 160px;
+}
+
+.content {
+  box-shadow: 0 0 10px 0 var(--color-shadow);
+  border-radius: 12px;
+}
+
+.titleBlock {
+  padding: 20px 24px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.description {
+  font-size: 12px;
+}

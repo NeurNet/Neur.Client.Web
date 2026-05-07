@@ -1,6 +1,6 @@
-import { apiClient } from '@/shared/api';
-import type { Credentials, UserAuth } from '../model/types';
 import axios from 'axios';
+import { apiClient } from '@/shared/api';
+import type { AuthorizedUser, Credentials } from '../model/types';
 
 export const AuthApi = {
   login: async (credentials: Credentials) => {
@@ -25,7 +25,7 @@ export const AuthApi = {
 
   fetchUserAuth: async () => {
     try {
-      const res = await apiClient.get<UserAuth>('/users/auth');
+      const res = await apiClient.get<AuthorizedUser>('/users/auth');
       return res.data;
     } catch (err) {
       throw new Error('Произошла ошибка!', { cause: err });
