@@ -30,3 +30,19 @@
 .description {
   font-size: 12px;
 }
+
+.tagWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.name {
+  color: var(--color-gray-900);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.username {
+  color: var(--color-gray-600);
+  font-size: 14px;
+}

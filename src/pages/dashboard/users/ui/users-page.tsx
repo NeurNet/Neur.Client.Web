@@ -3,6 +3,7 @@ import { useUsers, mapUserRole, type UserRole } from '@/entities/user';
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
 import { Select } from '@/shared/ui/select';
+import { Tag } from '@/shared/ui/tag';
 import { useMemo, useState } from 'react';
 
 type RoleFilter = 'all' | UserRole;
@@ -76,11 +77,19 @@ export function UsersPage() {
             {users.map((user) => (
               <tr key={user.user_id}>
                 <td>
-                  {user.surname} {user.name}
+                  <span className={classes.name}>
+                    {user.surname} {user.name}
+                  </span>
                   <br />
-                  {user.user_name}
+                  <span className={classes.username}>{user.user_name}</span>
                 </td>
-                <td>{mapUserRole(user.role)}</td>
+                <td>
+                  <div className={classes.tagWrapper}>
+                    <Tag variant={user.role === 'student' ? 'success' : 'error'}>
+                      {mapUserRole(user.role)}
+                    </Tag>
+                  </div>
+                </td>
                 <td>{user.tokens} токенов</td>
                 <td>{new Date(user.last_request).toLocaleString()}</td>
                 <td>
