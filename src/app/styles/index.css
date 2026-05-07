@@ -22,6 +22,7 @@ a {
 table {
   width: 100%;
   border-collapse: collapse;
+  white-space: nowrap;
 }
 
 th {
