@@ -1,18 +1,29 @@
 import classes from './models-page.module.css';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Plus } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
-import { DashboardModelCard, useModels } from '@/entities/model';
+import { DashboardModelCard, useModels, useRemoveModel } from '@/entities/model';
 import { CreateModelDialog } from '@/features/dashboard/models';
 
 export function ModelsPage() {
-  const models = useModels();
+  const { data } = useModels();
+  const { mutate: removeModel } = useRemoveModel();
 
   const [searchText, setSearchText] = useState('');
   const [showCreateModelDialog, setShowCreateModelDialog] = useState(false);
 
-  if (!models.data) return null;
+  const models = useMemo(() => {
+    if (!data) return [];
+
+    const q = searchText.trim().toLowerCase();
+
+    return data.filter(
+      (model) => model.name.toLowerCase().includes(q) || model.model.toLowerCase().includes(q),
+    );
+  }, [data, searchText]);
+
+  if (!data) return null;
 
   return (
     <>
@@ -34,8 +45,8 @@ export function ModelsPage() {
       </div>
 
       <div className={classes.models}>
-        {models.data.map((model) => (
-          <DashboardModelCard key={model.id} model={model} />
+        {models.map((model) => (
+          <DashboardModelCard key={model.id} model={model} onRemove={() => removeModel(model)} />
         ))}
       </div>
 

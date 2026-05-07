@@ -5,10 +5,8 @@ import { Label } from '@/shared/ui/label';
 import { Button } from '@/shared/ui/button';
 import { Textarea } from '@/shared/ui/textarea';
 import { Select } from '@/shared/ui/select';
-import { useForm } from 'react-hook-form';
-import { ModelApi, type CreateModel } from '@/entities/model';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import toast from 'react-hot-toast';
+import { useForm, type SubmitHandler } from 'react-hook-form';
+import { type CreateModel, useCreateModel } from '@/entities/model';
 
 interface CreateModelDialogProps {
   open?: boolean;
@@ -16,27 +14,23 @@ interface CreateModelDialogProps {
 }
 
 export function CreateModelDialog({ open, onClose }: CreateModelDialogProps) {
-  const queryClient = useQueryClient();
-
-  const { register, handleSubmit, getValues } = useForm<CreateModel>({
+  const { register, handleSubmit, reset } = useForm<CreateModel>({
     defaultValues: { version: '1.0' },
   });
 
-  const mutation = useMutation({
-    mutationFn: ModelApi.createModel,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['models'] });
-      toast.success(`Вы создали модель ${getValues('name')}!`);
-      onClose?.();
-    },
-    onError: (error) => toast.error(error.message),
-  });
+  const { mutate: createModel } = useCreateModel();
+
+  const onSubmit: SubmitHandler<CreateModel> = (data) => {
+    createModel(data);
+    reset();
+    onClose?.();
+  };
 
   return (
     <Dialog open={open} onClose={onClose}>
       <h2 className={classes.title}>Добавить модель</h2>
 
-      <form onSubmit={handleSubmit((data) => mutation.mutate(data))}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className={classes.row}>
           <div className={classes.field}>
             <Label htmlFor="name">Название</Label>

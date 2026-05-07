@@ -29,7 +29,7 @@ export const ModelApi = {
 
   deleteModel: async (id: string) => {
     try {
-      apiClient.delete(`/models/${id}`);
+      await apiClient.delete(`/models/${id}`);
     } catch (err) {
       throw new Error('Произошла ошибка!', { cause: err });
     }
