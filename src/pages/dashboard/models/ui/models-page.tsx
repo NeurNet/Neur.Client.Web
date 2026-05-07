@@ -9,6 +9,7 @@ import { CreateModelDialog } from '@/features/dashboard/models';
 export function ModelsPage() {
   const models = useModels();
 
+  const [searchText, setSearchText] = useState('');
   const [showCreateModelDialog, setShowCreateModelDialog] = useState(false);
 
   if (!models.data) return null;
@@ -18,9 +19,14 @@ export function ModelsPage() {
       <title>Модели - NeurNet</title>
 
       <div className={classes.top}>
-        <form className={classes.filters}>
-          <Input type="text" placeholder="Поиск" className={classes.searchInput} />
-        </form>
+        <div className={classes.filters}>
+          <Input
+            type="text"
+            placeholder="Поиск"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+        </div>
 
         <Button variant="outline" size="sm" onClick={() => setShowCreateModelDialog(true)}>
           <Plus size={14} /> Добавить модель

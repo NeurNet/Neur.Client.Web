@@ -1,13 +1,19 @@
 .top {
   display: flex;
   justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 24px;
 }
 
 .filters {
   display: flex;
   gap: 8px;
+  max-width: 320px;
+  width: 100%;
 }
 
-.searchInput {
-  width: 320px;
+.models {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
 }

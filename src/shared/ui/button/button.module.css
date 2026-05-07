@@ -6,13 +6,14 @@
   font-weight: 600;
   font-size: 14px;
   border-radius: 8px;
-  transition:
-    background-color 200ms,
-    outline-color 200ms;
+  white-space: nowrap;
   outline: 4px solid transparent;
   background-color: transparent;
   cursor: pointer;
   border: none;
+    transition:
+    background-color 200ms,
+    outline-color 200ms;
 }
 
 .icon {

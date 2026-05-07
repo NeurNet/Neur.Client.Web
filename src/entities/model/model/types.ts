@@ -1,4 +1,5 @@
-export type ModelType = 'Text' | 'Code' | 'Image';
+export type ModelType = 'text' | 'code' | 'images';
+export type CreateModelType = 'Text' | 'Code' | 'Image';
 export type ModelStatus = 'open' | 'locked';
 
 export interface Model {
@@ -16,7 +17,7 @@ export interface CreateModel {
   name: string;
   model: string;
   context: string;
-  type: ModelType;
+  type: CreateModelType;
   version: string;
   status: ModelStatus;
 }

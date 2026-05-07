@@ -1,0 +1,30 @@
+.card {
+  padding: 20px;
+  box-shadow: 0 0 8px 0 var(--color-shadow);
+  border-radius: 24px;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.name {
+  font-size: 18px;
+}
+
+.model {
+  font-weight: 500;
+  color: var(--color-gray-500);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.info {
+}
