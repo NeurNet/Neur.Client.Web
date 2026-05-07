@@ -29,13 +29,15 @@ export function DashboardModelCard({ model }: DashboardModelCardProps) {
         {model.status === 'locked' && <Tag variant="error">Приватная модель</Tag>}
       </div>
 
-      <div className={classes.info}>
-        <div className={classes.infoText}>
+      <hr className={classes.divider} />
+
+      <div className={classes.infoList}>
+        <div className={classes.info}>
           <span className={classes.infoTitle}>Версия</span>
           <span>{model.version}</span>
         </div>
 
-        <div className={classes.infoText}>
+        <div className={classes.info}>
           <span className={classes.infoTitle}>Добавлена</span>
           <span>{createdAt}</span>
         </div>

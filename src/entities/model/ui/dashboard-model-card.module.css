@@ -24,7 +24,30 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  margin-bottom: 12px;
+}
+
+.divider {
+  border: 1px solid var(--color-gray-300);
+  margin-bottom: 12px;
+}
+
+.infoList {
+  margin-bottom: 16px;
 }
 
 .info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+}
+
+.infoTitle {
+  font-weight: 600;
+}
+
+.controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
 }
