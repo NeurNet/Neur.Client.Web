@@ -103,6 +103,8 @@ export function ChatPage() {
                 if (parsed.type === 'meta') {
                   activeChatIdRef.current = parsed.data;
                   navigate(`/chat/${parsed.data}`, { replace: true });
+
+                  queryClient.invalidateQueries({ queryKey: ['chats'] });
                 } else if (parsed.type === 'data') {
                   appendChunk(parsed.data, 'assistant');
                 }
