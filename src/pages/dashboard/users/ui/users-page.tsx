@@ -1,5 +1,6 @@
 import classes from './users-page.module.css';
-import { useUsers, mapUserRole, type UserRole } from '@/entities/user';
+import { useUsers, mapUserRole, type UserRole, type User } from '@/entities/user';
+import { EditUserDialog } from '@/features/dashboard/users';
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
 import { Select } from '@/shared/ui/select';
@@ -13,6 +14,8 @@ export function UsersPage() {
 
   const [searchText, setSearchText] = useState('');
   const [roleFilter, setRoleFilter] = useState<RoleFilter>('all');
+
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
   const users = useMemo(() => {
     if (!data) return [];
@@ -93,7 +96,7 @@ export function UsersPage() {
                 <td>{user.tokens} токенов</td>
                 <td>{new Date(user.last_request).toLocaleString()}</td>
                 <td>
-                  <Button size="sm" variant="outline">
+                  <Button size="sm" variant="outline" onClick={() => setSelectedUser(user)}>
                     Управление
                   </Button>
                 </td>
@@ -102,6 +105,8 @@ export function UsersPage() {
           </tbody>
         </table>
       </div>
+
+      <EditUserDialog user={selectedUser} onClose={() => setSelectedUser(null)} />
     </>
   );
 }

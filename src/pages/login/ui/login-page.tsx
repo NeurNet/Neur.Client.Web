@@ -33,7 +33,7 @@ export function LoginPage() {
 
             <div>
               <span className={classes.title}>NeurNet</span>
-              <span className={classes.description}>
+              <span>
                 Платформа для работы
                 <br />с нейросетями
               </span>

@@ -27,12 +27,7 @@
   display: block;
 }
 
-.description {
-  font-size: 14px;
-}
-
 .recentText {
-  font-size: 14px;
   color: var(--color-gray-500);
 }
 

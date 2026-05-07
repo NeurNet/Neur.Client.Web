@@ -43,7 +43,7 @@ export function Sidebar() {
 
         <div>
           <span className={classes.title}>NeurNet</span>
-          <span className={classes.description}>Нейросети колледжа</span>
+          <span>Нейросети колледжа</span>
         </div>
       </div>
 

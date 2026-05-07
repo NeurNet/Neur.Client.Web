@@ -25,10 +25,6 @@
   font-weight: 700;
 }
 
-.description {
-  font-size: 14px;
-}
-
 .form {
   display: flex;
   flex-direction: column;
