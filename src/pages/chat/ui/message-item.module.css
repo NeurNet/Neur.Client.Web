@@ -1,0 +1,11 @@
+.message {
+  width: fit-content;
+}
+
+.userMessage {
+  margin-left: auto;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: 16px 32px;
+  border-radius: 24px;
+}

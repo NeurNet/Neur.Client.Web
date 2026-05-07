@@ -1,16 +1,17 @@
 import classes from './model-card.module.css';
 import avatar from '../assets/avatar.png';
-import { mapModelType } from '../lib/mapModelType';
 import { Tag } from '@/shared/ui/tag';
+import { mapModelType } from '../lib/mapModelType';
 import type { Model } from '../model/types';
 
 interface ModelCardProps {
   model: Model;
+  onClick?: () => void;
 }
 
-export function ModelCard({ model }: ModelCardProps) {
+export function ModelCard({ model, onClick }: ModelCardProps) {
   return (
-    <div className={classes.card}>
+    <div className={classes.card} onClick={onClick}>
       <div className={classes.top}>
         <img src={avatar} alt="Model avatar" />
 

@@ -16,7 +16,7 @@ export interface Request {
     name: string;
     surname: string;
   };
-  message: {
+  message?: {
     id: string;
     role: 'user' | 'ai';
     content: string;

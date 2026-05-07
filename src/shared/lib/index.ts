@@ -1,1 +1,1 @@
-export { relativeDate } from './relativeDate';
+export { timeAgo } from './timeAgo';

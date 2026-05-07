@@ -7,6 +7,7 @@ import { OverviewPage } from '@/pages/dashboard/overview';
 import { UsersPage } from '@/pages/dashboard/users';
 import { RequestsPage } from '@/pages/dashboard/requests';
 import { ModelsPage } from '@/pages/dashboard/models';
+import { ChatPage } from '@/pages/chat';
 
 export const router = createBrowserRouter([
   { path: '/login', element: <LoginPage /> },
@@ -15,6 +16,7 @@ export const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       { path: '/', element: <HomePage /> },
+      { path: '/chat/:id', element: <ChatPage /> },
       {
         path: '/dashboard',
         element: <DashboardLayout />,

@@ -5,9 +5,10 @@ import { Dialog } from '@/shared/ui/dialog';
 
 interface ModelDialogProps {
   onClose: () => void;
+  onModelSelect?: (modelId: string) => void;
 }
 
-export function ModelDialog({ onClose }: ModelDialogProps) {
+export function ModelDialog({ onClose, onModelSelect }: ModelDialogProps) {
   const { data: models } = useModels();
 
   if (!models) return null;
@@ -27,7 +28,7 @@ export function ModelDialog({ onClose }: ModelDialogProps) {
 
       <div className={classes.models}>
         {models.map((model) => (
-          <ModelCard key={model.id} model={model} />
+          <ModelCard key={model.id} model={model} onClick={() => onModelSelect?.(model.id)} />
         ))}
       </div>
     </Dialog>

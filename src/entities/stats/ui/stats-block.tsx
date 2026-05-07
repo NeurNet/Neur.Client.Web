@@ -17,9 +17,7 @@ export function StatsBlock({ icon, count, name, to }: StatsBlockProps) {
 
       <div className={classes.bottom}>
         <div>
-          <span className={classes.count}>
-            {count.toLocaleString('en-US').replaceAll(',', ' ')}
-          </span>
+          <span className={classes.count}>{count}</span>
           <span className={classes.name}>{name}</span>
         </div>
 

@@ -46,7 +46,7 @@ export function RequestsPage() {
                 <br />
                 {request.model_ollama}
               </td>
-              <td>{request.message.content}</td>
+              <td>{request.message?.content}</td>
               <td>
                 <div className={classes.status}>
                   {request.status === 'success' ? (
