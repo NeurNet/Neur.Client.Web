@@ -62,3 +62,9 @@
   box-shadow: 0 0 4px 0 var(--color-shadow);
   border-radius: 8px;
 }
+
+.roleList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

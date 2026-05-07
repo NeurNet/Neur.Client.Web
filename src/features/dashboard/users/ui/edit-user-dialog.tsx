@@ -1,11 +1,12 @@
 import classes from './edit-user-dialog.module.css';
-import { UserApi, type User } from '@/entities/user';
+import { UserApi, type User, type UserRole } from '@/entities/user';
 import { Button } from '@/shared/ui/button';
 import { Dialog } from '@/shared/ui/dialog';
 import { Input } from '@/shared/ui/input';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { RoleItem } from './role-item';
 
 interface EditUserDialogProps {
   user: User | null;
@@ -14,11 +15,29 @@ interface EditUserDialogProps {
 
 type Tab = 'tokens' | 'role';
 
+interface RoleItem {
+  name: string;
+  description: string;
+  role: UserRole;
+}
+
+const roleItems: RoleItem[] = [
+  { name: 'Студент', description: 'Доступ к чату, расход токенов', role: 'student' },
+  { name: 'Преподаватель', description: 'Управление токенами студентов', role: 'teacher' },
+  {
+    name: 'Администратор',
+    description: 'Полный доступ, просмотр истории, управление моделями',
+    role: 'admin',
+  },
+];
+
 const quickTokenOptions = [5, 10, 25, 50];
 
 export function EditUserDialog({ user, onClose }: EditUserDialogProps) {
   const [tab, setTab] = useState<Tab>('tokens');
+
   const [tokens, setTokens] = useState(10);
+  const [role, setRole] = useState<UserRole>(user?.role || 'student');
 
   const queryClient = useQueryClient();
 
@@ -36,11 +55,27 @@ export function EditUserDialog({ user, onClose }: EditUserDialogProps) {
     onError: (error) => toast.error(error.message),
   });
 
+  const { mutate: updateRole } = useMutation({
+    mutationFn: UserApi.updateRole,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['users'] });
+
+      if (user) {
+        toast.success(`Вы изменили роль пользователя ${user.surname} ${user.name}!`);
+      }
+
+      onClose();
+    },
+    onError: (error) => toast.error(error.message),
+  });
+
   const onSave = () => {
     if (!user) return;
 
     if (tab === 'tokens') {
       transferTokens({ user_id: user.user_id, token_count: tokens });
+    } else {
+      updateRole({ user_id: user.user_id, role });
     }
   };
 
@@ -98,6 +133,7 @@ export function EditUserDialog({ user, onClose }: EditUserDialogProps) {
               <div className={classes.row}>
                 {quickTokenOptions.map((quantity) => (
                   <Button
+                    key={quantity}
                     variant="outline"
                     size="sm"
                     active={tokens === quantity}
@@ -127,7 +163,17 @@ export function EditUserDialog({ user, onClose }: EditUserDialogProps) {
             </div>
           </>
         ) : (
-          <div></div>
+          <div className={classes.roleList}>
+            {roleItems.map((item) => (
+              <RoleItem
+                key={item.role}
+                name={item.name}
+                description={item.description}
+                active={role === item.role}
+                onClick={() => setRole(item.role)}
+              />
+            ))}
+          </div>
         )}
 
         <div className={classes.row}>
