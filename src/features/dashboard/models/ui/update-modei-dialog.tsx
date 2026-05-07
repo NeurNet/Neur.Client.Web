@@ -5,7 +5,7 @@ import type { SubmitHandler } from 'react-hook-form';
 import { ModelForm } from './model-form';
 
 interface UpdateModelDialogProps {
-  model: Model | null;
+  model: Model;
   onClose?: () => void;
 }
 
@@ -13,13 +13,12 @@ export function UpdateModelDialog({ model, onClose }: UpdateModelDialogProps) {
   const { mutate: updateModel } = useUpdateModel();
 
   const onSubmit: SubmitHandler<CreateModel> = (data) => {
-    if (!model) return;
     updateModel({ id: model.id, model: data });
     onClose?.();
   };
 
   return (
-    <Dialog open={model !== null} onClose={onClose}>
+    <Dialog onClose={onClose}>
       <h2 className={classes.title}>Редактировать модель</h2>
 
       <ModelForm model={model} onSubmit={onSubmit} onClose={onClose} />

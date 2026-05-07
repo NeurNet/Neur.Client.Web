@@ -106,7 +106,7 @@ export function UsersPage() {
         </table>
       </div>
 
-      <EditUserDialog user={selectedUser} onClose={() => setSelectedUser(null)} />
+      {selectedUser && <EditUserDialog user={selectedUser} onClose={() => setSelectedUser(null)} />}
     </>
   );
 }

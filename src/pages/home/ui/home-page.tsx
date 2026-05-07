@@ -14,7 +14,7 @@ export function HomePage() {
 
       <ChatInput placeholder="Спросите NeurNet" onSend={() => setShowDialog(true)} />
 
-      <ModelDialog open={showDialog} onClose={() => setShowDialog(false)} />
+      {showDialog && <ModelDialog onClose={() => setShowDialog(false)} />}
     </div>
   );
 }

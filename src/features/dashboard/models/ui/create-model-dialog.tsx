@@ -5,11 +5,10 @@ import type { SubmitHandler } from 'react-hook-form';
 import { ModelForm } from './model-form';
 
 interface CreateModelDialogProps {
-  open?: boolean;
   onClose?: () => void;
 }
 
-export function CreateModelDialog({ open, onClose }: CreateModelDialogProps) {
+export function CreateModelDialog({ onClose }: CreateModelDialogProps) {
   const { mutate: createModel } = useCreateModel();
 
   const onSubmit: SubmitHandler<CreateModel> = (data) => {
@@ -18,7 +17,7 @@ export function CreateModelDialog({ open, onClose }: CreateModelDialogProps) {
   };
 
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog onClose={onClose}>
       <h2 className={classes.title}>Добавить модель</h2>
 
       <ModelForm onSubmit={onSubmit} onClose={onClose} />

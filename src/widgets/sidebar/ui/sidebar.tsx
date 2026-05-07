@@ -104,7 +104,7 @@ export function Sidebar() {
         </div>
       )}
 
-      <ProfileDialog open={showProfileDialog} onClose={() => setShowProfileDialog(false)} />
+      {showProfileDialog && <ProfileDialog onClose={() => setShowProfileDialog(false)} />}
     </aside>
   );
 }

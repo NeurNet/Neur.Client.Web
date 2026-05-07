@@ -56,12 +56,13 @@ export function ModelsPage() {
         ))}
       </div>
 
-      <CreateModelDialog
-        open={showCreateModelDialog}
-        onClose={() => setShowCreateModelDialog(false)}
-      />
+      {showCreateModelDialog && (
+        <CreateModelDialog onClose={() => setShowCreateModelDialog(false)} />
+      )}
 
-      <UpdateModelDialog model={selectedModel} onClose={() => setSelectedModel(null)} />
+      {selectedModel && (
+        <UpdateModelDialog model={selectedModel} onClose={() => setSelectedModel(null)} />
+      )}
     </>
   );
 }

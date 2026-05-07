@@ -5,11 +5,11 @@ import { Dialog } from '@/shared/ui/dialog';
 import { Input } from '@/shared/ui/input';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
-import toast from 'react-hot-toast';
 import { RoleItem } from './role-item';
+import toast from 'react-hot-toast';
 
 interface EditUserDialogProps {
-  user: User | null;
+  user: User;
   onClose: () => void;
 }
 
@@ -37,7 +37,7 @@ export function EditUserDialog({ user, onClose }: EditUserDialogProps) {
   const [tab, setTab] = useState<Tab>('tokens');
 
   const [tokens, setTokens] = useState(10);
-  const [role, setRole] = useState<UserRole>(user?.role || 'student');
+  const [role, setRole] = useState<UserRole>(user.role);
 
   const queryClient = useQueryClient();
 
@@ -69,20 +69,16 @@ export function EditUserDialog({ user, onClose }: EditUserDialogProps) {
     onError: (error) => toast.error(error.message),
   });
 
-  const onSave = () => {
-    if (!user) return;
-
-    if (tab === 'tokens') {
-      transferTokens({ user_id: user.user_id, token_count: tokens });
-    } else {
-      updateRole({ user_id: user.user_id, role });
-    }
+  const handleTransferTokens = () => {
+    transferTokens({ user_id: user.user_id, token_count: tokens });
   };
 
-  if (!user) return null;
+  const handleUpdateRole = () => {
+    updateRole({ user_id: user.user_id, role });
+  };
 
   return (
-    <Dialog open={user !== null} onClose={onClose}>
+    <Dialog onClose={onClose}>
       <div className={classes.wrapper}>
         <h2 className={classes.title}>Управление пользователем</h2>
 
@@ -180,7 +176,9 @@ export function EditUserDialog({ user, onClose }: EditUserDialogProps) {
           <Button variant="outline" onClick={onClose}>
             Отмена
           </Button>
-          <Button onClick={onSave}>Сохранить</Button>
+          <Button onClick={tab === 'tokens' ? handleTransferTokens : handleUpdateRole}>
+            Сохранить
+          </Button>
         </div>
       </div>
     </Dialog>

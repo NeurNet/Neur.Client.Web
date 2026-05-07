@@ -2,12 +2,11 @@ import { createPortal } from 'react-dom';
 import classes from './dialog.module.css';
 
 export interface DialogProps {
-  open?: boolean;
   children?: React.ReactNode;
   onClose?: () => void;
 }
 
-export function Dialog({ open = false, children, onClose }: DialogProps) {
+export function Dialog({ children, onClose }: DialogProps) {
   if (!open) return null;
 
   return createPortal(

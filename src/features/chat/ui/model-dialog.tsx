@@ -1,14 +1,18 @@
 import classes from './model-dialog.module.css';
 import { Button } from '@/shared/ui/button';
-import { Dialog, type DialogProps } from '@/shared/ui/dialog';
+import { Dialog } from '@/shared/ui/dialog';
 import { ModelCard } from './model-card';
 import { useModels } from '@/entities/model';
 
-export function ModelDialog({ onClose, open }: DialogProps) {
+interface ModelDialogProps {
+  onClose: () => void;
+}
+
+export function ModelDialog({ onClose }: ModelDialogProps) {
   const models = useModels();
 
   return (
-    <Dialog onClose={onClose} open={open}>
+    <Dialog onClose={onClose}>
       <div className={classes.header}>
         <div>
           <h2 className={classes.title}>Выбери модель</h2>
