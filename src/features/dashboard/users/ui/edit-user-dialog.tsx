@@ -1,4 +1,5 @@
 import classes from './edit-user-dialog.module.css';
+import toast from 'react-hot-toast';
 import { UserApi, type User, type UserRole } from '@/entities/user';
 import { Button } from '@/shared/ui/button';
 import { Dialog } from '@/shared/ui/dialog';
@@ -6,7 +7,7 @@ import { Input } from '@/shared/ui/input';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { RoleItem } from './role-item';
-import toast from 'react-hot-toast';
+import { useAuth } from '@/features/auth';
 
 interface EditUserDialogProps {
   user: User;
@@ -38,6 +39,8 @@ export function EditUserDialog({ user, onClose }: EditUserDialogProps) {
 
   const [tokens, setTokens] = useState(10);
   const [role, setRole] = useState<UserRole>(user.role);
+
+  const { data: auth } = useAuth();
 
   const queryClient = useQueryClient();
 
@@ -77,6 +80,8 @@ export function EditUserDialog({ user, onClose }: EditUserDialogProps) {
     updateRole({ user_id: user.user_id, role });
   };
 
+  if (!auth) return null;
+
   return (
     <Dialog onClose={onClose}>
       <div className={classes.wrapper}>
@@ -92,14 +97,16 @@ export function EditUserDialog({ user, onClose }: EditUserDialogProps) {
             Токены
           </Button>
 
-          <Button
-            variant="outline"
-            size="sm"
-            active={tab === 'role'}
-            onClick={() => setTab('role')}
-          >
-            Роль
-          </Button>
+          {auth.role === 'admin' && (
+            <Button
+              variant="outline"
+              size="sm"
+              active={tab === 'role'}
+              onClick={() => setTab('role')}
+            >
+              Роль
+            </Button>
+          )}
         </div>
 
         <div className={classes.user}>
