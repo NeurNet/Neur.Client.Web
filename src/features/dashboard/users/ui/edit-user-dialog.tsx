@@ -119,6 +119,12 @@ export function EditUserDialog({ user, onClose }: EditUserDialogProps) {
                 onChange={(e) => setTokens(Number(e.target.value))}
               />
             </div>
+
+            <div className={classes.afterTransaction}>
+              <span>
+                <b>После выдачи:</b> {user.tokens + tokens} токенов
+              </span>
+            </div>
           </>
         ) : (
           <div></div>

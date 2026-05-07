@@ -54,3 +54,11 @@
   margin-bottom: 6px;
   color: var(--color-gray-500);
 }
+
+.afterTransaction {
+  padding: 14px 0;
+  text-align: center;
+  background-color: var(--color-gray-100);
+  box-shadow: 0 0 4px 0 var(--color-shadow);
+  border-radius: 8px;
+}
