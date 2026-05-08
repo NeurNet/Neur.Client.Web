@@ -8,6 +8,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { RoleItem } from './role-item';
 import { useAuth } from '@/features/auth';
+import { Avatar } from '@/shared/ui/avatar';
 
 interface EditUserDialogProps {
   user: User;
@@ -110,12 +111,10 @@ export function EditUserDialog({ user, onClose }: EditUserDialogProps) {
         </div>
 
         <div className={classes.user}>
-          <div className={classes.avatar}>
-            <span>
-              {user.surname[0]}
-              {user.name[0]}
-            </span>
-          </div>
+          <Avatar>
+            {user.surname[0]}
+            {user.name[0]}
+          </Avatar>
 
           <div>
             <span className={classes.name}>

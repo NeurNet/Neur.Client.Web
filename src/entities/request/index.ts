@@ -1,3 +1,3 @@
 export { RequestApi } from './api/request';
-export { useRequests } from './model/hooks';
-export type { RequestStatus } from './model/types';
+export { useRequests, useUserRequests } from './model/hooks';
+export type { Request, RequestStatus } from './model/types';

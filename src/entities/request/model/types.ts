@@ -23,7 +23,24 @@ export interface Request {
   };
 }
 
+export interface UserRequest {
+  id: string;
+  model_id: string;
+  model_name: string;
+  model_ollama: string;
+  token_cost: number;
+  status: RequestStatus;
+  created_at: string;
+  started_at: string;
+  finished_at: string;
+}
+
 export interface RequestsResponse {
   items: Request[];
+  total: number;
+}
+
+export interface UserRequestsResponse {
+  items: UserRequest[];
   total: number;
 }

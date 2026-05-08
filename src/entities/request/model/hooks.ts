@@ -8,3 +8,16 @@ export function useRequests(page = 1) {
     placeholderData: keepPreviousData,
   });
 }
+
+export function useUserRequests(userId?: string, page = 1) {
+  return useQuery({
+    queryKey: ['users', userId, 'requests', page],
+    queryFn: () => {
+      if (!userId) throw new Error('userId is required');
+
+      return RequestApi.fetchUserRequests(userId, page);
+    },
+    placeholderData: keepPreviousData,
+    enabled: !!userId,
+  });
+}

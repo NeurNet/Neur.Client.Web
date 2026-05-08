@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import { Navigate, useNavigate, useParams, useSearchParams } from 'react-router';
 import { ChatApi, useChat, type Chat, type Message, type MessageRole } from '@/entities/chat';
 import { ChatInput } from '@/features/chat';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { isAxiosError } from 'axios';
 import { MessageItem } from './message-item';
 import { useQueryClient } from '@tanstack/react-query';
@@ -33,8 +33,18 @@ export function ChatPage() {
   const activeChatIdRef = useRef(id);
   const processedLengthRef = useRef(0);
   const abortControllerRef = useRef<AbortController | null>(null);
+  const messagesRef = useRef<HTMLDivElement | null>(null);
 
   const { data: chat } = useChat(id);
+
+  useEffect(() => {
+    if (messagesRef.current) {
+      messagesRef.current.scrollTo({
+        top: messagesRef.current.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
+  }, [chat?.messages]);
 
   const appendChunk = (chunk: string, role: MessageRole) => {
     if (!chunk.trim()) return;
@@ -118,10 +128,7 @@ export function ChatPage() {
     } catch (err) {
       if (isAxiosError(err) && err.response?.status === 402) {
         toast.error('Недостаточно токенов!');
-        return;
       }
-
-      toast.error('Произошла ошибка!');
     } finally {
       setIsGenerating(false);
     }
@@ -139,7 +146,7 @@ export function ChatPage() {
       )}
 
       <div className={classes.chat}>
-        <div className={classes.messages}>
+        <div className={classes.messages} ref={messagesRef}>
           {chat?.messages.map((message) => (
             <MessageItem key={message.id} message={message} />
           ))}
