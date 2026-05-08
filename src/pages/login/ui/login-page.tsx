@@ -61,11 +61,11 @@ export function LoginPage() {
 
             {errors.root && <span className={classes.error}>{errors.root.message}</span>}
           </form>
-
-          <span className={classes.copyright}>
-            &copy; 2025 АНПОО &quot;Колледж Цифровых Технологий&quot;
-          </span>
         </div>
+
+        <span className={classes.copyright}>
+          &copy; 2025 АНПОО &quot;Колледж Цифровых Технологий&quot;
+        </span>
       </div>
 
       <img src={art} className={classes.art} alt="Login Art" />
