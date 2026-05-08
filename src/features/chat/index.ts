@@ -1,2 +1,2 @@
-export type { Chat, IMessage } from './model/types';
-export { ChatApi } from './api';
+export { ChatInput } from './ui/chat-input';
+export { ModelDialog } from './ui/model-dialog';

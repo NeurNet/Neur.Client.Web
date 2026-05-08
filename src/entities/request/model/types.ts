@@ -1,11 +1,12 @@
-export type MessageRole = 'user' | 'assistant';
+export type RequestStatus = 'success' | 'failed';
 
-export interface IRequest {
+export interface Request {
   id: string;
   model_id: string;
   model_name: string;
+  model_ollama: string;
   token_cost: number;
-  status: string;
+  status: RequestStatus;
   created_at: string;
   started_at: string;
   finished_at: string;
@@ -17,12 +18,29 @@ export interface IRequest {
   };
   message?: {
     id: string;
-    role: MessageRole;
+    role: 'user' | 'ai';
     content: string;
   };
 }
 
+export interface UserRequest {
+  id: string;
+  model_id: string;
+  model_name: string;
+  model_ollama: string;
+  token_cost: number;
+  status: RequestStatus;
+  created_at: string;
+  started_at: string;
+  finished_at: string;
+}
+
 export interface RequestsResponse {
-  items: IRequest[];
+  items: Request[];
+  total: number;
+}
+
+export interface UserRequestsResponse {
+  items: UserRequest[];
   total: number;
 }

@@ -1,83 +1,108 @@
 import classes from './sidebar.module.css';
 import logo from '@/shared/assets/logo.png';
-import { ChatButton } from './chat-button';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { ChatApi } from '@/features/chat';
-import { Box, LogOut, SquarePen, User } from 'lucide-react';
+import { useState } from 'react';
+import { Link, useLocation } from 'react-router';
 import { SidebarButton } from './sidebar-button';
-import { Link, useNavigate } from 'react-router';
-import { SessionApi, useSession } from '@/entities/session';
+import { Box, ChevronsLeft, ChevronsRight, LogOut, SquarePen, User } from 'lucide-react';
+import { useAuth, useLogout, ProfileDialog } from '@/features/auth';
+import { useChats } from '@/entities/chat';
+import { Button } from '@/shared/ui/button';
+import { mapUserRole } from '@/entities/user';
+import { ChatButton } from './chat-button';
 
 export function Sidebar() {
-  const session = useSession();
+  const auth = useAuth();
+  const { data: chats } = useChats();
 
-  const chats = useQuery({
-    queryKey: ['chats'],
-    queryFn: ChatApi.fetchChats,
-  });
+  const reversedChats = chats ? chats.toReversed() : [];
 
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
+  const logoutMutation = useLogout();
 
-  const signout = useMutation({
-    mutationFn: SessionApi.signout,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['session'] });
-      navigate('/signin');
-    },
-  });
+  const { pathname } = useLocation();
 
-  if (!session.isSuccess) return;
+  const isMobile = window.innerWidth < 1400;
 
-  return (
+  const [showProfileDialog, setShowProfileDialog] = useState(false);
+  const [sidebarHidden, setSidebarHidden] = useState(isMobile);
+
+  const onLinkClick = () => {
+    if (isMobile) setSidebarHidden(true);
+  };
+
+  return sidebarHidden ? (
+    <Button
+      size="icon"
+      variant="outline"
+      className={classes.showButton}
+      onClick={() => setSidebarHidden(false)}
+    >
+      <ChevronsRight />
+    </Button>
+  ) : (
     <aside className={classes.sidebar}>
       <div className={classes.logo}>
-        <img src={logo} alt="NeurNet logo" width={56} height={56} />
+        <img src={logo} alt="NeurNet Logo" width={56} />
 
         <div>
-          <h1 className={classes.title}>NeurNet</h1>
-          <span className={classes.description}>Нейросети колледжа</span>
+          <span className={classes.title}>NeurNet</span>
+          <span>Нейросети колледжа</span>
         </div>
       </div>
 
       <Link to="/">
-        <SidebarButton icon={<SquarePen size={18} />}>Новый чат</SidebarButton>
+        <SidebarButton
+          icon={<SquarePen size={18} />}
+          active={pathname === '/'}
+          onClick={onLinkClick}
+        >
+          Новый чат
+        </SidebarButton>
       </Link>
 
-      <span className={classes.recent}>Недавнее</span>
+      <span className={classes.recentText}>Недавнее</span>
 
-      <div className={classes.chats}>
-        {chats.data?.map((chat) => (
-          <Link key={chat.id} to={`/chat/${chat.id}`}>
-            <ChatButton key={chat.id} chat={chat} />
-          </Link>
+      <div className={classes.recentChats}>
+        {reversedChats.map((chat) => (
+          <ChatButton key={chat.id} chat={chat} />
         ))}
       </div>
 
-      <div className={classes.bottom}>
-        {session.data.role !== 'student' && (
-          <Link to="/admin/overview">
-            <SidebarButton icon={<Box size={18} />}>Панель управления</SidebarButton>
-          </Link>
-        )}
+      {auth.data && (
+        <div className={classes.bottom}>
+          <SidebarButton icon={<ChevronsLeft size={18} />} onClick={() => setSidebarHidden(true)}>
+            Скрыть
+          </SidebarButton>
 
-        <SidebarButton icon={<LogOut size={18} />} onClick={() => signout.mutate()}>
-          Выйти
-        </SidebarButton>
+          {auth.data.role !== 'student' && (
+            <Link to="/dashboard">
+              <SidebarButton
+                icon={<Box size={18} />}
+                active={pathname.startsWith('/dashboard')}
+                onClick={onLinkClick}
+              >
+                Панель управления
+              </SidebarButton>
+            </Link>
+          )}
 
-        <div className={classes.user}>
-          <User size={18} />
+          <SidebarButton icon={<LogOut size={18} />} onClick={() => logoutMutation.mutate()}>
+            Выйти
+          </SidebarButton>
 
-          <div>
-            <span className={classes.name}>
-              {session.data.surname} {session.data.name}
-            </span>
-            <span className={classes.tokens}>
-              {session.data.username} | {session.data.tokens} токенов
-            </span>
-          </div>
+          <SidebarButton icon={<User size={18} />} onClick={() => setShowProfileDialog(true)}>
+            <div>
+              <span className={classes.userName}>
+                {auth.data.surname} {auth.data.name}
+              </span>
+              <span className={classes.userInfo}>
+                {auth.data.username} | {mapUserRole(auth.data.role)}
+              </span>
+            </div>
+          </SidebarButton>
         </div>
-      </div>
+      )}
+
+      {showProfileDialog && <ProfileDialog onClose={() => setShowProfileDialog(false)} />}
     </aside>
   );
 }

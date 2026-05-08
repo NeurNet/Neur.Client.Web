@@ -1,2 +1,3 @@
-export { RequestApi } from './api';
-export type { MessageRole, IRequest } from './model/types';
+export { RequestApi } from './api/request';
+export { useRequests, useUserRequests } from './model/hooks';
+export type { Request, RequestStatus } from './model/types';

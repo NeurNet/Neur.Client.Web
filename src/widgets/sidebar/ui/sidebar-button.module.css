@@ -1,21 +1,23 @@
 .sidebarButton {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 16px;
   padding: 16px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
   font-size: 16px;
   border-radius: 8px;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 200ms;
   width: 100%;
 }
-.sidebarButton:hover {
+
+.sidebarButton:hover,
+.active {
   background-color: var(--color-sidebar-button-hover);
 }
 
 .label {
-  font-weight: 300;
   margin-left: auto;
+  font-weight: 300;
 }

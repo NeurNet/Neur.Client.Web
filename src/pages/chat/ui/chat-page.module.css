@@ -1,0 +1,44 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.chat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  gap: 40px;
+  flex: 1;
+  width: 80%;
+  scrollbar-width: none;
+}
+
+@media screen and (max-width: 1100px) {
+  .messages {
+    width: 100%;
+  }
+}
+
+.disclaimer {
+  font-weight: 300;
+  text-align: center;
+}
+
+.name {
+  font-size: 18px;
+}
+
+.model {
+  font-size: 16px;
+  color: var(--color-gray-500);
+}

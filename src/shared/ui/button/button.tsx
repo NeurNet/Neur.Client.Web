@@ -1,26 +1,29 @@
-import classes from './button.module.css';
 import clsx from 'clsx';
+import classes from './button.module.css';
+
+type ButtonSize = 'icon' | 'sm' | 'md' | 'lg' | 'xl';
+type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary';
-  size?: 'md' | 'sm' | 'icon';
-  selected?: boolean;
+  size?: ButtonSize;
+  variant?: ButtonVariant;
+  active?: boolean;
 }
 
 export function Button({
-  className,
   size = 'md',
   variant = 'primary',
-  selected = false,
+  active = false,
+  className,
   ...props
 }: ButtonProps) {
   return (
     <button
       className={clsx(
         classes.button,
-        selected && classes.selected,
         classes[size],
         classes[variant],
+        active && classes.active,
         className,
       )}
       {...props}

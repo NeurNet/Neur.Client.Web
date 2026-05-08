@@ -1,7 +1,12 @@
 * {
   font-family: 'Open Sans Variable', sans-serif;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+body {
+  font-size: 14px;
 }
 
 html,
@@ -10,12 +15,40 @@ body,
   height: 100%;
 }
 
-body {
-  background-color: var(--color-bg);
-  color: var(--color-text);
-}
-
 a {
   text-decoration: none;
   color: inherit;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  white-space: nowrap;
+}
+
+th {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 12px 24px;
+  color: var(--color-gray-600);
+}
+th:first-child {
+  text-align: start;
+}
+
+tr {
+  border-top: 1px solid var(--color-gray-200);
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+td {
+  text-align: center;
+  padding: 16px 24px;
+}
+td:first-child {
+  text-align: start;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: var(--color-gray-50);
 }

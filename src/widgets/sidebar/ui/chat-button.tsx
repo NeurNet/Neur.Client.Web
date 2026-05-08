@@ -1,36 +1,24 @@
-import type { Chat } from '@/features/chat';
+import type { Chat } from '@/entities/chat';
 import { SidebarButton } from './sidebar-button';
+import { timeAgo } from '@/shared/lib';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router';
 
-export function ChatButton({ chat }: { chat: Chat }) {
-  const [now, setNow] = useState(() => Date.now());
+interface ChatButtonProps {
+  chat: Chat;
+}
 
-  const timeAgo = (dateString: string) => {
-    const date = new Date(dateString);
-    const seconds = Math.floor((now - date.getTime()) / 1000);
-
-    if (seconds < 60) return `${seconds} с.`;
-
-    const minutes = Math.round(seconds / 60);
-    if (minutes < 60) return `${minutes} м.`;
-
-    const hours = Math.round(seconds / 3600);
-    if (hours < 24) return `${hours} ч.`;
-
-    const days = Math.round(seconds / 86400);
-    if (days < 30) return `${days} д.`;
-
-    const months = Math.round(seconds / (86400 * 30));
-    if (months < 12) return `${months} мес.`;
-
-    const years = Math.round(seconds / (86400 * 365));
-    return `${years} г.`;
-  };
+export function ChatButton({ chat }: ChatButtonProps) {
+  const [ago, setAgo] = useState(timeAgo(chat.created_at));
 
   useEffect(() => {
-    const id = setInterval(() => setNow(Date.now()), 1000);
-    return () => clearInterval(id);
-  }, []);
+    const interval = setInterval(() => setAgo(timeAgo(chat.created_at)), 1000);
+    return () => clearInterval(interval);
+  }, [chat.created_at]);
 
-  return <SidebarButton label={timeAgo(chat.created_at)}>{chat.model_name}</SidebarButton>;
+  return (
+    <Link to={`/chat/${chat.id}`}>
+      <SidebarButton label={ago}>{chat.model_name}</SidebarButton>
+    </Link>
+  );
 }

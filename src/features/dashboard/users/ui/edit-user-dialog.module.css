@@ -1,0 +1,59 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.title {
+  text-align: center;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+}
+.row * {
+  flex: 1;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--color-gray-100);
+  box-shadow: 0 0 4px 0 var(--color-shadow);
+  padding: 12px;
+  border-radius: 14px;
+}
+
+.name {
+  display: block;
+  font-weight: 500;
+}
+
+.userInfo {
+  color: var(--color-gray-600);
+}
+
+.label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--color-gray-500);
+}
+
+.afterTransaction {
+  padding: 14px 0;
+  text-align: center;
+  background-color: var(--color-gray-100);
+  box-shadow: 0 0 4px 0 var(--color-shadow);
+  border-radius: 8px;
+}
+
+.roleList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

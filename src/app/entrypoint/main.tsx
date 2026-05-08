@@ -1,5 +1,6 @@
 import '../styles/index.css';
 import '../styles/theme.css';
+
 import '@fontsource-variable/open-sans/wght.css';
 
 import { StrictMode } from 'react';

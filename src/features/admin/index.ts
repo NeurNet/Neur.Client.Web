@@ -1,1 +1,0 @@
-export { AdminApi } from './api';
