@@ -1,5 +1,6 @@
 import classes from './users-page.module.css';
 import { useUsers, mapUserRole, type UserRole, type User } from '@/entities/user';
+import { useAuth } from '@/features/auth';
 import { EditUserDialog } from '@/features/dashboard/users';
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
@@ -11,6 +12,7 @@ type RoleFilter = 'all' | UserRole;
 
 export function UsersPage() {
   const { data, isPending, error } = useUsers();
+  const { data: auth } = useAuth();
 
   const [searchText, setSearchText] = useState('');
   const [roleFilter, setRoleFilter] = useState<RoleFilter>('all');
@@ -34,6 +36,8 @@ export function UsersPage() {
 
   if (isPending) return null;
   if (error) return <span>{error.message}</span>;
+
+  if (!auth) return null;
 
   return (
     <>
@@ -100,9 +104,11 @@ export function UsersPage() {
                 <td>{user.last_request ? new Date(user.last_request).toLocaleString() : '-'}</td>
 
                 <td>
-                  <Button size="sm" variant="outline" onClick={() => setSelectedUser(user)}>
-                    Управление
-                  </Button>
+                  {user.user_id !== auth.id && (
+                    <Button size="sm" variant="outline" onClick={() => setSelectedUser(user)}>
+                      Управление
+                    </Button>
+                  )}
                 </td>
               </tr>
             ))}
