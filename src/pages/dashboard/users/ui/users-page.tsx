@@ -86,6 +86,7 @@ export function UsersPage() {
                   <br />
                   <span className={classes.username}>{user.user_name}</span>
                 </td>
+
                 <td>
                   <div className={classes.tagWrapper}>
                     <Tag variant={user.role === 'student' ? 'success' : 'error'}>
@@ -93,8 +94,11 @@ export function UsersPage() {
                     </Tag>
                   </div>
                 </td>
+
                 <td>{user.tokens} токенов</td>
-                <td>{new Date(user.last_request).toLocaleString()}</td>
+
+                <td>{user.last_request ? new Date(user.last_request).toLocaleString() : '-'}</td>
+
                 <td>
                   <Button size="sm" variant="outline" onClick={() => setSelectedUser(user)}>
                     Управление

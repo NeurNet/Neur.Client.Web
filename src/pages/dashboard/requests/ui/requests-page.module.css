@@ -41,3 +41,11 @@
   display: flex;
   justify-content: center;
 }
+
+.primary {
+  font-weight: 500;
+}
+
+.secondary {
+  color: var(--color-gray-600);
+}

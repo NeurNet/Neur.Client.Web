@@ -1,14 +1,20 @@
-import { Tag } from '@/shared/ui/tag';
 import classes from './requests-page.module.css';
 import { useRequests } from '@/entities/request';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/shared/ui/button';
+import { Tag } from '@/shared/ui/tag';
 
 export function RequestsPage() {
   const [page, setPage] = useState(1);
 
   const { data: requests, isPending, error } = useRequests(page);
+
+  const formatMessageContent = (content?: string) => {
+    if (!content) return '-';
+
+    return content.length > 50 ? content.substring(0, 50) + '...' : content;
+  };
 
   if (isPending) return null;
   if (error) return <span>{error.message}</span>;
@@ -35,18 +41,30 @@ export function RequestsPage() {
         <tbody>
           {requests.items.map((request) => (
             <tr key={request.id}>
-              <td>{new Date(request.created_at).toLocaleString()}</td>
               <td>
-                {request.user.surname} {request.user.name}
+                <span className={classes.primary}>
+                  {new Date(request.created_at).toLocaleDateString()}
+                </span>
                 <br />
-                {request.user.username}
+                <span className={classes.secondary}>
+                  {new Date(request.created_at).toLocaleTimeString()}
+                </span>
               </td>
               <td>
-                {request.model_name}
+                <span className={classes.primary}>
+                  {request.user.surname} {request.user.name}
+                </span>
                 <br />
-                {request.model_ollama}
+                <span className={classes.secondary}>{request.user.username}</span>
               </td>
-              <td>{request.message?.content}</td>
+              <td>
+                <span className={classes.primary}>{request.model_name}</span>
+                <br />
+                <span className={classes.secondary}>{request.model_ollama}</span>
+              </td>
+              <td title={request.message?.content}>
+                {formatMessageContent(request.message?.content)}
+              </td>
               <td>
                 <div className={classes.status}>
                   {request.status === 'success' ? (
@@ -67,13 +85,23 @@ export function RequestsPage() {
         </span>
 
         <div className={classes.pagination}>
-          <Button variant="outline" size="icon" onClick={() => setPage(page - 1)}>
+          <Button
+            variant="outline"
+            size="icon"
+            disabled={page === 1}
+            onClick={() => setPage(page - 1)}
+          >
             <ChevronLeft />
           </Button>
 
           <span>{page}</span>
 
-          <Button variant="outline" size="icon" onClick={() => setPage(page + 1)}>
+          <Button
+            variant="outline"
+            size="icon"
+            disabled={page * 20 >= requests.total}
+            onClick={() => setPage(page + 1)}
+          >
             <ChevronRight />
           </Button>
         </div>
