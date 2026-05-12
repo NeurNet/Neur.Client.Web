@@ -10,6 +10,13 @@ export function useModels() {
   });
 }
 
+export function useOllamaModels() {
+  return useQuery({
+    queryKey: ['ollamaModels'],
+    queryFn: ModelApi.fetchOllamaModels,
+  });
+}
+
 export function useCreateModel() {
   const queryClient = useQueryClient();
 

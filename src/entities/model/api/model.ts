@@ -1,10 +1,19 @@
 import { apiClient } from '@/shared/api';
-import type { Model, CreateModel, UpdateModel } from '../model/types';
+import type { Model, CreateModel, UpdateModel, OllamaModel } from '../model/types';
 
 export const ModelApi = {
   fetchModels: async (): Promise<Model[]> => {
     try {
       const res = await apiClient.get<Model[]>('/models');
+      return res.data;
+    } catch (err) {
+      throw new Error('Произошла ошибка!', { cause: err });
+    }
+  },
+
+  fetchOllamaModels: async (): Promise<OllamaModel[]> => {
+    try {
+      const res = await apiClient.get<OllamaModel[]>('/ollama');
       return res.data;
     } catch (err) {
       throw new Error('Произошла ошибка!', { cause: err });

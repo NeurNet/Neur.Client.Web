@@ -1,5 +1,5 @@
 import classes from './model-form.module.css';
-import type { CreateModel, Model } from '@/entities/model';
+import { useOllamaModels, type CreateModel, type Model } from '@/entities/model';
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
 import { Label } from '@/shared/ui/label';
@@ -23,6 +23,8 @@ export function ModelForm({ model, onClose, onSubmit }: ModelFormProps) {
     },
   });
 
+  const models = useOllamaModels();
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={classes.row}>
@@ -41,12 +43,23 @@ export function ModelForm({ model, onClose, onSubmit }: ModelFormProps) {
       <div className={classes.row}>
         <div className={classes.field}>
           <Label htmlFor="model">Имя модели в Ollama</Label>
-          <Input
-            type="text"
-            id="model"
-            placeholder="Введите имя модели в Ollama..."
-            {...register('model', { required: true })}
-          />
+
+          {models.data ? (
+            <Select>
+              {models.data.map((model) => (
+                <option key={model.name} value={model.name}>
+                  {model.name}
+                </option>
+              ))}
+            </Select>
+          ) : (
+            <Input
+              type="text"
+              id="model"
+              placeholder="Введите имя модели в Ollama..."
+              {...register('model', { required: true })}
+            />
+          )}
         </div>
       </div>
 
