@@ -23,15 +23,17 @@ export function OverviewPage() {
         to="/dashboard/users"
       />
 
+      {(auth.role === 'teacher' || auth.role === 'admin') && (
+        <StatsBlock
+          icon={<Globe size={32} />}
+          count={stats.data.requests_count}
+          name="запросов всего"
+          to="/dashboard/requests"
+        />
+      )}
+
       {auth.role === 'admin' && (
         <>
-          <StatsBlock
-            icon={<Globe size={32} />}
-            count={stats.data.requests_count}
-            name="запросов всего"
-            to="/dashboard/requests"
-          />
-
           <StatsBlock
             icon={<BrainCircuit size={32} />}
             count={stats.data.models_count}
