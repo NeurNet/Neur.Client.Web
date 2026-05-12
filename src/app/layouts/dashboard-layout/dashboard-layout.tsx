@@ -12,7 +12,7 @@ interface Link {
 const links: Link[] = [
   { name: 'Обзор', path: '/dashboard', role: 'teacher' },
   { name: 'Пользователи', path: '/dashboard/users', role: 'teacher' },
-  { name: 'История запросов', path: '/dashboard/requests', role: 'admin' },
+  { name: 'История запросов', path: '/dashboard/requests', role: 'teacher' },
   { name: 'Модели', path: '/dashboard/models', role: 'admin' },
 ];
 
